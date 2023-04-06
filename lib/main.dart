@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:ramadan_app/core/app.dart';
+import 'package:ramadan_app/app/app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

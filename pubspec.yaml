@@ -17,6 +17,9 @@ dependencies:
   flutter_dotenv: ^5.0.2
   freezed_annotation: ^2.2.0
   json_annotation: ^4.8.0
+  retrofit: ^4.0.1
+  logger: any #for logging purpose
+  flutter_bloc: ^8.1.2
 
 dev_dependencies:
   flutter_test:
@@ -26,6 +29,7 @@ dev_dependencies:
   freezed: ^2.3.2
   json_serializable: ^6.6.1
   auto_route_generator: ^6.0.3
+  retrofit_generator: ^6.0.0+1
 
 flutter:
   uses-material-design: true

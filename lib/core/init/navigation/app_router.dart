@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:ramadan_app/views/home/view/home_view.dart';
-import 'package:ramadan_app/views/onboarding/view/onboarding_view.dart';
+import 'package:ramadan_app/app/views/home/view/home_view.dart';
+import 'package:ramadan_app/app/views/onboarding/view/onboarding_view.dart';
 
 part 'app_router.gr.dart';
 
