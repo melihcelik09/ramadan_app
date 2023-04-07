@@ -4,9 +4,9 @@ A new Flutter project.
 
 ## Packages
 
-- Freezed
-- Retrofit
-- Bloc
+- Freezed✅
+- Retrofit✅
+- Bloc✅
 - Localization✅
 - Autoroute ✅
 
