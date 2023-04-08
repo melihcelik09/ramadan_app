@@ -4,7 +4,6 @@ A new Flutter project.
 
 ## Packages
 
-- Freezed✅
 - Retrofit✅
 - Bloc✅
 - Localization✅

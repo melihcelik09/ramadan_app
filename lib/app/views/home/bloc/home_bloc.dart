@@ -1,14 +1,19 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'dart:async';
+import 'dart:html';
 
-part 'home_bloc.freezed.dart';
+import 'package:bloc/bloc.dart';
+import 'package:meta/meta.dart';
+
 part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc() : super(const _Initial()) {
-    on<HomeEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+  HomeBloc() : super(HomeInitial()) {
+    on<HomeEvent>(_fetchEvent);
+  }
+
+  FutureOr<void> _fetchEvent(event, emit) {
+    emit(HomeLoading());
+    if (event is FetchEvent) {}
   }
 }

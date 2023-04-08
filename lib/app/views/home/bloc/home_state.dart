@@ -1,6 +1,8 @@
 part of 'home_bloc.dart';
 
-@freezed
-class HomeState with _$HomeState {
-  const factory HomeState.initial() = _Initial;
-}
+@immutable
+abstract class HomeState {}
+
+class HomeInitial extends HomeState {}
+
+class HomeLoading extends HomeState {}
