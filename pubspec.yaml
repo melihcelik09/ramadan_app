@@ -19,6 +19,7 @@ dependencies:
   retrofit: ^4.0.1
   logger: any #for logging purpose
   flutter_bloc: ^8.1.2
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:
