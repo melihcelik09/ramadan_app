@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/single_child_widget.dart';
-import 'package:ramadan_app/app/views/home/bloc/home_bloc.dart';
-import 'package:ramadan_app/app/views/onboarding/bloc/onboarding_bloc.dart';
+import 'package:ramadan_app/app/view/home/bloc/home_bloc.dart';
+import 'package:ramadan_app/app/view/onboarding/bloc/onboarding_bloc.dart';
 
 class BlocList {
   static BlocList? _instance;

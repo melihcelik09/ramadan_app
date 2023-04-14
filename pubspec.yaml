@@ -20,6 +20,8 @@ dependencies:
   logger: any #for logging purpose
   flutter_bloc: ^8.1.2
   equatable: ^2.0.5
+  flutter_svg: ^2.0.5
+  smooth_page_indicator: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -33,3 +35,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+  assets:
+    - assets/env/
+    - assets/images/
+    - assets/icons/

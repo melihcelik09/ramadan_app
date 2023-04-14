@@ -7,10 +7,12 @@ import 'package:ramadan_app/core/init/bloc/bloc_list.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: "assets/env/.env");
   await GetStorage.init();
-  runApp(MultiBlocProvider(
-    providers: [...BlocList.instance.items],
-    child: RamadanApp(),
-  ));
+  runApp(
+    MultiBlocProvider(
+      providers: [...BlocList.instance.items],
+      child: RamadanApp(),
+    ),
+  );
 }
