@@ -22,37 +22,44 @@ class BodyWidget extends StatelessWidget {
               OnboardingModel target = state.model[index];
               return Padding(
                 padding: context.paddingNormal,
-                child: Wrap(
-                  alignment: WrapAlignment.start,
-                  runAlignment: WrapAlignment.spaceAround,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SvgPicture.asset(target.image, semanticsLabel: 'Onboarding image $index'),
-                    Text(target.title,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.secondaryColor,
-                            )),
-                    Text(target.description,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.copyWith(color: AppColors.secondaryColor, fontSize: 18)),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SmoothPageIndicator(
-                          controller: context.read<OnboardingBloc>().state.pageController,
-                          count: state.model.length,
-                          effect: const ExpandingDotsEffect(
-                            dotHeight: 9,
-                            dotWidth: 9,
-                            activeDotColor: AppColors.primaryColor,
+                    Text(
+                      target.title,
+                      style: context.textTheme.headlineMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.secondaryColor,
+                      ),
+                    ),
+                    Text(
+                      target.description,
+                      style: context.textTheme.bodyMedium?.copyWith(
+                        color: AppColors.secondaryColor,
+                        fontSize: 18,
+                      ),
+                    ),
+                    SizedBox(
+                      height: kToolbarHeight,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SmoothPageIndicator(
+                            controller: context.read<OnboardingBloc>().state.pageController,
+                            count: state.model.length,
+                            effect: const ExpandingDotsEffect(
+                              dotHeight: 9,
+                              dotWidth: 9,
+                              activeDotColor: AppColors.primaryColor,
+                            ),
                           ),
-                        ),
-                        state.currentIndex == index && index == state.model.length - 1
-                            ? const SizedBox.shrink()
-                            : NextButtonWidget(index: index),
-                      ],
+                          state.currentIndex == index && index == state.model.length - 1
+                              ? const SizedBox.shrink()
+                              : NextButtonWidget(index: index),
+                        ],
+                      ),
                     )
                   ],
                 ),
