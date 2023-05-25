@@ -38,4 +38,6 @@ flutter:
   assets:
     - assets/env/
     - assets/images/
+    - assets/images/categories/
+    - assets/images/titles/
     - assets/icons/
