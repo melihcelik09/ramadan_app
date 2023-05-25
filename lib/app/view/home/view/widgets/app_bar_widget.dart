@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ramadan_app/core/constants/app_colors.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const AppBarWidget({
@@ -8,7 +9,16 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text('Home View'),
+//        backgroundColor: Colors.transparent,
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      title: const Align(
+        alignment: Alignment.topRight,
+        child: Text(
+          "Gün ve tarih",
+          style: TextStyle(color: AppColors.secondaryColor),
+        ),
+      ),
     );
   }
 

@@ -11,6 +11,7 @@ class HomeView extends StatelessWidget {
     return const Scaffold(
       appBar: AppBarWidget(),
       body: BodyWidget(),
+      bottomNavigationBar: BottomNavigationBarWidget(),
     );
   }
 }
