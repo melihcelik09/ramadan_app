@@ -7,10 +7,16 @@ part 'onboarding_event.dart';
 part 'onboarding_state.dart';
 
 class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
-  OnboardingBloc() : super(OnboardingState(model: model, currentIndex: 0, pageController: PageController())) {
+  OnboardingBloc()
+      : super(OnboardingState(
+            model: model, currentIndex: 0, pageController: PageController())) {
     on<ChangePageEvent>((event, emit) {
-      state.pageController.animateToPage(event.index, duration: const Duration(milliseconds: 300), curve: Curves.ease);
-      emit(OnboardingState(model: model, currentIndex: event.index, pageController: state.pageController));
+      state.pageController.animateToPage(event.index,
+          duration: const Duration(milliseconds: 300), curve: Curves.ease);
+      emit(OnboardingState(
+          model: model,
+          currentIndex: event.index,
+          pageController: state.pageController));
     });
   }
 }
@@ -24,7 +30,8 @@ List<OnboardingModel> model = [
   OnboardingModel(
     image: 'assets/images/onboarding/2.svg',
     title: 'Prayer Times',
-    description: 'This app provides you with prayer times based on your location.',
+    description:
+        'This app provides you with prayer times based on your location.',
   ),
   OnboardingModel(
     image: 'assets/images/onboarding/3.svg',

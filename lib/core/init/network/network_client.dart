@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:ramadan_app/app/view/location/model/location_model.dart';
 import 'package:ramadan_app/core/constants/app_endpoints.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -9,16 +10,18 @@ abstract class NetworkClient {
   factory NetworkClient(Dio dio, {String baseUrl}) = _NetworkClient;
 
   @GET("/countries")
-  Future getCountries();
+  Future<List<LocationModel>> getCountries();
 
   @GET("/regions")
-  Future getState(@Query("country") String country);
+  Future<List<String>> getState(@Query("country") String country);
 
   @GET("/cities")
-  Future getCity(@Query("country") String country, @Query("region") String region);
+  Future<List<String>> getCity(
+      @Query("country") String country, @Query("region") String region);
 
   @GET("/coordinates")
-  Future getCoordinate(@Query("country") String country, @Query("region") String region, @Query("city") String city);
+  Future getCoordinate(@Query("country") String country,
+      @Query("region") String region, @Query("city") String city);
 
   @GET("/timesFromCoordinates")
   Future getTimesFromCoordinates(
@@ -40,12 +43,14 @@ abstract class NetworkClient {
 
   //baseUrl= https://api.aladhan.com/v1
   @GET("/qibla/{latitude}/{longitude}")
-  Future getQiblaDirection(@Path("latitude") String latitude, @Path("longitude") String longitude);
+  Future getQiblaDirection(
+      @Path("latitude") String latitude, @Path("longitude") String longitude);
 
   @GET("/name")
   Future getAsmaulHusna(@Header("X-RapidAPI-Key") String key);
 
   //q= 37.84501,27.83963
   @GET("/current.json")
-  Future getDailyWeather(@Header("X-RapidAPI-Key") String key, @Query("q") String coordinates);
+  Future getDailyWeather(
+      @Header("X-RapidAPI-Key") String key, @Query("q") String coordinates);
 }

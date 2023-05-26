@@ -1,13 +1,25 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ramadan_app/app/view/location/bloc/location_bloc.dart';
+import 'package:ramadan_app/app/view/location/view/widgets/custom_dropdown_button.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
-import 'package:ramadan_app/core/init/navigation/app_router.dart';
 
-class BodyWidget extends StatelessWidget {
+class BodyWidget extends StatefulWidget {
   const BodyWidget({
     super.key,
   });
+
+  @override
+  State<BodyWidget> createState() => _BodyWidgetState();
+}
+
+class _BodyWidgetState extends State<BodyWidget> {
+  @override
+  void initState() {
+    context.read<LocationBloc>().add(InitialLocationEvent());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,23 +49,76 @@ class BodyWidget extends StatelessWidget {
             ],
           ),
           //DROPDOWNS
-          //COUNTRY
-          //STATE
-          //CITY
+          BlocListener<LocationBloc, LocationState>(
+            listener: (context, state) {
+              debugPrint("Country: ${state.selectedCountry}");
+              debugPrint("State: ${state.selectedState}");
+              debugPrint("City: ${state.selectedCity}");
+            },
+            child: Wrap(
+              runSpacing: context.mediumValue,
+              children: [
+                //COUNTRY
+                CustomDropdownButton(
+                  hint: "Select Country",
+                  items: context
+                      .watch<LocationBloc>()
+                      .state
+                      .countryList
+                      .map((e) => DropdownMenuItem(value: e.name, child: Text(e.name ?? "")))
+                      .toList(),
+                  onChanged: (country) {
+                    context.read<LocationBloc>().add(CountrySelectedEvent(country: country));
+                  },
+                  // value: context.watch<LocationBloc>().state.selectedCountry,
+                ),
+                //STATE
+                CustomDropdownButton(
+                  hint: "Select State",
+                  items: context
+                      .watch<LocationBloc>()
+                      .state
+                      .stateList
+                      .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                      .toList(),
+                  onChanged: (state) {
+                    context.read<LocationBloc>().add(StateSelectedEvent(state: state));
+                  },
+                  // value: context.watch<LocationBloc>().state.selectedState,
+                ),
+                //CITY
+                CustomDropdownButton(
+                  hint: "Select City",
+                  items: context
+                      .watch<LocationBloc>()
+                      .state
+                      .cityList
+                      .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                      .toList(),
+                  onChanged: (city) {
+                    context.read<LocationBloc>().add(CitySelectedEvent(city: city));
+                  },
+                  // value: context.watch<LocationBloc>().state.selectedCity,
+                ),
+              ],
+            ),
+          ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               TextButton(
-                  onPressed: () {
-                    context.router.pushAndPopUntil(const HomeRoute(), predicate: (route) => false);
-                  },
-                  child: Text(
-                    'Go to Home Page',
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelLarge
-                        ?.copyWith(color: AppColors.secondaryColor, fontSize: 16, fontWeight: FontWeight.bold),
-                  )),
+                onPressed: () {
+                  context.read<LocationBloc>().add(SubmitLocationEvent());
+                },
+                child: Text(
+                  'Go to Home Page',
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge
+                      ?.copyWith(color: AppColors.secondaryColor, fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ),
             ],
           )
         ],
