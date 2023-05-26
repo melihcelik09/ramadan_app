@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/init/navigation/app_router.dart';
 
@@ -16,11 +15,11 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       actions: [
         TextButton(
-            onPressed: () {
-              Logger().i('Skip button pressed');
-              context.router.pushNamed(NavigationPaths.location.path);
-            },
-            child: const Text('Skip', style: TextStyle(color: AppColors.secondaryColor))),
+          onPressed: () =>
+              context.router.replaceNamed(NavigationPaths.location.path),
+          child: const Text('Skip',
+              style: TextStyle(color: AppColors.secondaryColor)),
+        ),
       ],
     );
   }

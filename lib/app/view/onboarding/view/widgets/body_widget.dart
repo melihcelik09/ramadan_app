@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,6 +6,7 @@ import 'package:ramadan_app/app/view/onboarding/bloc/onboarding_bloc.dart';
 import 'package:ramadan_app/app/view/onboarding/model/onboarding_model.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
+import 'package:ramadan_app/core/init/navigation/app_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class BodyWidget extends StatelessWidget {
@@ -16,7 +18,9 @@ class BodyWidget extends StatelessWidget {
       builder: (context, state) {
         return PageView.builder(
             controller: state.pageController,
-            onPageChanged: (value) => context.read<OnboardingBloc>().add(ChangePageEvent(index: value)),
+            onPageChanged: (value) => context
+                .read<OnboardingBloc>()
+                .add(ChangePageEvent(index: value)),
             itemCount: state.model.length,
             itemBuilder: (context, index) {
               OnboardingModel target = state.model[index];
@@ -26,7 +30,8 @@ class BodyWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SvgPicture.asset(target.image, semanticsLabel: 'Onboarding image $index'),
+                    SvgPicture.asset(target.image,
+                        semanticsLabel: 'Onboarding image $index'),
                     Text(
                       target.title,
                       style: context.textTheme.headlineMedium?.copyWith(
@@ -47,7 +52,10 @@ class BodyWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SmoothPageIndicator(
-                            controller: context.read<OnboardingBloc>().state.pageController,
+                            controller: context
+                                .read<OnboardingBloc>()
+                                .state
+                                .pageController,
                             count: state.model.length,
                             effect: const ExpandingDotsEffect(
                               dotHeight: 9,
@@ -55,9 +63,9 @@ class BodyWidget extends StatelessWidget {
                               activeDotColor: AppColors.primaryColor,
                             ),
                           ),
-                          state.currentIndex == index && index == state.model.length - 1
-                              ? const SizedBox.shrink()
-                              : NextButtonWidget(index: index),
+                          NextButtonWidget(
+                              index: index,
+                              isLastPage: index == state.model.length - 1),
                         ],
                       ),
                     )
@@ -72,19 +80,26 @@ class BodyWidget extends StatelessWidget {
 
 class NextButtonWidget extends StatelessWidget {
   final int index;
+  final bool isLastPage;
   const NextButtonWidget({
     super.key,
     required this.index,
+    required this.isLastPage,
   });
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
       backgroundColor: AppColors.primaryColor,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(16))),
       child: const Icon(Icons.arrow_forward_ios),
       onPressed: () {
-        context.read<OnboardingBloc>().add(ChangePageEvent(index: index + 1));
+        if (isLastPage) {
+          context.router.replaceNamed(NavigationPaths.location.path);
+        } else {
+          context.read<OnboardingBloc>().add(ChangePageEvent(index: index + 1));
+        }
       },
     );
   }
