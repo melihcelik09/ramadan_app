@@ -14,6 +14,12 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    AsmaAlHusnaRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AsmaAlHusnaView(),
+      );
+    },
     HomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -33,6 +39,20 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [AsmaAlHusnaView]
+class AsmaAlHusnaRoute extends PageRouteInfo<void> {
+  const AsmaAlHusnaRoute({List<PageRouteInfo>? children})
+      : super(
+          AsmaAlHusnaRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AsmaAlHusnaRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
