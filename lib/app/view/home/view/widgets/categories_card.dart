@@ -1,6 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:ramadan_app/app/view/asma_al_husna/view/asma_al_husna_view.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
+import 'package:ramadan_app/core/init/navigation/app_router.dart';
 
 class CategoriesCard extends StatelessWidget {
   const CategoriesCard({
@@ -13,14 +14,12 @@ class CategoriesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     List<String> titles = [
       "Prayer Time",
-      "Daily Hadith",
       "Qiable Finder",
       "Ramadan Time",
       "Asma Al-Husna"
     ];
     List<String> imageUrls = [
       "assets/images/categories/Praying.png",
-      "assets/images/categories/Read.png",
       "assets/images/categories/Qibla.png",
       "assets/images/categories/Lamp.png",
       "assets/images/categories/Allah.png",
@@ -29,25 +28,13 @@ class CategoriesCard extends StatelessWidget {
       onTap: () {
         switch (index) {
           case 0:
-            print("Prayer Time");
             break;
           case 1:
-            print("Daily Hadith");
             break;
           case 2:
-            print("Qiable Finder");
-            break;
-          case 3:
-            print("Ramadan Time");
             break;
           default:
-            print("Asma Al-Husna");
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => AsmaAlHusnaView(),
-              ),
-            );
+            context.router.pushNamed(NavigationPaths.asmaAlHusna.path);
         }
       },
       child: Card(
