@@ -13,7 +13,8 @@ class LocationModel with EquatableMixin {
     this.name,
   });
 
-  factory LocationModel.fromJson(Map<String, dynamic> json) => _$LocationModelFromJson(json);
+  factory LocationModel.fromJson(Map<String, dynamic> json) =>
+      _$LocationModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$LocationModelToJson(this);
 
