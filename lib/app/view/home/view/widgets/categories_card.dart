@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ramadan_app/app/view/asma_al_husna/view/asma_al_husna_view.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
 
 class CategoriesCard extends StatelessWidget {
@@ -41,6 +42,12 @@ class CategoriesCard extends StatelessWidget {
             break;
           default:
             print("Asma Al-Husna");
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AsmaAlHusnaView(),
+              ),
+            );
         }
       },
       child: Card(

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:ramadan_app/app/view/location/model/location_model.dart';
+import 'package:ramadan_app/app/view/asma_al_husna/model/asma_al_husna.dart';
 import 'package:ramadan_app/core/constants/app_endpoints.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -16,12 +17,10 @@ abstract class NetworkClient {
   Future<List<String>> getState(@Query("country") String country);
 
   @GET("/cities")
-  Future<List<String>> getCity(
-      @Query("country") String country, @Query("region") String region);
+  Future<List<String>> getCity(@Query("country") String country, @Query("region") String region);
 
   @GET("/coordinates")
-  Future getCoordinate(@Query("country") String country,
-      @Query("region") String region, @Query("city") String city);
+  Future getCoordinate(@Query("country") String country,@Query("region") String region, @Query("city") String city);
 
   @GET("/timesFromCoordinates")
   Future getTimesFromCoordinates(
@@ -47,7 +46,7 @@ abstract class NetworkClient {
       @Path("latitude") String latitude, @Path("longitude") String longitude);
 
   @GET("/name")
-  Future getAsmaulHusna(@Header("X-RapidAPI-Key") String key);
+  Future<AsmaAlHusna> getAsmaulHusna(@Header("X-RapidAPI-Key") String key);
 
   //q= 37.84501,27.83963
   @GET("/current.json")
