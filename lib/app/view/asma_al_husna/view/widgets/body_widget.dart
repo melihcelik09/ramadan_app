@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ramadan_app/app/view/asma_al_husna/service/asma_al_husna_service.dart';
 import 'package:ramadan_app/app/view/asma_al_husna/view/widgets/asma_al_husna_card.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
+import 'package:ramadan_app/core/constants/app_endpoints.dart';
 
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 
@@ -9,34 +11,55 @@ class BodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AsmaAlHusnaService service =
+        AsmaAlHusnaService(baseUrl: AppEndpoints.asmaulHusnaBaseUrl);
     return SingleChildScrollView(
       child: Padding(
-        padding: PaddingExtensionSymetric(context).horizontalPaddingMedium,
+        padding: context.horizontalPaddingMedium,
         child: Column(
           children: [
-            const Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  "Asma Al Husna",
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.secondaryColor),
-                )),
-            GridView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: 99,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 1,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-              ),
-              itemBuilder: (context, index) {
-                return AsmaAlHusnaCard(
-                  index: index,
-                );
+            Padding(
+              padding: context.onlyBottomPaddingMedium,
+              child: const Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Asma Al Husna",
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.secondaryColor),
+                  )),
+            ),
+            FutureBuilder(
+              future: service.getAsmaAlHusna(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: snapshot.data!.main!.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 1,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                    ),
+                    itemBuilder: (context, index) {
+                      return AsmaAlHusnaCard(
+                        index: index,
+                      );
+                    },
+                  );
+                } else if (snapshot.hasError) {
+                  return const Center(
+                    child: Text("Error"),
+                  );
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
               },
             ),
           ],

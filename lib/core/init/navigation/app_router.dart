@@ -16,15 +16,16 @@ class AppRouter extends _$AppRouter {
         page: OnboardingRoute.page, path: NavigationPaths.onboarding.path),
     AutoRoute(page: HomeRoute.page, path: NavigationPaths.home.path),
     AutoRoute(page: LocationRoute.page, path: NavigationPaths.location.path),
-    //AutoRoute(page: AsmaAlHusnaRoute.page, path: NavigationPaths.asmaAlHusna.path),
+    AutoRoute(
+        page: AsmaAlHusnaRoute.page, path: NavigationPaths.asmaAlHusna.path),
   ];
 }
 
 enum NavigationPaths {
   onboarding("/"),
   home("/home"),
-  location("/location");
-  //asmaAlHusna("/asmaAlHusna");
+  location("/location"),
+  asmaAlHusna("/asmaAlHusna");
 
   final String path;
 
