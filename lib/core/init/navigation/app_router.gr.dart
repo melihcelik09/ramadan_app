@@ -20,12 +20,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const AsmaAlHusnaView(),
       );
     },
-    HomeRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const HomeView(),
-      );
-    },
     LocationRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -36,6 +30,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const OnboardingView(),
+      );
+    },
+    BottomNavigationBarRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const BottomNavigationBarView(),
       );
     },
   };
@@ -51,20 +51,6 @@ class AsmaAlHusnaRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'AsmaAlHusnaRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [HomeView]
-class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute({List<PageRouteInfo>? children})
-      : super(
-          HomeRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'HomeRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -93,6 +79,20 @@ class OnboardingRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'OnboardingRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [BottomNavigationBarView]
+class BottomNavigationBarRoute extends PageRouteInfo<void> {
+  const BottomNavigationBarRoute({List<PageRouteInfo>? children})
+      : super(
+          BottomNavigationBarRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'BottomNavigationBarRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
