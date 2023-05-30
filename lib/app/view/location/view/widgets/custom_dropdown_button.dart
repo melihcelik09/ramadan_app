@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 
-class CustomDropdownButton extends StatelessWidget {
-  final List<DropdownMenuItem> items;
-  final void Function(dynamic)? onChanged;
+class CustomDropdownButton<T> extends StatelessWidget {
+  final List<DropdownMenuItem<T>> items;
+  final void Function(T?)? onChanged;
   final String? hint;
-  final dynamic value;
+  final T? value;
 
   const CustomDropdownButton({
     super.key,
@@ -18,7 +18,7 @@ class CustomDropdownButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField(
+    return DropdownButtonFormField<T>(
       isExpanded: true,
       decoration: InputDecoration(
         filled: true,

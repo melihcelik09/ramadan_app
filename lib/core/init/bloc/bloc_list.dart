@@ -1,7 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/single_child_widget.dart';
+import 'package:ramadan_app/app/view/bottom_navbar/bloc/bottom_navbar_bloc.dart';
 import 'package:ramadan_app/app/view/home/bloc/home_bloc.dart';
-import 'package:ramadan_app/app/view/location/bloc/location_bloc.dart';
+import 'package:ramadan_app/app/view/location/cubit/location_cubit.dart';
 import 'package:ramadan_app/app/view/onboarding/bloc/onboarding_bloc.dart';
 
 class BlocList {
@@ -15,6 +16,7 @@ class BlocList {
   List<SingleChildWidget> items = [
     BlocProvider<OnboardingBloc>(create: (context) => OnboardingBloc()),
     BlocProvider<HomeBloc>(create: (context) => HomeBloc()),
-    BlocProvider<LocationBloc>(create: (context) => LocationBloc()),
+    BlocProvider<BottomNavbarBloc>(create: (context) => BottomNavbarBloc()),
+    BlocProvider<LocationCubit>(create: (context) => LocationCubit()),
   ];
 }
