@@ -5,6 +5,7 @@ import 'package:ramadan_app/app/view/asma_al_husna/view/asma_al_husna_view.dart'
 import 'package:ramadan_app/app/view/home/view/home_view.dart';
 import 'package:ramadan_app/app/view/location/view/location_view.dart';
 import 'package:ramadan_app/app/view/onboarding/view/onboarding_view.dart';
+import 'package:ramadan_app/app/view/ramadan_time/view/ramadan_time_view.dart';
 
 part 'app_router.gr.dart';
 
@@ -17,15 +18,16 @@ class AppRouter extends _$AppRouter {
     AutoRoute(page: HomeRoute.page, path: NavigationPaths.home.path),
     AutoRoute(page: LocationRoute.page, path: NavigationPaths.location.path),
     //AutoRoute(page: AsmaAlHusnaRoute.page, path: NavigationPaths.asmaAlHusna.path),
+    AutoRoute(page: RamadanTimeRoute.page, path: NavigationPaths.ramadanTime.path),
   ];
 }
 
 enum NavigationPaths {
   onboarding("/"),
   home("/home"),
-  location("/location");
+  location("/location"),
   //asmaAlHusna("/asmaAlHusna");
-
+  ramadanTime("/ramadanTime");
   final String path;
 
   const NavigationPaths(this.path);

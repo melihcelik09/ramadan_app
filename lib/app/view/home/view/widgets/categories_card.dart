@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:ramadan_app/app/view/asma_al_husna/view/asma_al_husna_view.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
+import 'package:ramadan_app/core/init/navigation/app_router.dart';
 
 class CategoriesCard extends StatelessWidget {
   const CategoriesCard({
@@ -39,6 +41,7 @@ class CategoriesCard extends StatelessWidget {
             break;
           case 3:
             print("Ramadan Time");
+            context.router.pushNamed(NavigationPaths.ramadanTime.path);
             break;
           default:
             print("Asma Al-Husna");
