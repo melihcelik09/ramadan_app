@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:hijri/hijri_calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:ramadan_app/app/view/ramadan_time/model/calendar_model.dart';
 import 'package:ramadan_app/app/view/ramadan_time/model/countdown.dart';
