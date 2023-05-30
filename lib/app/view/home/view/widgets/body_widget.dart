@@ -87,7 +87,7 @@ class BodyWidget extends StatelessWidget {
             child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              itemCount: 5,
+              itemCount: 4,
               itemBuilder: (BuildContext context, int index) => CategoriesCard(
                 index: index,
               ),

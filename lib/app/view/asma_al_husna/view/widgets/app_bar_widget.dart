@@ -15,7 +15,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       foregroundColor: AppColors.secondaryColor,
       leading: IconButton(
         onPressed: () {
-          AutoRouter.of(context).pop();
+          context.router.pop();
         },
         icon: const Icon(Icons.arrow_back_ios),
       ),

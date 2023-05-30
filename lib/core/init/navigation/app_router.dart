@@ -17,8 +17,10 @@ class AppRouter extends _$AppRouter {
         page: OnboardingRoute.page, path: NavigationPaths.onboarding.path),
     AutoRoute(page: HomeRoute.page, path: NavigationPaths.home.path),
     AutoRoute(page: LocationRoute.page, path: NavigationPaths.location.path),
-    //AutoRoute(page: AsmaAlHusnaRoute.page, path: NavigationPaths.asmaAlHusna.path),
     AutoRoute(page: RamadanTimeRoute.page, path: NavigationPaths.ramadanTime.path),
+    AutoRoute(
+        page: AsmaAlHusnaRoute.page, path: NavigationPaths.asmaAlHusna.path),
+
   ];
 }
 
@@ -26,8 +28,9 @@ enum NavigationPaths {
   onboarding("/"),
   home("/home"),
   location("/location"),
-  //asmaAlHusna("/asmaAlHusna");
   ramadanTime("/ramadanTime");
+  asmaAlHusna("/asmaAlHusna");
+  
   final String path;
 
   const NavigationPaths(this.path);

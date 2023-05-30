@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ramadan_app/app/view/location/bloc/location_bloc.dart';
 import 'package:ramadan_app/app/view/location/view/widgets/custom_dropdown_button.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
+import 'package:ramadan_app/core/init/navigation/app_router.dart';
 
 class BodyWidget extends StatefulWidget {
   const BodyWidget({
@@ -65,10 +67,13 @@ class _BodyWidgetState extends State<BodyWidget> {
                       .watch<LocationBloc>()
                       .state
                       .countryList
-                      .map((e) => DropdownMenuItem(value: e.name, child: Text(e.name ?? "")))
+                      .map((e) => DropdownMenuItem(
+                          value: e.name, child: Text(e.name ?? "")))
                       .toList(),
                   onChanged: (country) {
-                    context.read<LocationBloc>().add(CountrySelectedEvent(country: country));
+                    context
+                        .read<LocationBloc>()
+                        .add(CountrySelectedEvent(country: country));
                   },
                   // value: context.watch<LocationBloc>().state.selectedCountry,
                 ),
@@ -82,7 +87,9 @@ class _BodyWidgetState extends State<BodyWidget> {
                       .map((e) => DropdownMenuItem(value: e, child: Text(e)))
                       .toList(),
                   onChanged: (state) {
-                    context.read<LocationBloc>().add(StateSelectedEvent(state: state));
+                    context
+                        .read<LocationBloc>()
+                        .add(StateSelectedEvent(state: state));
                   },
                   // value: context.watch<LocationBloc>().state.selectedState,
                 ),
@@ -96,7 +103,9 @@ class _BodyWidgetState extends State<BodyWidget> {
                       .map((e) => DropdownMenuItem(value: e, child: Text(e)))
                       .toList(),
                   onChanged: (city) {
-                    context.read<LocationBloc>().add(CitySelectedEvent(city: city));
+                    context
+                        .read<LocationBloc>()
+                        .add(CitySelectedEvent(city: city));
                   },
                   // value: context.watch<LocationBloc>().state.selectedCity,
                 ),
@@ -110,13 +119,14 @@ class _BodyWidgetState extends State<BodyWidget> {
               TextButton(
                 onPressed: () {
                   context.read<LocationBloc>().add(SubmitLocationEvent());
+                  context.router.replaceNamed(NavigationPaths.home.path);
                 },
                 child: Text(
                   'Go to Home Page',
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelLarge
-                      ?.copyWith(color: AppColors.secondaryColor, fontSize: 16, fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: AppColors.secondaryColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ],
