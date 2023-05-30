@@ -11,6 +11,6 @@ class UserLocationModel {
 
   @override
   String toString() {
-    return 'Country: $country, State: $state, City: $city)';
+    return 'Country: $country, State: $state, City: $city';
   }
 }
