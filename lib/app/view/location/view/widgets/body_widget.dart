@@ -67,15 +67,11 @@ class _BodyWidgetState extends State<BodyWidget> {
                       .watch<LocationBloc>()
                       .state
                       .countryList
-                      .map((e) => DropdownMenuItem(
-                          value: e.name, child: Text(e.name ?? "")))
+                      .map((e) => DropdownMenuItem(value: e.name, child: Text(e.name ?? "")))
                       .toList(),
                   onChanged: (country) {
-                    context
-                        .read<LocationBloc>()
-                        .add(CountrySelectedEvent(country: country));
+                    context.read<LocationBloc>().add(CountrySelectedEvent(country: country));
                   },
-                  // value: context.watch<LocationBloc>().state.selectedCountry,
                 ),
                 //STATE
                 CustomDropdownButton(
@@ -87,11 +83,8 @@ class _BodyWidgetState extends State<BodyWidget> {
                       .map((e) => DropdownMenuItem(value: e, child: Text(e)))
                       .toList(),
                   onChanged: (state) {
-                    context
-                        .read<LocationBloc>()
-                        .add(StateSelectedEvent(state: state));
+                    context.read<LocationBloc>().add(StateSelectedEvent(state: state));
                   },
-                  // value: context.watch<LocationBloc>().state.selectedState,
                 ),
                 //CITY
                 CustomDropdownButton(
@@ -103,11 +96,8 @@ class _BodyWidgetState extends State<BodyWidget> {
                       .map((e) => DropdownMenuItem(value: e, child: Text(e)))
                       .toList(),
                   onChanged: (city) {
-                    context
-                        .read<LocationBloc>()
-                        .add(CitySelectedEvent(city: city));
+                    context.read<LocationBloc>().add(CitySelectedEvent(city: city));
                   },
-                  // value: context.watch<LocationBloc>().state.selectedCity,
                 ),
               ],
             ),
@@ -123,10 +113,10 @@ class _BodyWidgetState extends State<BodyWidget> {
                 },
                 child: Text(
                   'Go to Home Page',
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      color: AppColors.secondaryColor,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge
+                      ?.copyWith(color: AppColors.secondaryColor, fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
             ],

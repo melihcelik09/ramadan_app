@@ -12,14 +12,8 @@ class CategoriesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> titles = [
-      "Prayer Time",
-      "Qiable Finder",
-      "Ramadan Time",
-      "Asma Al-Husna"
-    ];
+    List<String> titles = ["Qiable Finder", "Ramadan Time", "Asma Al-Husna"];
     List<String> imageUrls = [
-      "assets/images/categories/Praying.png",
       "assets/images/categories/Qibla.png",
       "assets/images/categories/Lamp.png",
       "assets/images/categories/Allah.png",
@@ -30,14 +24,12 @@ class CategoriesCard extends StatelessWidget {
           case 0:
             break;
           case 1:
-            print("Qiable Finder");
+          context.router.pushNamed(NavigationPaths.ramadanTime.path);
             break;
           case 2:
-            print("Ramadan Time");
-            context.router.pushNamed(NavigationPaths.ramadanTime.path);
+            context.router.pushNamed(NavigationPaths.asmaAlHusna.path);
             break;
           default:
-            context.router.pushNamed(NavigationPaths.asmaAlHusna.path);
         }
       },
       child: Card(
