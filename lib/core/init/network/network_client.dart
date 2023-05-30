@@ -17,10 +17,12 @@ abstract class NetworkClient {
   Future<List<String>> getState(@Query("country") String country);
 
   @GET("/cities")
-  Future<List<String>> getCity(@Query("country") String country, @Query("region") String region);
+  Future<List<String>> getCity(
+      @Query("country") String country, @Query("region") String region);
 
   @GET("/coordinates")
-  Future getCoordinate(@Query("country") String country,@Query("region") String region, @Query("city") String city);
+  Future getCoordinate(@Query("country") String country,
+      @Query("region") String region, @Query("city") String city);
 
   @GET("/timesFromCoordinates")
   Future getTimesFromCoordinates(
@@ -52,4 +54,9 @@ abstract class NetworkClient {
   @GET("/current.json")
   Future getDailyWeather(
       @Header("X-RapidAPI-Key") String key, @Query("q") String coordinates);
+
+  //baseUrl= https://api.aladhan.com/v1
+  @GET("/hToG/{date}")
+  Future requestGregorianforHijri(@Header("X-RapidAPI-Key") String key,
+      @Path("date") String date);
 }
