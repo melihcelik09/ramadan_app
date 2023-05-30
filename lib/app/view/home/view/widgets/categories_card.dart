@@ -32,6 +32,12 @@ class CategoriesCard extends StatelessWidget {
           case 1:
             break;
           case 2:
+            print("Qiable Finder");
+            break;
+          case 3:
+            print("Ramadan Time");
+            context.router.pushNamed(NavigationPaths.ramadanTime.path);
+
             break;
           default:
             context.router.pushNamed(NavigationPaths.asmaAlHusna.path);
