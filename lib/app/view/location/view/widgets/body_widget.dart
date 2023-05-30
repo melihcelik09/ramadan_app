@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ramadan_app/app/view/location/bloc/location_bloc.dart';
+import 'package:ramadan_app/app/view/location/cubit/location_cubit.dart';
 import 'package:ramadan_app/app/view/location/view/widgets/custom_dropdown_button.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
@@ -17,9 +17,10 @@ class BodyWidget extends StatefulWidget {
 }
 
 class _BodyWidgetState extends State<BodyWidget> {
+  LocationCubit get _cubit => context.read<LocationCubit>();
   @override
   void initState() {
-    context.read<LocationBloc>().add(InitialLocationEvent());
+    _cubit.fetchCountries();
     super.initState();
   }
 
@@ -51,64 +52,72 @@ class _BodyWidgetState extends State<BodyWidget> {
             ],
           ),
           //DROPDOWNS
-          BlocListener<LocationBloc, LocationState>(
-            listener: (context, state) {
-              debugPrint("Country: ${state.selectedCountry}");
-              debugPrint("State: ${state.selectedState}");
-              debugPrint("City: ${state.selectedCity}");
+          BlocBuilder<LocationCubit, LocationState>(
+            builder: (context, state) {
+              if (state is LocationLoaded || state is LocationSelectedState) {
+                return Wrap(
+                  runSpacing: context.mediumValue,
+                  children: [
+                    //COUNTRY
+                    CustomDropdownButton<String>(
+                      hint: "Select Country",
+                      value: _cubit.selectedCountry,
+                      items: _cubit.countryList.map((country) {
+                        return DropdownMenuItem<String>(
+                          value: country.name,
+                          child: Text(country.name ?? ''),
+                        );
+                      }).toList(),
+                      onChanged: (country) {
+                        _cubit.selectCountry(country: country ?? '');
+                        _cubit.fetchStates(country: country ?? '');
+                      },
+                    ),
+                    //STATE
+                    CustomDropdownButton<String>(
+                      hint: "Select State",
+                      value: _cubit.selectedState,
+                      items: _cubit.stateList.map((state) {
+                        return DropdownMenuItem<String>(
+                          value: state,
+                          child: Text(state),
+                        );
+                      }).toList(),
+                      onChanged: (state) {
+                        _cubit.selectState(state: state ?? '');
+                        _cubit.fetchCities(
+                          country: _cubit.selectedCountry ?? '',
+                          state: state ?? '',
+                        );
+                      },
+                    ),
+                    //CITY
+                    CustomDropdownButton<String>(
+                      hint: "Select City",
+                      value: _cubit.selectedCity,
+                      items: _cubit.cityList.map((city) {
+                        return DropdownMenuItem<String>(
+                          value: city,
+                          child: Text(city),
+                        );
+                      }).toList(),
+                      onChanged: (city) {
+                        _cubit.selectCity(city: city ?? '');
+                      },
+                    ),
+                  ],
+                );
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
             },
-            child: Wrap(
-              runSpacing: context.mediumValue,
-              children: [
-                //COUNTRY
-                CustomDropdownButton(
-                  hint: "Select Country",
-                  items: context
-                      .watch<LocationBloc>()
-                      .state
-                      .countryList
-                      .map((e) => DropdownMenuItem(value: e.name, child: Text(e.name ?? "")))
-                      .toList(),
-                  onChanged: (country) {
-                    context.read<LocationBloc>().add(CountrySelectedEvent(country: country));
-                  },
-                ),
-                //STATE
-                CustomDropdownButton(
-                  hint: "Select State",
-                  items: context
-                      .watch<LocationBloc>()
-                      .state
-                      .stateList
-                      .map((e) => DropdownMenuItem(value: e, child: Text(e)))
-                      .toList(),
-                  onChanged: (state) {
-                    context.read<LocationBloc>().add(StateSelectedEvent(state: state));
-                  },
-                ),
-                //CITY
-                CustomDropdownButton(
-                  hint: "Select City",
-                  items: context
-                      .watch<LocationBloc>()
-                      .state
-                      .cityList
-                      .map((e) => DropdownMenuItem(value: e, child: Text(e)))
-                      .toList(),
-                  onChanged: (city) {
-                    context.read<LocationBloc>().add(CitySelectedEvent(city: city));
-                  },
-                ),
-              ],
-            ),
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               TextButton(
                 onPressed: () {
-                  context.read<LocationBloc>().add(SubmitLocationEvent());
+                  _cubit.submitLocation();
                   context.router.replaceNamed(NavigationPaths.home.path);
                 },
                 child: Text(
