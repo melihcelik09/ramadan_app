@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ramadan_app/app/view/location/cubit/location_cubit.dart';
 import 'package:ramadan_app/app/view/location/view/widgets/custom_dropdown_button.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
+import 'package:ramadan_app/core/init/navigation/app_router.dart';
 
 class BodyWidget extends StatefulWidget {
   const BodyWidget({
@@ -116,7 +118,7 @@ class _BodyWidgetState extends State<BodyWidget> {
               TextButton(
                 onPressed: () {
                   _cubit.submitLocation();
-                  // context.router.replaceNamed(NavigationPaths.home.path);
+                  context.router.replaceNamed(NavigationPaths.home.path);
                 },
                 child: Text(
                   'Go to Home Page',
