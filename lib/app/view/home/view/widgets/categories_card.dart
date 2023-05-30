@@ -24,6 +24,7 @@ class CategoriesCard extends StatelessWidget {
           case 0:
             break;
           case 1:
+          context.router.pushNamed(NavigationPaths.ramadanTime.path);
             break;
           case 2:
             context.router.pushNamed(NavigationPaths.asmaAlHusna.path);
