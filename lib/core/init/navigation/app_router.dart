@@ -28,7 +28,7 @@ enum NavigationPaths {
   onboarding("/"),
   home("/home"),
   location("/location"),
-  ramadanTime("/ramadanTime");
+  ramadanTime("/ramadanTime"),
   asmaAlHusna("/asmaAlHusna");
   
   final String path;
