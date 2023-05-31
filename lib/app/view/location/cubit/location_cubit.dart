@@ -81,6 +81,9 @@ class LocationCubit extends Cubit<LocationState> {
 
   Future<void> submitLocation() async {
     userLocation = UserLocationModel(country: selectedCountry, state: selectedState, city: selectedCity);
-    await CacheManager<UserLocationModel?>().writeData(key: 'location', value: userLocation);
+    await CacheManager<Map<String, dynamic>>().writeData(
+      key: CacheManagerEnum.location.name,
+      value: userLocation!.toJson(),
+    );
   }
 }

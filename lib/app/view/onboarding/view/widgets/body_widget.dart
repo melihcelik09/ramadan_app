@@ -88,7 +88,7 @@ class NextButtonWidget extends StatelessWidget {
       child: const Icon(Icons.arrow_forward_ios),
       onPressed: () async {
         if (isLastPage) {
-          await CacheManager<bool>().writeData(key: 'onboarding', value: true).then(
+          await CacheManager<bool>().writeData(key: CacheManagerEnum.onboarding.name, value: true).then(
                 (value) => context.router.replaceNamed(NavigationPaths.location.path),
               );
         } else {
