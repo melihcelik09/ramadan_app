@@ -19,6 +19,7 @@ class LocationCubit extends Cubit<LocationState> {
   String? selectedState;
   String? selectedCity;
   UserLocationModel? userLocation;
+  bool get isLocationSelected => selectedCountry != null && selectedState != null && selectedCity != null;
 
   Future<void> fetchCountries() async {
     try {

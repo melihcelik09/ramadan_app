@@ -116,9 +116,13 @@ class _BodyWidgetState extends State<BodyWidget> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               TextButton(
-                onPressed: () async {
-                  await _cubit.submitLocation().then((value) => context.router.replaceNamed(NavigationPaths.home.path));
-                },
+                onPressed: context.watch<LocationCubit>().isLocationSelected
+                    ? () async {
+                        await _cubit
+                            .submitLocation()
+                            .then((value) => context.router.replaceNamed(NavigationPaths.home.path));
+                      }
+                    : null,
                 child: Text(
                   'Go to Home Page',
                   style: Theme.of(context)
