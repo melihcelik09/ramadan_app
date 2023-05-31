@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:ramadan_app/app/view/location/model/location_model.dart';
 import 'package:ramadan_app/app/view/location/model/user_location_model.dart';
 import 'package:ramadan_app/app/view/location/service/location_service.dart';
 import 'package:ramadan_app/core/constants/app_endpoints.dart';
+import 'package:ramadan_app/core/init/cache/cache_manager.dart';
 
 part 'location_state.dart';
 
@@ -78,13 +78,8 @@ class LocationCubit extends Cubit<LocationState> {
     ));
   }
 
-  void submitLocation() {
-    userLocation = UserLocationModel(
-      country: selectedCountry,
-      state: selectedState,
-      city: selectedCity,
-    );
-    debugPrint(userLocation.toString());
-    //TODO: SAVE USER LOCATION TO LOCAL STORAGE
+  Future<void> submitLocation() async {
+    userLocation = UserLocationModel(country: selectedCountry, state: selectedState, city: selectedCity);
+    await CacheManager<UserLocationModel?>().writeData(key: 'location', value: userLocation);
   }
 }
