@@ -23,9 +23,7 @@ class BodyWidget extends StatelessWidget {
               itemCount: 4,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: ContextExtension(context).width /
-                    ContextExtension(context).height *
-                    2.17,
+                childAspectRatio: ContextExtension(context).width / ContextExtension(context).height * 2.17,
                 crossAxisSpacing: ContextExtension(context).lowValue,
                 mainAxisSpacing: ContextExtension(context).lowValue,
               ),
@@ -62,9 +60,7 @@ class BodyWidget extends StatelessWidget {
                     ),
                     const Text(
                       "Dua for breaking fast",
-                      style: TextStyle(
-                          color: AppColors.secondaryColor,
-                          fontWeight: FontWeight.bold),
+                      style: TextStyle(color: AppColors.secondaryColor, fontWeight: FontWeight.bold),
                     ),
                     const Text(
                       "Allahumma inni laka sumtu wa bika aamantu wa alayka tawakkaltu wa ala rizq-ika-aftartu",
@@ -87,7 +83,7 @@ class BodyWidget extends StatelessWidget {
             child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              itemCount: 4,
+              itemCount: 3,
               itemBuilder: (BuildContext context, int index) => CategoriesCard(
                 index: index,
               ),
