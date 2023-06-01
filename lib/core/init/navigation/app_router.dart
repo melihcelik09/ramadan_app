@@ -5,6 +5,7 @@ import 'package:ramadan_app/app/view/bottom_navbar/view/bottom_navbar_view.dart'
 import 'package:ramadan_app/app/view/location/view/location_view.dart';
 import 'package:ramadan_app/app/view/onboarding/view/onboarding_view.dart';
 import 'package:ramadan_app/app/view/ramadan_time/view/ramadan_time_view.dart';
+import 'package:ramadan_app/app/view/splash/view/splash_view.dart';
 
 part 'app_router.gr.dart';
 
@@ -12,6 +13,10 @@ part 'app_router.gr.dart';
 class AppRouter extends _$AppRouter {
   @override
   final List<AutoRoute> routes = [
+    AutoRoute(
+      page: SplashRoute.page,
+      path: NavigationPaths.splash.path,
+    ),
     AutoRoute(
       page: OnboardingRoute.page,
       path: NavigationPaths.onboarding.path,
@@ -36,7 +41,8 @@ class AppRouter extends _$AppRouter {
 }
 
 enum NavigationPaths {
-  onboarding("/"),
+  splash("/"),
+  onboarding("/onboarding"),
   home("/home"),
   location("/location"),
   ramadanTime("/ramadanTime"),
