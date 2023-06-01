@@ -56,7 +56,8 @@ class CurrentPrayerTimeWidget extends StatelessWidget {
                 children: [
                   const Placeholder(fallbackHeight: 100, fallbackWidth: 100),
                   Padding(
-                    padding: context.horizontalPaddingNormal + context.onlyRightPaddingHigh,
+                    padding: context.horizontalPaddingNormal +
+                        context.onlyRightPaddingHigh,
                     child: Text('Imsak', style: context.textTheme.titleLarge),
                   ),
                   Text('04:00', style: context.textTheme.titleLarge),
@@ -79,17 +80,7 @@ class WeeklyCalendarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-                onPressed: () {
-                  context.router.pop();
-                },
-                icon: const Icon(Icons.arrow_back_ios)),
-            Text(DateFormat('EEEE, d MMMM').format(DateTime.now()), style: context.textTheme.titleLarge),
-          ],
-        ),
+        
         Container(
           padding: context.verticalPaddingLow,
           height: context.width * 0.4,
@@ -100,14 +91,15 @@ class WeeklyCalendarWidget extends StatelessWidget {
               DateTime currentDate = DateTime.now().add(Duration(days: index));
               DateTime nextDate = currentDate.add(const Duration(days: 1));
               bool shouldDisplayMonthName = currentDate.month != nextDate.month;
-              String dayName = DateFormat.EEEE().format(currentDate).split('').first;
+              List<String> dayName =
+                  DateFormat.EEEE().format(currentDate).split('').sublist(0, 3);
               String dayNumber = DateFormat.d().format(currentDate);
               String monthName = DateFormat.MMMM().format(currentDate);
               return Row(
                 children: [
                   Column(
                     children: [
-                      Text(dayName, style: context.textTheme.titleLarge),
+                      Text(dayName.join(), style: context.textTheme.titleLarge),
                       SizedBox(
                         height: context.height * 0.1,
                         width: context.width * 0.2,
@@ -118,7 +110,9 @@ class WeeklyCalendarWidget extends StatelessWidget {
                           child: InkWell(
                             borderRadius: BorderRadius.circular(16),
                             onTap: () {},
-                            child: Center(child: Text(dayNumber, style: context.textTheme.titleLarge)),
+                            child: Center(
+                                child: Text(dayNumber,
+                                    style: context.textTheme.titleLarge)),
                           ),
                         ),
                       ),
