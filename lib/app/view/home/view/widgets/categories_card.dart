@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
+import 'package:ramadan_app/core/extensions/context_extension.dart';
 import 'package:ramadan_app/core/init/navigation/app_router.dart';
 
 class CategoriesCard extends StatelessWidget {
@@ -24,7 +25,7 @@ class CategoriesCard extends StatelessWidget {
           case 0:
             break;
           case 1:
-          context.router.pushNamed(NavigationPaths.ramadanTime.path);
+            context.router.pushNamed(NavigationPaths.ramadanTime.path);
             break;
           case 2:
             context.router.pushNamed(NavigationPaths.asmaAlHusna.path);
@@ -47,7 +48,10 @@ class CategoriesCard extends StatelessWidget {
                   imageUrls[index],
                   fit: BoxFit.fill,
                 ),
-                Text(titles[index]),
+                Text(
+                  titles[index],
+                  style: context.textTheme.labelLarge,
+                ),
               ],
             ),
           )),
