@@ -14,7 +14,11 @@ class SplashRepository {
         CacheManager<Map<String, dynamic>>().readData(key: CacheManagerEnum.location.name) ?? {};
     UserLocationModel model = UserLocationModel.fromJson(data);
     debugPrint('Location model: ${model.toString()}');
-    if (model.country == null || model.state == null || model.city == null) {
+    if (model.country == null ||
+        model.region == null ||
+        model.city == null ||
+        model.latitude == null ||
+        model.longitude == null) {
       return false;
     }
     return true;
