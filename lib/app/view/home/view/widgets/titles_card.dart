@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ramadan_app/app/view/location/model/user_location_model.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/init/cache/cache_manager.dart';
+import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class TitlesCard extends StatelessWidget {
   const TitlesCard({
@@ -25,19 +27,61 @@ class TitlesCard extends StatelessWidget {
         ),
         child: index != 1
             ? Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: context.paddingLow,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Align(
                         alignment: Alignment.topLeft,
-                        child: Text(titles[index > 1 ? index - 1 : index])), // Your Location
+                        child: Text(
+                          titles[index > 1 ? index - 1 : index],
+                          style: context.textTheme.titleMedium,
+                        )), // Your Location
                     Image.asset(
                       imageUrls[index > 1 ? index - 1 : index],
                       fit: BoxFit.fill,
                     ),
-                    const Text('Partly Cloudy'),
+                    index == 3
+                        ? CupertinoSwitch(
+                            value: true,
+                            activeColor: AppColors.secondaryColor,
+                            onChanged: (value) {},
+                          )
+                        : index == 2
+                            ? Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Asr",
+                                        style: context.textTheme.titleMedium,
+                                      ),
+                                      Text(
+                                        "16:00",
+                                        style: context.textTheme.titleMedium,
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Kalan Süre",
+                                        style: context.textTheme.titleMedium,
+                                      ),
+                                      Text(
+                                        "2:00",
+                                        style: context.textTheme.titleMedium,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )
+                            : const Text("Location"),
                   ],
                 ),
               )
