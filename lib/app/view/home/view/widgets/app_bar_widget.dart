@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
@@ -12,11 +13,11 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
 //        backgroundColor: Colors.transparent,
       backgroundColor: Colors.transparent,
       elevation: 0,
-      title: const Align(
+      title: Align(
         alignment: Alignment.topRight,
         child: Text(
-          "Gün ve tarih",
-          style: TextStyle(color: AppColors.secondaryColor),
+          DateFormat('EEEE, d MMMM y', 'tr_TR').format(DateTime.now()),
+          style: const TextStyle(color: AppColors.secondaryColor),
         ),
       ),
     );
