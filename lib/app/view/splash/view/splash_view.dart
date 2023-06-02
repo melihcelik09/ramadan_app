@@ -13,6 +13,7 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
+  // SplashBloc get _viewModel => context.read<SplashBloc>();
   @override
   void initState() {
     context.read<SplashBloc>().add(SplashInitialEvent());

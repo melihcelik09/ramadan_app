@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:ramadan_app/app/view/app_settings/view/app_settings_view.dart';
 import 'package:ramadan_app/app/view/home/view/home_view.dart';
 import 'package:ramadan_app/app/view/prayer_time/view/prayer_time_view.dart';
 
@@ -14,7 +13,6 @@ class BottomNavbarBloc extends Bloc<BottomNavbarEvent, BottomNavbarInitial> {
           pages: [
             HomeView(),
             PrayerTimeView(),
-            AppSettingsView(),
           ],
         )) {
     on<BottomNavbarInitialEvent>((event, emit) {
