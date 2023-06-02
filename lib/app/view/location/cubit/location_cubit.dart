@@ -86,4 +86,11 @@ class LocationCubit extends Cubit<LocationState> {
       value: userLocation!.toJson(),
     );
   }
+
+  UserLocationModel fetchUserLocation() {
+    final CacheManager<Map<String, dynamic>> cache = CacheManager<Map<String, dynamic>>();
+    Map<String, dynamic> data = cache.readData(key: CacheManagerEnum.location.name) ?? {};
+    UserLocationModel model = UserLocationModel.fromJson(data);
+    return model;
+  }
 }

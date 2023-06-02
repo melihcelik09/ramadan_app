@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ramadan_app/app/view/location/cubit/location_cubit.dart';
 import 'package:ramadan_app/app/view/location/model/user_location_model.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
-import 'package:ramadan_app/core/init/cache/cache_manager.dart';
 
-class TitlesCard extends StatelessWidget {
+class TitlesCard extends StatefulWidget {
   const TitlesCard({
     super.key,
     required this.index,
@@ -12,8 +13,20 @@ class TitlesCard extends StatelessWidget {
   final int index;
 
   @override
+  State<TitlesCard> createState() => _TitlesCardState();
+}
+
+class _TitlesCardState extends State<TitlesCard> {
+  late UserLocationModel location;
+  @override
+  void initState() {
+    location = context.read<LocationCubit>().fetchUserLocation();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    List<String> titles = [getLocation(), "Next Time", "Time Alert"];
+    List<String> titles = ["${location.state}, ${location.country}", "Next Time", "Time Alert"];
     List<String> imageUrls = [
       "assets/images/titles/Map.png",
       "assets/images/titles/Asr.png",
@@ -24,7 +37,7 @@ class TitlesCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-        child: index != 1
+        child: widget.index != 1
             ? Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -34,12 +47,12 @@ class TitlesCard extends StatelessWidget {
                     Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          titles[index > 1 ? index - 1 : index],
+                          titles[widget.index > 1 ? widget.index - 1 : widget.index],
                           style: context.textTheme.titleMedium,
                         )), // Your Location
 
                     Image.asset(
-                      imageUrls[index > 1 ? index - 1 : index],
+                      imageUrls[widget.index > 1 ? widget.index - 1 : widget.index],
                       fit: BoxFit.fill,
                     ),
                     const Text('Partly Cloudy'),
@@ -58,12 +71,5 @@ class TitlesCard extends StatelessWidget {
             //     ],
             //   ),
             : const SizedBox.shrink());
-  }
-
-  String getLocation() {
-    final CacheManager<Map<String, dynamic>> cache = CacheManager<Map<String, dynamic>>();
-    Map<String, dynamic> data = cache.readData(key: CacheManagerEnum.location.name) ?? {};
-    UserLocationModel model = UserLocationModel.fromJson(data);
-    return "${model.city}, ${model.state}, ${model.country}";
   }
 }
