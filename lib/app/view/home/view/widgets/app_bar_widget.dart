@@ -10,15 +10,19 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+//        backgroundColor: Colors.transparent,
       backgroundColor: Colors.transparent,
       elevation: 0,
       title: Align(
         alignment: Alignment.topRight,
-        child: Text(DateFormat('EEEE, d MMMM y', 'tr_TR').format(DateTime.now()),style: context.textTheme.displaySmall,),
+        child: Text(
+          DateFormat('EEEE, d MMMM y', 'tr_TR').format(DateTime.now()),
+          style: context.textTheme.displaySmall,
+        ),
       ),
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(35);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

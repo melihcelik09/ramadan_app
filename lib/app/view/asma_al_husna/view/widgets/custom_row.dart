@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
-import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class CustomRow extends StatelessWidget {
   const CustomRow({
@@ -23,12 +22,19 @@ class CustomRow extends StatelessWidget {
         Expanded(
           child: Text(
             title,
-            style: context.textTheme.titleMedium,
+            style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: AppColors.secondaryColor),
           ),
         ),
         Expanded(
           child: Text(information,
-              maxLines: 15, style: context.textTheme.titleLarge),
+              maxLines: 15,
+              style: const TextStyle(
+                fontSize: 18,
+                color: AppColors.secondaryColor,
+              )),
         ),
       ],
     );

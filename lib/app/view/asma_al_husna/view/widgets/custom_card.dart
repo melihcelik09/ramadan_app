@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ramadan_app/core/extensions/context_extension.dart';
+import 'package:ramadan_app/core/constants/app_colors.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({
@@ -24,10 +24,17 @@ class CustomCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(data[index].arName ?? '', style: context.textTheme.titleMedium),
+          Text(data[index].arName ?? '',
+              style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.secondaryColor)),
           Text(
             data[index].enName ?? '',
-            style: context.textTheme.titleMedium,
+            style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: AppColors.secondaryColor),
           ),
         ],
       ),
