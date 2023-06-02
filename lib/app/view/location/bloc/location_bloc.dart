@@ -45,7 +45,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
     on<SubmitLocationEvent>((event, emit) async {
       UserLocationModel model = UserLocationModel(
         country: state.selectedCountry,
-        state: state.selectedState,
+        region: state.selectedState,
         city: state.selectedCity,
       );
       debugPrint(model.toString());
