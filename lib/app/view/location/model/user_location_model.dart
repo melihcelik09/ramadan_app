@@ -5,13 +5,19 @@ part 'user_location_model.g.dart';
 @JsonSerializable()
 class UserLocationModel {
   String? country;
-  String? state;
+  String? countryCode;
   String? city;
+  String? region;
+  double? latitude;
+  double? longitude;
 
   UserLocationModel({
     this.country,
-    this.state,
+    this.countryCode,
     this.city,
+    this.region,
+    this.latitude,
+    this.longitude,
   });
 
   factory UserLocationModel.fromJson(Map<String, dynamic> json) => _$UserLocationModelFromJson(json);
@@ -20,6 +26,6 @@ class UserLocationModel {
 
   @override
   String toString() {
-    return 'Country: $country, State: $state, City: $city';
+    return 'country: $country, countryCode: $countryCode, city: $city, region: $region, latitude: $latitude, longitude: $longitude';
   }
 }

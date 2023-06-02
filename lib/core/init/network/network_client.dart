@@ -2,6 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:ramadan_app/app/view/home/model/daily_dua/daily_dua.dart';
 import 'package:ramadan_app/app/view/location/model/location_model.dart';
 import 'package:ramadan_app/app/view/asma_al_husna/model/asma_al_husna.dart';
+import 'package:ramadan_app/app/view/location/model/location_model.dart';
+import 'package:ramadan_app/app/view/location/model/user_location_model.dart';
+import 'package:ramadan_app/app/view/prayer_time/model/prayer_response_model.dart';
 import 'package:ramadan_app/core/constants/app_endpoints.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -18,19 +21,17 @@ abstract class NetworkClient {
   Future<List<String>> getState(@Query("country") String country);
 
   @GET("/cities")
-  Future<List<String>> getCity(
-      @Query("country") String country, @Query("region") String region);
+  Future<List<String>> getCity(@Query("country") String country, @Query("region") String region);
 
   @GET("/coordinates")
-  Future getCoordinate(@Query("country") String country,
-      @Query("region") String region, @Query("city") String city);
+  Future<UserLocationModel> getCoordinate(
+      @Query("country") String country, @Query("region") String region, @Query("city") String city);
 
   @GET("/timesFromCoordinates")
-  Future getTimesFromCoordinates(
+  Future<PrayerResponseModel> getTimesFromCoordinates(
     @Query("lat") String latitude,
     @Query("lng") String longitude,
-    //2023-10-29
-    @Query("date") String date,
+    @Query("days") String days,
     @Query("timezoneOffset") String timezone,
   );
 
@@ -45,19 +46,16 @@ abstract class NetworkClient {
 
   //baseUrl= https://api.aladhan.com/v1
   @GET("/qibla/{latitude}/{longitude}")
-  Future getQiblaDirection(
-      @Path("latitude") String latitude, @Path("longitude") String longitude);
+  Future getQiblaDirection(@Path("latitude") String latitude, @Path("longitude") String longitude);
 
   @GET("/name")
   Future<AsmaAlHusna> getAsmaulHusna(@Header("X-RapidAPI-Key") String key);
 
   //q= 37.84501,27.83963
   @GET("/current.json")
-  Future getDailyWeather(
-      @Header("X-RapidAPI-Key") String key, @Query("q") String coordinates);
+  Future getDailyWeather(@Header("X-RapidAPI-Key") String key, @Query("q") String coordinates);
 
   //baseUrl= https://api.aladhan.com/v1
   @GET("/hToG/{date}")
-  Future requestGregorianforHijri(
-      @Header("X-RapidAPI-Key") String key, @Path("date") String date);
+  Future requestGregorianforHijri(@Header("X-RapidAPI-Key") String key, @Path("date") String date);
 }
