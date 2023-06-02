@@ -15,3 +15,7 @@ class SelectLanguage extends AppSettingsEvent {
   @override
   List<Object> get props => [language!];
 }
+
+class SelectTheme extends AppSettingsEvent {
+  
+}
