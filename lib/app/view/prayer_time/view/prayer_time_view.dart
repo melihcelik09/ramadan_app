@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:ramadan_app/app/view/prayer_time/view/widgets/body_widget.dart';
+import 'package:ramadan_app/core/constants/app_colors.dart';
+import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class PrayerTimeView extends StatelessWidget {
   const PrayerTimeView({Key? key}) : super(key: key);
