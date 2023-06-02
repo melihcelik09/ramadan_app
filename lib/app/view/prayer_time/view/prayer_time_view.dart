@@ -22,7 +22,7 @@ class PrayerTimeView extends StatelessWidget {
           ),
         ],
       ),
-      body: SafeArea(child: BodyWidget()),
+      body: const BodyWidget(),
     );
   }
 }
