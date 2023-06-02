@@ -23,6 +23,7 @@ dependencies:
   json_annotation: ^4.8.0
   logger: any
   retrofit: ^4.0.1
+  shimmer: ^3.0.0
   smooth_page_indicator: ^1.0.1
 
 dev_dependencies:
