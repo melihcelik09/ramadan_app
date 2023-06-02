@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ramadan_app/app/view/location/model/user_location_model.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
+import 'package:ramadan_app/core/extensions/context_extension.dart';
 import 'package:ramadan_app/core/init/cache/cache_manager.dart';
 
 class TitlesCard extends StatelessWidget {
@@ -32,7 +33,11 @@ class TitlesCard extends StatelessWidget {
                   children: [
                     Align(
                         alignment: Alignment.topLeft,
-                        child: Text(titles[index > 1 ? index - 1 : index])), // Your Location
+                        child: Text(
+                          titles[index > 1 ? index - 1 : index],
+                          style: context.textTheme.titleMedium,
+                        )), // Your Location
+
                     Image.asset(
                       imageUrls[index > 1 ? index - 1 : index],
                       fit: BoxFit.fill,
