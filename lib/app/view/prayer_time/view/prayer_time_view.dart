@@ -6,8 +6,20 @@ class PrayerTimeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(child: BodyWidget()),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        foregroundColor: AppColors.secondaryColor,
+        elevation: 0,
+        actions: [
+          Padding(
+            padding: context.paddingLow,
+            child: Text(DateFormat('EEEE, d MMMM').format(DateTime.now()),
+                style: context.textTheme.headlineMedium),
+          ),
+        ],
+      ),
+      body: const BodyWidget(),
     );
   }
 }
