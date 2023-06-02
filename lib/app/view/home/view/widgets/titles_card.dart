@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ramadan_app/app/view/location/cubit/location_cubit.dart';
+import 'package:ramadan_app/app/view/location/model/user_location_model.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 
@@ -17,6 +18,8 @@ class TitlesCard extends StatefulWidget {
 }
 
 class _TitlesCardState extends State<TitlesCard> {
+  late UserLocationModel location;
+
   @override
   void initState() {
     location = context.read<LocationCubit>().fetchUserLocation();
