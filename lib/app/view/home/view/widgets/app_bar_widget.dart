@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
@@ -9,12 +10,13 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+//        backgroundColor: Colors.transparent,
       backgroundColor: Colors.transparent,
       elevation: 0,
       title: Align(
         alignment: Alignment.topRight,
         child: Text(
-          "Gün ve tarih",
+          DateFormat('EEEE, d MMMM y', 'tr_TR').format(DateTime.now()),
           style: context.textTheme.displaySmall,
         ),
       ),
@@ -22,5 +24,5 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(35);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

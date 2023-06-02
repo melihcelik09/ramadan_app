@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:ramadan_app/app/view/home/model/daily_dua/daily_dua.dart';
 import 'package:ramadan_app/app/view/location/model/location_model.dart';
 import 'package:ramadan_app/app/view/asma_al_husna/model/asma_al_husna.dart';
-import 'package:ramadan_app/app/view/ramadan_time/model/calendar_model.dart';
 import 'package:ramadan_app/core/constants/app_endpoints.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -38,7 +36,7 @@ abstract class NetworkClient {
   //baseUrl= https://api.alquran.cloud/v1
   //Please specify an Ayah number (1 to 6236).
   @GET("/ayah/{number}/editions/tr.diyanet,en.asad")
-  Future<DailyDua> getAyah(@Path("number") String number);
+  Future getAyah(@Path("number") String number);
 
   //baseUrl= https://api.aladhan.com/v1
   @GET("/gToH/{date}")
@@ -59,6 +57,6 @@ abstract class NetworkClient {
 
   //baseUrl= https://api.aladhan.com/v1
   @GET("/hToG/{date}")
-  Future<CalendarModel> requestGregorianforHijri(@Header("X-RapidAPI-Key") String key,
+  Future requestGregorianforHijri(@Header("X-RapidAPI-Key") String key,
       @Path("date") String date);
 }

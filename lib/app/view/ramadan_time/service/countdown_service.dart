@@ -11,12 +11,14 @@ class CountdownService {
     final DateFormat formatter = DateFormat("dd-MM-yyyy");
     final DateFormat outputFormatter = DateFormat("yyyy-MM-dd");
 
-    final CalendarModel response = await NetworkClient(dio,
+    final response = await NetworkClient(dio,
             baseUrl: AppEndpoints.dateAndQiblaBaseUrl)
         .requestGregorianforHijri(
             "77bd26fb72mshd52097b4eaa3e06p1a44b8jsn68fc3dc01507", "01-09-1445");
+    CalendarModel jsonToCalendardownModel = CalendarModel.fromJson(response);
 
-    final outputDate = formatter.parse(response.data!.gregorian!.date!);
+    final outputDate =
+        formatter.parse(jsonToCalendardownModel.data!.gregorian!.date!);
     final String formattedOutput = outputFormatter.format(outputDate);
 
     DateTime dt = DateTime.parse(formattedOutput);
