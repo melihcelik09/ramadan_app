@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ramadan_app/app/view/app_settings/bloc/app_settings_bloc.dart';
@@ -51,8 +50,6 @@ class LanguageButtons extends StatefulWidget {
 }
 
 class _LanguageButtonsState extends State<LanguageButtons> {
-  Languages? _language = Languages.turkce;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -76,10 +73,7 @@ class _LanguageButtonsState extends State<LanguageButtons> {
               value: Languages.turkce,
               groupValue: context.watch<AppSettingsBloc>().state.language,
               onChanged: (Languages? value) {
-                print("Amina kodumun valuesu : $value");
-                context
-                    .read<AppSettingsBloc>()
-                    .add(SelectLanguage(language: value));
+                context.read<AppSettingsBloc>().add(SelectLanguage(language: value));
               },
             )
           ],
@@ -101,9 +95,7 @@ class _LanguageButtonsState extends State<LanguageButtons> {
               value: Languages.english,
               groupValue: context.watch<AppSettingsBloc>().state.language,
               onChanged: (Languages? value) {
-                context
-                    .read<AppSettingsBloc>()
-                    .add(SelectLanguage(language: value));
+                context.read<AppSettingsBloc>().add(SelectLanguage(language: value));
               },
             )
           ],

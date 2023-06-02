@@ -111,12 +111,6 @@ class WeeklyCalendarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Text(DateFormat('EEEE, d MMMM').format(DateTime.now()), style: context.textTheme.titleLarge),
-          ],
-        ),
         Container(
           padding: context.verticalPaddingLow,
           height: context.width * 0.4,
@@ -127,7 +121,7 @@ class WeeklyCalendarWidget extends StatelessWidget {
               DateTime currentDate = DateTime.now().add(Duration(days: index));
               DateTime nextDate = currentDate.add(const Duration(days: 1));
               bool shouldDisplayMonthName = currentDate.month != nextDate.month;
-              String dayName = DateFormat.EEEE().format(currentDate).split('').first;
+              String dayName = DateFormat.EEEE().format(currentDate).substring(0, 3);
               String dayNumber = DateFormat.d().format(currentDate);
               String monthName = DateFormat.MMMM().format(currentDate);
               return Row(
