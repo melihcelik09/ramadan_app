@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
@@ -13,10 +14,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       title: Align(
         alignment: Alignment.topRight,
-        child: Text(
-          "Gün ve tarih",
-          style: context.textTheme.displaySmall,
-        ),
+        child: Text(DateFormat('EEEE, d MMMM y', 'tr_TR').format(DateTime.now()),style: context.textTheme.displaySmall,),
       ),
     );
   }
