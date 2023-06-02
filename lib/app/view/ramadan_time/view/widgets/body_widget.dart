@@ -15,7 +15,7 @@ class BodyWidget extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: context.height / 3.5,
+            height: context.height / 3,
             width: context.width,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
