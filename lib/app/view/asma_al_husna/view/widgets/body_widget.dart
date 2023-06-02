@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ramadan_app/app/view/asma_al_husna/service/asma_al_husna_service.dart';
 import 'package:ramadan_app/app/view/asma_al_husna/view/widgets/asma_al_husna_card.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/constants/app_endpoints.dart';
 
 import 'package:ramadan_app/core/extensions/context_extension.dart';
@@ -20,15 +19,11 @@ class BodyWidget extends StatelessWidget {
           children: [
             Padding(
               padding: context.onlyBottomPaddingMedium,
-              child: const Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    "Asma Al Husna",
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.secondaryColor),
-                  )),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text("Asma Al Husna",
+                    style: context.textTheme.displayMedium),
+              ),
             ),
             FutureBuilder(
               future: service.getAsmaAlHusna(),

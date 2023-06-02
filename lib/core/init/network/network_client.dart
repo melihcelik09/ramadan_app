@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:ramadan_app/app/view/home/model/daily_dua/daily_dua.dart';
+import 'package:ramadan_app/app/view/location/model/location_model.dart';
 import 'package:ramadan_app/app/view/asma_al_husna/model/asma_al_husna.dart';
 import 'package:ramadan_app/app/view/location/model/location_model.dart';
 import 'package:ramadan_app/app/view/location/model/user_location_model.dart';
@@ -36,7 +38,7 @@ abstract class NetworkClient {
   //baseUrl= https://api.alquran.cloud/v1
   //Please specify an Ayah number (1 to 6236).
   @GET("/ayah/{number}/editions/tr.diyanet,en.asad")
-  Future getAyah(@Path("number") String number);
+  Future<DailyDua> getAyah(@Path("number") String number);
 
   //baseUrl= https://api.aladhan.com/v1
   @GET("/gToH/{date}")
