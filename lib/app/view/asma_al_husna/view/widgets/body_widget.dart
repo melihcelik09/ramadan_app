@@ -20,15 +20,10 @@ class BodyWidget extends StatelessWidget {
           children: [
             Padding(
               padding: context.onlyBottomPaddingMedium,
-              child: const Align(
+              child: Align(
                   alignment: Alignment.topLeft,
-                  child: Text(
-                    "Asma Al Husna",
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.secondaryColor),
-                  )),
+                  child: Text("Asma Al Husna",
+                      style: context.textTheme.displayMedium)),
             ),
             FutureBuilder(
               future: service.getAsmaAlHusna(),
