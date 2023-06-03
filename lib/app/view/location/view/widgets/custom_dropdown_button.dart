@@ -7,6 +7,7 @@ class CustomDropdownButton<T> extends StatelessWidget {
   final void Function(T?)? onChanged;
   final String? hint;
   final T? value;
+  final bool appSettings;
 
   const CustomDropdownButton({
     super.key,
@@ -14,25 +15,38 @@ class CustomDropdownButton<T> extends StatelessWidget {
     required this.onChanged,
     this.hint,
     this.value,
+    this.appSettings = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<T>(
       isExpanded: true,
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: AppColors.primaryColor,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide.none,
-        ),
-      ),
-      icon: const Icon(Icons.expand_more, color: Colors.white),
+      decoration: appSettings
+          ? const InputDecoration(
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide.none,
+              ),
+            )
+          : InputDecoration(
+              filled: true,
+              fillColor: AppColors.primaryColor,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide.none,
+              ),
+            ),
+      icon: Icon(Icons.expand_more,
+          color: appSettings ? AppColors.secondaryColor : Colors.white),
       items: items,
       onChanged: onChanged,
       value: value,
-      hint: Text(hint ?? 'Select', style: context.textTheme.titleLarge?.copyWith(color: Colors.white)),
+      hint: Text(
+        hint ?? 'Select',
+        style: context.textTheme.titleLarge?.copyWith(
+          color: appSettings ? AppColors.secondaryColor : Colors.white,
+        ),
+      ),
     );
   }
 }
