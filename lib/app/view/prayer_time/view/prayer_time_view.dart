@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:ramadan_app/app/view/prayer_time/view/widgets/body_widget.dart';
+import 'package:ramadan_app/app/view/prayer_time/view/widgets/calendar_widget.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 
@@ -17,12 +17,11 @@ class PrayerTimeView extends StatelessWidget {
         actions: [
           Padding(
             padding: context.paddingLow,
-            child: Text(DateFormat('EEEE, d MMMM').format(DateTime.now()),
-                style: context.textTheme.headlineMedium),
+            child: Text(DateFormat('EEEE, d MMMM').format(DateTime.now()), style: context.textTheme.headlineMedium),
           ),
         ],
       ),
-      body: const BodyWidget(),
+      body: const CalendarWidget(),
     );
   }
 }

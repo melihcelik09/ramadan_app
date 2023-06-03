@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:ramadan_app/app/view/location/cubit/location_cubit.dart';
 import 'package:ramadan_app/app/view/location/model/user_location_model.dart';
 import 'package:ramadan_app/app/view/prayer_time/model/prayer_response_model.dart';
@@ -12,27 +11,31 @@ part 'prayer_state.dart';
 
 class PrayerBloc extends Bloc<PrayerEvent, PrayerState> {
   final PrayerTimeService _service = PrayerTimeService(baseUrl: AppEndpoints.baseUrl);
-  PrayerBloc() : super(const PrayerState(times: [], selectedPrayerIndex: 0, isLoading: true)) {
-    on<PrayerFetchEvent>((event, emit) async {
-      try {
-        UserLocationModel user = LocationCubit().fetchUserLocation();
-        PrayerResponseModel model = await _service.getTimesFromCoordinates(
-          latitude: user.latitude.toString(),
-          longitude: user.longitude.toString(),
-        );
-        List? times = model.times?.values.toList();
-        emit(state.copyWith(times: times, isLoading: false));
-      } catch (e) {
-        debugPrint('PrayerFetchEvent: $e');
-        throw Exception(e);
-      }
-    });
-
-    on<PrayerSelectedEvent>(
+  PrayerResponseModel? _model;
+  PrayerBloc() : super(PrayerLoading()) {
+    on<LoadPrayerEvent>(
       (event, emit) async {
-        emit(state.copyWith(isLoading: true));
-        await Future.delayed(const Duration(milliseconds: 500));
-        emit(state.copyWith(selectedPrayerIndex: event.index, isLoading: false));
+        emit(PrayerLoading());
+        try {
+          UserLocationModel user = LocationCubit().fetchUserLocation();
+          _model = await _service.getTimesFromCoordinates(
+            latitude: user.latitude.toString(),
+            longitude: user.longitude.toString(),
+          );
+          List times = _model?.times?.values.toList() ?? [];
+          emit(PrayerLoaded(prayers: times, selectedPrayerIndex: 0));
+        } catch (e) {
+          emit(PrayerError(message: e.toString()));
+        }
+      },
+    );
+
+    on<SelectPrayerEvent>(
+      (event, emit) async {
+        emit(PrayerLoading());
+        await Future.delayed(const Duration(seconds: 1));
+        List times = _model?.times?.values.toList() ?? [];
+        emit(PrayerLoaded(prayers: times, selectedPrayerIndex: event.index));
       },
     );
   }
