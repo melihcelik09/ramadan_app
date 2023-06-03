@@ -12,9 +12,8 @@ part 'prayer_state.dart';
 
 class PrayerBloc extends Bloc<PrayerEvent, PrayerState> {
   final PrayerTimeService _service = PrayerTimeService(baseUrl: AppEndpoints.baseUrl);
-  PrayerBloc() : super(PrayerInitial()) {
+  PrayerBloc() : super(const PrayerState(times: [], selectedPrayerIndex: 0, isLoading: true)) {
     on<PrayerFetchEvent>((event, emit) async {
-      emit(PrayerLoading());
       try {
         UserLocationModel user = LocationCubit().fetchUserLocation();
         PrayerResponseModel model = await _service.getTimesFromCoordinates(
@@ -22,18 +21,18 @@ class PrayerBloc extends Bloc<PrayerEvent, PrayerState> {
           longitude: user.longitude.toString(),
         );
         List? times = model.times?.values.toList();
-        emit(PrayerLoaded(times: times ?? [], selectedPrayerIndex: 0));
+        emit(state.copyWith(times: times, isLoading: false));
       } catch (e) {
-        emit(PrayerError(message: e.toString()));
+        debugPrint('PrayerFetchEvent: $e');
+        throw Exception(e);
       }
     });
 
     on<PrayerSelectedEvent>(
-      (event, emit) {
-        debugPrint('PrayerSelectedEvent: ${event.index}');
-        emit(
-          (state as PrayerLoaded).copyWith(selectedPrayerIndex: event.index),
-        );
+      (event, emit) async {
+        emit(state.copyWith(isLoading: true));
+        await Future.delayed(const Duration(milliseconds: 500));
+        emit(state.copyWith(selectedPrayerIndex: event.index, isLoading: false));
       },
     );
   }
