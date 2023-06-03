@@ -1,44 +1,27 @@
 part of 'prayer_bloc.dart';
 
-abstract class PrayerState extends Equatable {
-  const PrayerState();
-
-  @override
-  List<Object> get props => [];
-}
-
-class PrayerInitial extends PrayerState {}
-
-class PrayerLoading extends PrayerState {}
-
-class PrayerLoaded extends PrayerState {
+class PrayerState extends Equatable {
   final List times;
   final int selectedPrayerIndex;
-
-  const PrayerLoaded({
+  final bool? isLoading;
+  const PrayerState({
+    this.isLoading,
     required this.times,
     required this.selectedPrayerIndex,
   });
 
-  @override
-  List<Object> get props => [times, selectedPrayerIndex];
-
-  PrayerLoaded copyWith({
+  PrayerState copyWith({
     List? times,
     int? selectedPrayerIndex,
+    bool? isLoading,
   }) {
-    return PrayerLoaded(
+    return PrayerState(
+      isLoading: isLoading ?? this.isLoading,
       times: times ?? this.times,
       selectedPrayerIndex: selectedPrayerIndex ?? this.selectedPrayerIndex,
     );
   }
-}
-
-class PrayerError extends PrayerState {
-  final String message;
-
-  const PrayerError({required this.message});
 
   @override
-  List<Object> get props => [message];
+  List<Object?> get props => [isLoading, times, selectedPrayerIndex];
 }
