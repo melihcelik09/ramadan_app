@@ -8,15 +8,15 @@ class AppSettingsBloc extends Bloc<AppSettingsEvent, AppSettingsState> {
   AppSettingsBloc()
       : super(
           const AppSettingsState(
-            languages: [
-              Languages.turkce,
-              Languages.english,
-            ],
             language: Languages.turkce,
+            theme: Themes.light,
           ),
         ) {
     on<SelectLanguage>((event, emit) {
       emit(state.copyWith(language: event.language));
+    });
+    on<SelectTheme>((event, emit) {
+      emit(state.copyWith(theme: event.theme));
     });
   }
 }
