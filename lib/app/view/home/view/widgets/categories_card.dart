@@ -23,6 +23,7 @@ class CategoriesCard extends StatelessWidget {
       onTap: () {
         switch (index) {
           case 0:
+            context.router.pushNamed(NavigationPaths.qiableFinder.path);
             break;
           case 1:
             context.router.pushNamed(NavigationPaths.ramadanTime.path);
