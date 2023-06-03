@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -6,14 +8,37 @@ import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 import 'package:shimmer/shimmer.dart';
 
-class CurrentPrayerTimeWidget extends StatelessWidget {
+class CurrentPrayerTimeWidget extends StatefulWidget {
   const CurrentPrayerTimeWidget({
     super.key,
   });
 
   @override
+  State<CurrentPrayerTimeWidget> createState() => _CurrentPrayerTimeWidgetState();
+}
+
+class _CurrentPrayerTimeWidgetState extends State<CurrentPrayerTimeWidget> {
+  late Timer timer;
+  late String currentTime;
+  @override
+  void initState() {
+    currentTime = DateFormat('kk:mm').format(DateTime.now());
+    timer = Timer.periodic(const Duration(minutes: 1), (timer) {
+      setState(() {
+        currentTime = DateFormat('kk:mm').format(DateTime.now());
+      });
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    String currentTime = DateFormat('kk:mm').format(DateTime.now());
     return BlocBuilder<PrayerBloc, PrayerState>(
       builder: (context, state) {
         if (state is PrayerLoaded) {
