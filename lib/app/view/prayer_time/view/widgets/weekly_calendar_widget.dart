@@ -38,15 +38,16 @@ class WeeklyCalendarWidget extends StatelessWidget {
                         child: BlocBuilder<PrayerBloc, PrayerState>(
                           builder: (context, state) {
                             return Card(
-                              color:
-                                  state.selectedPrayerIndex == index ? AppColors.primaryColor : context.theme.cardColor,
+                              color: (state is PrayerLoaded) && state.selectedPrayerIndex == index
+                                  ? AppColors.primaryColor
+                                  : context.theme.cardColor,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: InkWell(
                                 borderRadius: BorderRadius.circular(16),
                                 onTap: () {
-                                  context.read<PrayerBloc>().add(PrayerSelectedEvent(index: index));
+                                  context.read<PrayerBloc>().add(SelectPrayerEvent(index: index));
                                 },
                                 child: Center(
                                   child: Text(dayNumber, style: context.textTheme.displaySmall),
