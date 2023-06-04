@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ramadan_app/app/view/location/cubit/location_cubit.dart';
+import 'package:ramadan_app/app/view/location/model/user_location_model.dart';
 import 'package:ramadan_app/app/view/location/view/widgets/custom_dropdown_button.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 
@@ -13,10 +14,22 @@ class LocationSelect extends StatefulWidget {
 
 class _LocationSelectState extends State<LocationSelect> {
   LocationCubit get _cubit => context.read<LocationCubit>();
+
   @override
   void initState() {
-    _cubit.fetchCountries();
+    fillLocation();
     super.initState();
+  }
+
+  fillLocation() async {
+    UserLocationModel userLocation = _cubit.fetchUserLocation();
+    await _cubit.fetchCountries();
+    await _cubit.fetchStates(country: userLocation.country!);
+    await _cubit.fetchCities(
+        country: userLocation.country!, state: userLocation.region!);
+    _cubit.selectCountry(country: userLocation.country!);
+    _cubit.selectState(state: userLocation.region!);
+    _cubit.selectCity(city: userLocation.city!);
   }
 
   @override
@@ -36,7 +49,7 @@ class _LocationSelectState extends State<LocationSelect> {
                     style: context.textTheme.titleLarge,
                   ),
                   SizedBox(
-                    width: context.dynamicWidth(0.35),
+                    width: context.dynamicWidth(0.4),
                     child: CustomDropdownButton<String>(
                       appSettings: true,
                       hint: "Select Country",
@@ -47,9 +60,9 @@ class _LocationSelectState extends State<LocationSelect> {
                           child: Text(country.name ?? ''),
                         );
                       }).toList(),
-                      onChanged: (country) {
-                        _cubit.selectCountry(country: country ?? '');
-                        _cubit.fetchStates(country: country ?? '');
+                      onChanged: (country) async {
+                        _cubit.selectCountry(country: country!);
+                        await _cubit.fetchStates(country: country);
                       },
                     ),
                   ),
@@ -63,7 +76,7 @@ class _LocationSelectState extends State<LocationSelect> {
                     style: context.textTheme.titleLarge,
                   ),
                   SizedBox(
-                    width: context.dynamicWidth(0.35),
+                    width: context.dynamicWidth(0.4),
                     child: CustomDropdownButton<String>(
                       appSettings: true,
                       hint: "Select State",
@@ -74,11 +87,11 @@ class _LocationSelectState extends State<LocationSelect> {
                           child: Text(state),
                         );
                       }).toList(),
-                      onChanged: (state) {
-                        _cubit.selectState(state: state ?? '');
-                        _cubit.fetchCities(
-                          country: _cubit.selectedCountry ?? '',
-                          state: state ?? '',
+                      onChanged: (state) async {
+                        _cubit.selectState(state: state!);
+                        await _cubit.fetchCities(
+                          country: _cubit.selectedCountry!,
+                          state: state,
                         );
                       },
                     ),
@@ -93,7 +106,7 @@ class _LocationSelectState extends State<LocationSelect> {
                     style: context.textTheme.titleLarge,
                   ),
                   SizedBox(
-                    width: context.dynamicWidth(0.35),
+                    width: context.dynamicWidth(0.4),
                     child: CustomDropdownButton<String>(
                       appSettings: true,
                       hint: "Select City",
@@ -104,8 +117,9 @@ class _LocationSelectState extends State<LocationSelect> {
                           child: Text(city),
                         );
                       }).toList(),
-                      onChanged: (city) {
-                        _cubit.selectCity(city: city ?? '');
+                      onChanged: (city) async {
+                        _cubit.selectCity(city: city!);
+                        await _cubit.submitLocation();
                       },
                     ),
                   ),

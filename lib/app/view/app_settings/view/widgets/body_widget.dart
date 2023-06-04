@@ -5,9 +5,6 @@ import 'package:ramadan_app/app/view/app_settings/view/widgets/custom_card.dart'
 import 'package:ramadan_app/app/view/app_settings/view/widgets/language_buttons.dart';
 import 'package:ramadan_app/app/view/app_settings/view/widgets/location_select.dart';
 import 'package:ramadan_app/app/view/app_settings/view/widgets/theme_buttons.dart';
-import 'package:ramadan_app/app/view/location/cubit/location_cubit.dart';
-import 'package:ramadan_app/app/view/location/view/widgets/custom_dropdown_button.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class BodyWidget extends StatelessWidget {
