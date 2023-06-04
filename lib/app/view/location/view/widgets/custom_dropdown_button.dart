@@ -24,6 +24,9 @@ class CustomDropdownButton<T> extends StatelessWidget {
       isExpanded: true,
       decoration: appSettings
           ? const InputDecoration(
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: AppColors.secondaryColor),
+              ),
               enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide.none,
               ),
