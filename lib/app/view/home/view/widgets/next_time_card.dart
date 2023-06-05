@@ -30,6 +30,12 @@ class _NextTimeCardState extends State<NextTimeCard> {
   }
 
   @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     List<String> imageUrls = [
       "assets/images/prayer/Fajr.png",
