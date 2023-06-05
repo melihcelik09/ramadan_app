@@ -45,14 +45,14 @@ class _LocationSelectState extends State<LocationSelect> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Country",
+                    context.loc.country,
                     style: context.textTheme.titleLarge,
                   ),
                   SizedBox(
                     width: context.dynamicWidth(0.4),
                     child: CustomDropdownButton<String>(
                       appSettings: true,
-                      hint: "Select Country",
+                      hint: context.loc.selectCountry,
                       value: _cubit.selectedCountry,
                       items: _cubit.countryList.map((country) {
                         return DropdownMenuItem<String>(
@@ -72,14 +72,14 @@ class _LocationSelectState extends State<LocationSelect> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "State",
+                    context.loc.state,
                     style: context.textTheme.titleLarge,
                   ),
                   SizedBox(
                     width: context.dynamicWidth(0.4),
                     child: CustomDropdownButton<String>(
                       appSettings: true,
-                      hint: "Select State",
+                      hint: context.loc.selectState,
                       value: _cubit.selectedState,
                       items: _cubit.stateList.map((state) {
                         return DropdownMenuItem<String>(
@@ -102,14 +102,14 @@ class _LocationSelectState extends State<LocationSelect> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "City",
+                    context.loc.city,
                     style: context.textTheme.titleLarge,
                   ),
                   SizedBox(
                     width: context.dynamicWidth(0.4),
                     child: CustomDropdownButton<String>(
                       appSettings: true,
-                      hint: "Select City",
+                      hint: context.loc.selectCity,
                       value: _cubit.selectedCity,
                       items: _cubit.cityList.map((city) {
                         return DropdownMenuItem<String>(

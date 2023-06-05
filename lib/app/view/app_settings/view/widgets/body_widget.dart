@@ -21,11 +21,11 @@ class BodyWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "App Settings",
+                context.loc.appSettings,
                 style: Theme.of(context).textTheme.displayMedium,
               ),
               Text(
-                "Language",
+                context.loc.location,
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               CustomCard(
@@ -33,7 +33,7 @@ class BodyWidget extends StatelessWidget {
                 child: const LanguageButtons(),
               ),
               Text(
-                "Theme",
+                context.loc.theme,
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               CustomCard(
@@ -41,11 +41,11 @@ class BodyWidget extends StatelessWidget {
                 child: const ThemeButtons(),
               ),
               Text(
-                "Location",
+                context.loc.location,
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               CustomCard(
-                height: context.dynamicHeight(0.23),
+                height: context.dynamicHeight(0.2),
                 child: const LocationSelect(),
               ),
             ],

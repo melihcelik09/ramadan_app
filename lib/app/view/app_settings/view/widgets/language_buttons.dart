@@ -29,9 +29,12 @@ class LanguageButtons extends StatelessWidget {
               value: Languages.turkce,
               groupValue: context.watch<AppSettingsBloc>().state.language,
               onChanged: (Languages? value) {
-                context
-                    .read<AppSettingsBloc>()
-                    .add(SelectLanguage(language: value));
+                context.read<AppSettingsBloc>().add(
+                      SelectLanguage(
+                        language: value,
+                        locale: const Locale("tr", "TR"),
+                      ),
+                    );
               },
             )
           ],
@@ -54,7 +57,10 @@ class LanguageButtons extends StatelessWidget {
               groupValue: context.watch<AppSettingsBloc>().state.language,
               onChanged: (Languages? value) {
                 context.read<AppSettingsBloc>().add(
-                      SelectLanguage(language: value),
+                      SelectLanguage(
+                        language: value,
+                        locale: const Locale("en", "EN"),
+                      ),
                     );
               },
             )

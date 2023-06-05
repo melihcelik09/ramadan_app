@@ -1,6 +1,39 @@
-{
+{ 
   "appTitle": "Ramazan Uygulaması",
   "@appTitle": {
     "description": "Uygulamanın başlığı"
-  }
+  },
+  "location": "Konum",
+  "nextTime": "Sıradaki Zaman",
+  "remainingTime": "Kalan Süre",
+  "timeAlert": "Zaman Uyarısı",
+  "alert": "Uyarı ",
+  "dailyDua": "Günlük Dua",
+  "categories": "Kategoriler",
+  "qiableFinder": "Kıble Bulucu",
+  "qiableOffset": "Kıble Açısı",
+  "ramadanCountdown": "Ramazan \nGeri Sayımı",
+  "ramadanCountdownV2": "Ramazan Geri Sayımı",
+  "asmaAlHusna": "Allah'ın İsimleri",
+  "fajr": "İmsak",
+  "sun": "Güneş",
+  "dhuhr": "Öğle",
+  "asr": "İkindi",
+  "maghrib": "Akşam",
+  "isha": "Yatsı",
+  "appSettings": "Uygulama Ayarları",
+  "language": "Dil",
+  "theme": "Tema",
+  "system": "Sistem",
+  "dark": "Koyu",
+  "light": "Açık",
+  "country": "Ülke",
+  "state": "İl",
+  "city": "İlçe",
+  "selectCountry": "Ülke Seçin",
+  "selectState": "İl Seçin",
+  "selectCity": "İlçe Seçin",
+  "days": " Gün",
+  "hours": " Saat",
+  "minutes": " Dakika"
 }

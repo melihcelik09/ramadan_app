@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ramadan_app/app/view/app_settings/bloc/app_settings_bloc.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
+import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class ThemeButtons extends StatelessWidget {
   const ThemeButtons({super.key});
@@ -16,7 +17,7 @@ class ThemeButtons extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "System",
+              context.loc.system,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             Radio<Themes>(
@@ -38,7 +39,7 @@ class ThemeButtons extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Light",
+              context.loc.light,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             Radio<Themes>(
@@ -62,7 +63,7 @@ class ThemeButtons extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Dark",
+              context.loc.dark,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             Radio<Themes>(
