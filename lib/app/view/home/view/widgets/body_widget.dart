@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ramadan_app/app/view/app_settings/bloc/app_settings_bloc.dart';
 import 'package:ramadan_app/app/view/home/service/daily_dua_service.dart';
 import 'package:ramadan_app/app/view/home/view/widgets/categories_card.dart';
 import 'package:ramadan_app/app/view/home/view/widgets/titles_card.dart';
@@ -53,7 +55,7 @@ class BodyWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Daily Dua",
+                                context.loc.dailyDua,
                                 style: context.textTheme.displaySmall,
                               ),
                               Image.asset(
@@ -63,12 +65,24 @@ class BodyWidget extends StatelessWidget {
                           ),
                           Expanded(
                             child: Text(
-                              snapshot
-                                  .data!
-                                  .data![snapshot.data!.data!.indexWhere(
-                                      (element) =>
-                                          element.edition!.language == "tr")]
-                                  .text.toString(),
+                              context.read<AppSettingsBloc>().state.locale ==
+                                      const Locale("tr", "TR")
+                                  ? snapshot
+                                      .data!
+                                      .data![snapshot.data!.data!.indexWhere(
+                                          (element) =>
+                                              element.edition!.language ==
+                                              "tr")]
+                                      .text
+                                      .toString()
+                                  : snapshot
+                                      .data!
+                                      .data![snapshot.data!.data!.indexWhere(
+                                          (element) =>
+                                              element.edition!.language ==
+                                              "en")]
+                                      .text
+                                      .toString(),
                               style: context.textTheme.bodyMedium,
                             ),
                           ),
@@ -102,7 +116,7 @@ class BodyWidget extends StatelessWidget {
           Align(
             alignment: Alignment.topLeft,
             child: Text(
-              "Categories",
+              context.loc.categories,
               style: context.textTheme.displaySmall,
             ),
           ),

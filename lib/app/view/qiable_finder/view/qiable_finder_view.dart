@@ -17,7 +17,10 @@ class QiableFinderView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Qiable Finder", style: context.textTheme.displayMedium),
+            Text(
+              context.loc.qiableFinder,
+              style: context.textTheme.displayMedium,
+            ),
             SmoothCompass(
               isQiblahCompass: true,
               compassBuilder: (context, compassData, compassAsset) {
@@ -31,13 +34,15 @@ class QiableFinderView extends StatelessWidget {
                       child: Stack(
                         children: [
                           Positioned.fill(
-                            child: Image.asset("assets/images/qiable_finder/face.png"),
+                            child: Image.asset(
+                                "assets/images/qiable_finder/face.png"),
                           ),
                           Positioned.fill(
                             child: AnimatedRotation(
                               duration: context.lowDuration,
                               turns: compassData?.data?.qiblahOffset ?? 0,
-                              child: Image.asset("assets/images/qiable_finder/needle.png"),
+                              child: Image.asset(
+                                  "assets/images/qiable_finder/needle.png"),
                             ),
                           ),
                         ],
@@ -53,7 +58,7 @@ class QiableFinderView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Qiblah Offset",
+                                context.loc.qiableOffset,
                                 style: context.textTheme.displaySmall,
                               ),
                               Text(

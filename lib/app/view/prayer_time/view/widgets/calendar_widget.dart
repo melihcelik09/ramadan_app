@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ramadan_app/app/view/prayer_time/bloc/prayer_bloc.dart';
 import 'package:ramadan_app/app/view/prayer_time/view/widgets/current_prayer_time_widget.dart';
 import 'package:ramadan_app/app/view/prayer_time/view/widgets/weekly_calendar_widget.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
@@ -17,7 +15,6 @@ class CalendarWidget extends StatefulWidget {
 class _CalendarWidgetState extends State<CalendarWidget> {
   @override
   void initState() {
-    context.read<PrayerBloc>().add(LoadPrayerEvent());
     super.initState();
   }
 

@@ -21,7 +21,7 @@ class BodyWidget extends StatelessWidget {
               padding: context.onlyBottomPaddingMedium,
               child: Align(
                 alignment: Alignment.topLeft,
-                child: Text("Asma Al Husna",
+                child: Text(context.loc.asmaAlHusna,
                     style: context.textTheme.displayMedium),
               ),
             ),

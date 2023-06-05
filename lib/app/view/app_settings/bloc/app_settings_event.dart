@@ -9,11 +9,12 @@ abstract class AppSettingsEvent extends Equatable {
 
 class SelectLanguage extends AppSettingsEvent {
   final Languages? language;
+  final Locale? locale;
 
-  const SelectLanguage({this.language});
-
+  const SelectLanguage({this.locale, this.language});
+  
   @override
-  List<Object> get props => [language!];
+  List<Object> get props => [language!, locale!];
 }
 
 class SelectTheme extends AppSettingsEvent {

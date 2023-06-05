@@ -13,7 +13,11 @@ class CategoriesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> titles = ["Qiable Finder", "Ramadan Time", "Asma Al-Husna"];
+    List<String> titles = [
+      context.loc.qiableFinder,
+      context.loc.ramadanCountdownV2,
+      context.loc.asmaAlHusna
+    ];
     List<String> imageUrls = [
       "assets/images/categories/Qibla.png",
       "assets/images/categories/Lamp.png",
