@@ -13,31 +13,37 @@ class CategoriesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> titles = ["Qiable Finder", "Ramadan Time", "Asma Al-Husna"];
+    List<String> titles = [
+      context.loc.qiableFinder,
+      context.loc.ramadanCountdownV2,
+      context.loc.asmaAlHusna
+    ];
     List<String> imageUrls = [
       "assets/images/categories/Qibla.png",
       "assets/images/categories/Lamp.png",
       "assets/images/categories/Allah.png",
     ];
-    return InkWell(
-      onTap: () {
-        switch (index) {
-          case 0:
-            break;
-          case 1:
-            context.router.pushNamed(NavigationPaths.ramadanTime.path);
-            break;
-          case 2:
-            context.router.pushNamed(NavigationPaths.asmaAlHusna.path);
-            break;
-          default:
-        }
-      },
-      child: Card(
-        color: AppColors.cardColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
+    return Card(
+      color: AppColors.cardColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(10),
+        onTap: () {
+          switch (index) {
+            case 0:
+              context.router.pushNamed(NavigationPaths.qiableFinder.path);
+              break;
+            case 1:
+              context.router.pushNamed(NavigationPaths.ramadanTime.path);
+              break;
+            case 2:
+              context.router.pushNamed(NavigationPaths.asmaAlHusna.path);
+              break;
+            default:
+          }
+        },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(

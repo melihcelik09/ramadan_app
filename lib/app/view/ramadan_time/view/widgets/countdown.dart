@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ramadan_app/app/view/ramadan_time/view/widgets/countdown_titles.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
+import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class Countdown extends StatelessWidget {
   const Countdown({
@@ -28,8 +29,8 @@ class Countdown extends StatelessWidget {
               Row(
                 children: [
                   CountdownTitles(text: day),
-                  const CountdownTitles(
-                    text: " Days",
+                  CountdownTitles(
+                    text: context.loc.days,
                     isTypeTitle: true,
                   )
                 ],
@@ -37,13 +38,13 @@ class Countdown extends StatelessWidget {
               Row(
                 children: [
                   CountdownTitles(text: hour),
-                  const CountdownTitles(text: " Hours", isTypeTitle: true)
+                  CountdownTitles(text: context.loc.hours, isTypeTitle: true)
                 ],
               ),
               Row(
                 children: [
                   CountdownTitles(text: minute),
-                  const CountdownTitles(text: " Minutes", isTypeTitle: true)
+                  CountdownTitles(text: context.loc.minutes, isTypeTitle: true)
                 ],
               ),
             ],
@@ -54,7 +55,7 @@ class Countdown extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Alert ",
+              context.loc.alert,
               style: Theme.of(context)
                   .textTheme
                   .displaySmall!

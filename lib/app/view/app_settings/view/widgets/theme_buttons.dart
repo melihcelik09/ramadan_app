@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ramadan_app/app/view/app_settings/bloc/app_settings_bloc.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
+import 'package:ramadan_app/core/extensions/context_extension.dart';
 
-class LanguageButtons extends StatelessWidget {
-  const LanguageButtons({super.key});
+class ThemeButtons extends StatelessWidget {
+  const ThemeButtons({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,24 +17,43 @@ class LanguageButtons extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Türkçe",
+              context.loc.system,
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            Radio<Languages>(
+            Radio<Themes>(
               activeColor: AppColors.primaryColor,
               visualDensity: const VisualDensity(
                 horizontal: VisualDensity.minimumDensity,
                 vertical: VisualDensity.minimumDensity,
               ),
               materialTapTargetSize: MaterialTapTargetSize.padded,
-              value: Languages.turkce,
-              groupValue: context.watch<AppSettingsBloc>().state.language,
-              onChanged: (Languages? value) {
+              value: Themes.system,
+              groupValue: context.watch<AppSettingsBloc>().state.theme,
+              onChanged: (Themes? value) {
+                context.read<AppSettingsBloc>().add(SelectTheme(theme: value));
+              },
+            )
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              context.loc.light,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            Radio<Themes>(
+              activeColor: AppColors.primaryColor,
+              visualDensity: const VisualDensity(
+                horizontal: VisualDensity.minimumDensity,
+                vertical: VisualDensity.minimumDensity,
+              ),
+              materialTapTargetSize: MaterialTapTargetSize.padded,
+              value: Themes.light,
+              groupValue: context.watch<AppSettingsBloc>().state.theme,
+              onChanged: (Themes? value) {
                 context.read<AppSettingsBloc>().add(
-                      SelectLanguage(
-                        language: value,
-                        locale: const Locale("tr", "TR"),
-                      ),
+                      SelectTheme(theme: value),
                     );
               },
             )
@@ -43,29 +63,26 @@ class LanguageButtons extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "English",
+              context.loc.dark,
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            Radio<Languages>(
+            Radio<Themes>(
               activeColor: AppColors.primaryColor,
               visualDensity: const VisualDensity(
                 horizontal: VisualDensity.minimumDensity,
                 vertical: VisualDensity.minimumDensity,
               ),
               materialTapTargetSize: MaterialTapTargetSize.padded,
-              value: Languages.english,
-              groupValue: context.watch<AppSettingsBloc>().state.language,
-              onChanged: (Languages? value) {
+              value: Themes.dark,
+              groupValue: context.watch<AppSettingsBloc>().state.theme,
+              onChanged: (Themes? value) {
                 context.read<AppSettingsBloc>().add(
-                      SelectLanguage(
-                        language: value,
-                        locale: const Locale("en", "EN"),
-                      ),
+                      SelectTheme(theme: value),
                     );
               },
             )
           ],
-        )
+        ),
       ],
     );
   }

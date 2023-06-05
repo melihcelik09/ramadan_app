@@ -7,31 +7,16 @@ abstract class PrayerState extends Equatable {
   List<Object> get props => [];
 }
 
-class PrayerInitial extends PrayerState {}
-
 class PrayerLoading extends PrayerState {}
 
 class PrayerLoaded extends PrayerState {
-  final List times;
+  final List prayers;
   final int selectedPrayerIndex;
 
-  const PrayerLoaded({
-    required this.times,
-    required this.selectedPrayerIndex,
-  });
+  const PrayerLoaded({required this.prayers, required this.selectedPrayerIndex});
 
   @override
-  List<Object> get props => [times, selectedPrayerIndex];
-
-  PrayerLoaded copyWith({
-    List? times,
-    int? selectedPrayerIndex,
-  }) {
-    return PrayerLoaded(
-      times: times ?? this.times,
-      selectedPrayerIndex: selectedPrayerIndex ?? this.selectedPrayerIndex,
-    );
-  }
+  List<Object> get props => [prayers, selectedPrayerIndex];
 }
 
 class PrayerError extends PrayerState {

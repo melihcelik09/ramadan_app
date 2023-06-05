@@ -24,6 +24,7 @@ dependencies:
   logger: any
   retrofit: ^4.0.1
   shimmer: ^3.0.0
+  smooth_compass: ^2.0.17
   smooth_page_indicator: ^1.0.1
 
 dev_dependencies:
@@ -44,6 +45,7 @@ flutter:
     - assets/images/categories/
     - assets/images/titles/
     - assets/images/ramadan_time/
+    - assets/images/qiable_finder/
     - assets/images/prayer/
     - assets/icons/
     - assets/images/onboarding/

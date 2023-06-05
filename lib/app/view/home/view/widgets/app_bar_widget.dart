@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:ramadan_app/app/view/app_settings/bloc/app_settings_bloc.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
@@ -15,10 +17,16 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       title: Align(
         alignment: Alignment.topRight,
-        child: Text(
-          DateFormat('EEEE, d MMMM y', 'tr_TR').format(DateTime.now()),
-          style: context.textTheme.displaySmall,
-        ),
+        child: context.read<AppSettingsBloc>().state.locale ==
+                const Locale("tr", "TR")
+            ? Text(
+                DateFormat('EEEE, d MMMM y', 'tr').format(DateTime.now()),
+                style: context.textTheme.displaySmall,
+              )
+            : Text(
+                DateFormat('EEEE, d MMMM y', 'en').format(DateTime.now()),
+                style: context.textTheme.displaySmall,
+              ),
       ),
     );
   }

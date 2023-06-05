@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ramadan_app/app/view/ramadan_time/model/calendar_model.dart';
 import 'package:ramadan_app/app/view/ramadan_time/service/countdown_service.dart';
 import 'package:ramadan_app/app/view/ramadan_time/view/widgets/countdown.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
@@ -21,7 +20,7 @@ class BodyWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text("Ramadan \nCountdown",
+                Text(context.loc.ramadanCountdown,
                     style: Theme.of(context).textTheme.displayMedium),
                 Align(
                   alignment: Alignment.bottomRight,
