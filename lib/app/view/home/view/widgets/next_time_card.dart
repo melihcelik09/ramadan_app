@@ -20,10 +20,10 @@ class _NextTimeCardState extends State<NextTimeCard> {
   late String currentTime;
   @override
   void initState() {
-    currentTime = DateFormat('kk:mm').format(DateTime.now());
+    currentTime = DateFormat('yyyy-MM-dd kk:mm').format(DateTime.now());
     timer = Timer.periodic(const Duration(minutes: 1), (timer) {
       setState(() {
-        currentTime = DateFormat('kk:mm').format(DateTime.now());
+        currentTime = DateFormat('yyyy-MM-dd kk:mm').format(DateTime.now());
       });
     });
     super.initState();
@@ -64,8 +64,13 @@ class _NextTimeCardState extends State<NextTimeCard> {
             times = state.prayers[state.selectedPrayerIndex + 1];
             index = 0;
           }
-          List<int> remaningTime =
-              calculateRemainingTime(currentTime, times[index]);
+          List<int> remaningTime;
+          try {
+            remaningTime = calculateRemainingTime(currentTime, times[index], 0);
+          } catch (e) {
+            remaningTime = calculateRemainingTime(currentTime, times[index], 1);
+          }
+
           return Padding(
             padding: context.paddingLow,
             child: Column(
@@ -78,12 +83,11 @@ class _NextTimeCardState extends State<NextTimeCard> {
                     context.loc.nextTime,
                     style: context.textTheme.titleMedium,
                   ),
-                ), // Your Location
+                ),
                 Image.asset(
                   imageUrls[index],
                   fit: BoxFit.fill,
                 ),
-
                 Column(
                   children: [
                     Row(
@@ -141,10 +145,17 @@ class _NextTimeCardState extends State<NextTimeCard> {
 
 int? getIndexOfNextTime(
     {required String currentTime, required List prayerTimes}) {
-  DateTime convertedCurrent = DateFormat('kk:mm').parse(currentTime);
+  DateTime convertedCurrent = DateFormat('yyyy-MM-dd kk:mm').parse(currentTime);
 
   for (var i = 0; i < prayerTimes.length; i++) {
-    DateTime convertedPrayer = DateFormat('kk:mm').parse(prayerTimes[i]);
+    List newList = [];
+    String date = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    newList.addAll([date, prayerTimes[i]]);
+
+    var joinedValues = newList.join(" ");
+    DateTime convertedPrayer =
+        DateFormat('yyyy-MM-dd kk:mm').parse(joinedValues);
+
     if (convertedCurrent.isBefore(convertedPrayer)) {
       return i;
     }
@@ -152,16 +163,25 @@ int? getIndexOfNextTime(
   return null;
 }
 
-List<int> calculateRemainingTime(String currentTime, String prayerTime) {
-  List<int> remainingTime = [];
-  DateTime convertedCurrent;
-  DateTime convertedPrayer = DateFormat('kk:mm').parse(prayerTime);
-  if (int.parse(currentTime.substring(0, 2)) == 24) {
-    var resultCurrentTime = currentTime.replaceRange(0, 2, "00");
-    convertedCurrent = DateFormat('kk:mm').parse(resultCurrentTime);
-  } else {
-    convertedCurrent = DateFormat('kk:mm').parse(currentTime);
+List<int> calculateRemainingTime(
+    String currentTime, String prayerTime, int day) {
+  DateTime convertedCurrent = DateFormat('yyyy-MM-dd kk:mm').parse(currentTime);
+
+  List newList = [];
+  String date = DateFormat('yyyy-MM-dd').format(
+    DateTime.now().add(
+      Duration(days: day),
+    ),
+  );
+  newList.addAll([date, prayerTime]);
+
+  var joinedValues = newList.join(" ");
+  DateTime convertedPrayer = DateFormat('yyyy-MM-dd kk:mm').parse(joinedValues);
+
+  if (convertedPrayer.difference(convertedCurrent).inHours < 0) {
+    throw Exception();
   }
+  List<int> remainingTime = [];
   remainingTime.add(convertedPrayer.difference(convertedCurrent).inHours);
   remainingTime
       .add(convertedPrayer.difference(convertedCurrent).inMinutes % 60);
