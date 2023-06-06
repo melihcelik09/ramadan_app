@@ -17,7 +17,10 @@ class PrayerTimeView extends StatelessWidget {
         actions: [
           Padding(
             padding: context.paddingLow,
-            child: Text(DateFormat('EEEE, d MMMM').format(DateTime.now()), style: context.textTheme.headlineMedium),
+            child: Text(
+              DateFormat('EEEE, d MMMM', context.loc.localeName).format(DateTime.now()),
+              style: context.textTheme.headlineMedium,
+            ),
           ),
         ],
       ),

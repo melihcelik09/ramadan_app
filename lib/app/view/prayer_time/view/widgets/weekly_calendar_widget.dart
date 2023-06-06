@@ -24,7 +24,7 @@ class WeeklyCalendarWidget extends StatelessWidget {
               DateTime currentDate = DateTime.now().add(Duration(days: index));
               DateTime nextDate = currentDate.add(const Duration(days: 1));
               bool shouldDisplayMonthName = currentDate.month != nextDate.month;
-              String dayName = DateFormat.EEEE().format(currentDate).substring(0, 3);
+              String dayName = DateFormat.E(context.loc.localeName).format(currentDate);
               String dayNumber = DateFormat.d().format(currentDate);
               String monthName = DateFormat.MMMM().format(currentDate);
               return Row(
