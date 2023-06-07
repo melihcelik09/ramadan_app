@@ -38,7 +38,8 @@ class BodyWidget extends StatelessWidget {
             child: FutureBuilder(
               future: CountdownService().requestHijriforGregorian(),
               builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    snapshot.hasData) {
                   return Container(
                     decoration: BoxDecoration(
                         color: AppColors.cardColor,
@@ -53,13 +54,12 @@ class BodyWidget extends StatelessWidget {
                   );
                 } else {
                   return Container(
-                    decoration: BoxDecoration(
-                        color: AppColors.cardColor,
-                        borderRadius: BorderRadius.circular(16)),
-                    height: context.height / 2.5,
-                    width: context.width,
-                    child: const Center(child: CircularProgressIndicator())
-                  );
+                      decoration: BoxDecoration(
+                          color: AppColors.cardColor,
+                          borderRadius: BorderRadius.circular(16)),
+                      height: context.height / 2.5,
+                      width: context.width,
+                      child: const Center(child: CircularProgressIndicator()));
                 }
               },
             ),

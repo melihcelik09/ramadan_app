@@ -1,33 +1,33 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:equatable/equatable.dart';
-part 'daily_dua.g.dart';
+part 'daily_dua_model.g.dart';
 
 @JsonSerializable()
-class DailyDua with EquatableMixin {
+class DailyDuaModel with EquatableMixin {
   int? code;
   String? status;
   List<Data>? data;
 
-  DailyDua({
+  DailyDuaModel({
     this.code,
     this.status,
     this.data,
   });
 
-  factory DailyDua.fromJson(Map<String, dynamic> json) =>
-      _$DailyDuaFromJson(json);
+  factory DailyDuaModel.fromJson(Map<String, dynamic> json) =>
+      _$DailyDuaModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DailyDuaToJson(this);
+  Map<String, dynamic> toJson() => _$DailyDuaModelToJson(this);
 
   @override
   List<Object?> get props => [code, status, data];
 
-  DailyDua copyWith({
+  DailyDuaModel copyWith({
     int? code,
     String? status,
     List<Data>? data,
   }) {
-    return DailyDua(
+    return DailyDuaModel(
       code: code ?? this.code,
       status: status ?? this.status,
       data: data ?? this.data,

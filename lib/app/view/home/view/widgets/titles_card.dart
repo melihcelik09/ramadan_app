@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ramadan_app/app/view/home/view/widgets/daily_weather_card.dart';
 import 'package:ramadan_app/app/view/home/view/widgets/location_card.dart';
 import 'package:ramadan_app/app/view/home/view/widgets/next_time_card.dart';
 import 'package:ramadan_app/app/view/home/view/widgets/time_alert_card.dart';
@@ -39,7 +40,7 @@ class _TitlesCardState extends State<TitlesCard> {
       child: widget.index == 0
           ? const LocationCard()
           : widget.index == 1
-              ? const SizedBox.shrink()
+              ? const DailyWeatherCard()
               : widget.index == 2
                   ? const NextTimeCard()
                   : const TimeAlertCard(),
