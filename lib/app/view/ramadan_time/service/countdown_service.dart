@@ -16,8 +16,7 @@ class CountdownService {
         .requestGregorianforHijri(
             "77bd26fb72mshd52097b4eaa3e06p1a44b8jsn68fc3dc01507", "01-09-1445");
 
-    final outputDate =
-        formatter.parse(response.data!.gregorian!.date!);
+    final outputDate = formatter.parse(response.data!.gregorian!.date!);
     final String formattedOutput = outputFormatter.format(outputDate);
 
     DateTime dt = DateTime.parse(formattedOutput);
