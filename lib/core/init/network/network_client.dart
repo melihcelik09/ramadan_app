@@ -5,6 +5,7 @@ import 'package:ramadan_app/app/view/asma_al_husna/model/asma_al_husna.dart';
 import 'package:ramadan_app/app/view/location/model/location_model.dart';
 import 'package:ramadan_app/app/view/location/model/user_location_model.dart';
 import 'package:ramadan_app/app/view/prayer_time/model/prayer_response_model.dart';
+import 'package:ramadan_app/app/view/ramadan_time/model/calendar_model.dart';
 import 'package:ramadan_app/core/constants/app_endpoints.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -57,5 +58,5 @@ abstract class NetworkClient {
 
   //baseUrl= https://api.aladhan.com/v1
   @GET("/hToG/{date}")
-  Future requestGregorianforHijri(@Header("X-RapidAPI-Key") String key, @Path("date") String date);
+  Future<CalendarModel> requestGregorianforHijri(@Header("X-RapidAPI-Key") String key, @Path("date") String date);
 }
