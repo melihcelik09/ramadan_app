@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:ramadan_app/app/view/home/view/widgets/next_time_card.dart';
 import 'package:ramadan_app/app/view/prayer_time/bloc/prayer_bloc.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
@@ -44,43 +45,51 @@ class _CurrentPrayerTimeWidgetState extends State<CurrentPrayerTimeWidget> {
         if (state is PrayerLoaded) {
           List times = state.prayers[state.selectedPrayerIndex];
           bool isToday = state.selectedPrayerIndex == 0;
-          return ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: times.length,
-            itemBuilder: (context, index) {
-              var prayerTime = times[index];
-              return Card(
-                color: isToday ? getColorForPrayerTime(currentTime: currentTime, prayerTime: prayerTime) : null,
+          return Column(
+            children: [
+              Card(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(16),
-                  onTap: () {},
-                  child: Padding(
-                    padding: context.paddingNormal,
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          PrayerTimes.values[index].image,
-                          width: context.width * 0.2,
-                          height: context.width * 0.2,
+                child: const NextTimeCard(),
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: times.length,
+                itemBuilder: (context, index) {
+                  var prayerTime = times[index];
+                  return Card(
+                    color: isToday ? getColorForPrayerTime(currentTime: currentTime, prayerTime: prayerTime) : null,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(16),
+                      onTap: () {},
+                      child: Padding(
+                        padding: context.paddingNormal,
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              PrayerTimes.values[index].image,
+                              width: context.width * 0.2,
+                              height: context.width * 0.2,
+                            ),
+                            SizedBox(
+                              width: context.dynamicWidth(0.6),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(PrayerTimes.values[index].name(context), style: context.textTheme.displaySmall),
+                                  Text(prayerTime, style: context.textTheme.displaySmall),
+                                ],
+                              ),
+                            )
+                          ],
                         ),
-                        SizedBox(
-                          width: context.dynamicWidth(0.6),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(PrayerTimes.values[index].name, style: context.textTheme.displaySmall),
-                              Text(prayerTime, style: context.textTheme.displaySmall),
-                            ],
-                          ),
-                        )
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              );
-            },
+                  );
+                },
+              ),
+            ],
           );
         } else if (state is PrayerLoading) {
           return ListView.builder(
@@ -157,20 +166,20 @@ extension PrayerTimesImage on PrayerTimes {
 }
 
 extension PrayerTimesName on PrayerTimes {
-  String get name {
+  String name(BuildContext context) {
     switch (this) {
       case PrayerTimes.fajr:
-        return "Fajr";
+        return context.loc.fajr;
       case PrayerTimes.sunrise:
-        return "Sunrise";
+        return context.loc.sun;
       case PrayerTimes.dhuhr:
-        return "Dhuhr";
+        return context.loc.dhuhr;
       case PrayerTimes.asr:
-        return "Asr";
+        return context.loc.asr;
       case PrayerTimes.maghrib:
-        return "Maghrib";
+        return context.loc.maghrib;
       case PrayerTimes.isha:
-        return "Isha";
+        return context.loc.isha;
     }
   }
 }
