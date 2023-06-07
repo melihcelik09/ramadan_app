@@ -35,5 +35,6 @@
   "selectCity": "Select City",
   "days": " Days",
   "hours": " Hours",
-  "minutes": " Minutes"
+  "minutes": " Minutes",
+  "temp": "Temp"
 }

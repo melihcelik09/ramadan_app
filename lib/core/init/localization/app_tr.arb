@@ -35,5 +35,6 @@
   "selectCity": "İlçe Seçin",
   "days": " Gün",
   "hours": " Saat",
-  "minutes": " Dakika"
+  "minutes": " Dakika",
+  "temp": "Derece"
 }
