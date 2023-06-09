@@ -16,12 +16,12 @@ dependencies:
   flutter_dotenv: ^5.0.2
   flutter_localizations:
     sdk: flutter
+  flutter_native_splash: ^2.2.19
   flutter_svg: ^2.0.5
   get_storage: ^2.1.1
   google_fonts: any
   intl: ^0.17.0
   json_annotation: ^4.8.0
-  logger: any
   retrofit: ^4.0.1
   shimmer: ^3.0.0
   smooth_compass: ^2.0.17
@@ -30,6 +30,7 @@ dependencies:
 dev_dependencies:
   auto_route_generator: ^6.0.3
   build_runner: ^2.3.3
+  flutter_launcher_icons: ^0.13.1
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
