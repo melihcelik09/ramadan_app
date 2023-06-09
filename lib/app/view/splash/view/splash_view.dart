@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:ramadan_app/app/view/splash/bloc/splash_bloc.dart';
 import 'package:ramadan_app/core/init/navigation/app_router.dart';
 
@@ -16,6 +17,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     context.read<SplashBloc>().add(SplashInitialEvent());
+    FlutterNativeSplash.remove();
     super.initState();
   }
 
@@ -32,16 +34,8 @@ class _SplashViewState extends State<SplashView> {
             context.router.replaceNamed(NavigationPaths.onboarding.path);
           }
         },
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              FlutterLogo(
-                size: 200,
-              ),
-              CircularProgressIndicator(),
-            ],
-          ),
+        child: const Center(
+          child: CircularProgressIndicator(),
         ),
       ),
     );
