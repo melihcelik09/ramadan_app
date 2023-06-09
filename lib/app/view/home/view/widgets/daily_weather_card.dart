@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ramadan_app/app/view/home/model/daily_weather/daily_weather_model.dart';
+import 'package:ramadan_app/app/view/home/model/daily_weather/weather_language_model.dart';
 import 'package:ramadan_app/app/view/home/service/daily_service/daily_weather_service.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
-import 'package:ramadan_app/core/constants/app_endpoints.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -15,8 +16,7 @@ class DailyWeatherCard extends StatefulWidget {
 class _DailyWeatherCardState extends State<DailyWeatherCard> {
   @override
   Widget build(BuildContext context) {
-    DailyWeatherService service =
-        DailyWeatherService(baseUrl: AppEndpoints.weatherBaseUrl);
+    DailyWeatherService service = DailyWeatherService();
 
     return FutureBuilder(
       future: service.dailyWeather(context),
@@ -28,13 +28,35 @@ class _DailyWeatherCardState extends State<DailyWeatherCard> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    snapshot.data!.current!.condition!.text!,
-                    style: context.textTheme.titleMedium,
-                  ),
-                ), // Your Location
+                FutureBuilder(
+                  future: snapshot.data!.current!.condition!.language(context),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done &&
+                        snapshot.hasData) {
+                      return Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          snapshot.data.toString(),
+                          style: context.textTheme.titleMedium,
+                        ),
+                      );
+                    } else {
+                      return Shimmer.fromColors(
+                        enabled: true,
+                        baseColor: Colors.grey.shade300,
+                        highlightColor: AppColors.cardColor,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            color: AppColors.cardColor,
+                          ),
+                          height: 20,
+                          width: 100,
+                        ),
+                      );
+                    }
+                  },
+                ),
                 Expanded(
                   child: Image.network(
                     "https:${snapshot.data!.current!.condition!.icon!}",
@@ -94,5 +116,26 @@ class _DailyWeatherCardState extends State<DailyWeatherCard> {
         }
       },
     );
+  }
+}
+
+extension GetLanguage on ConditionModel {
+  Future<String> language(BuildContext context) async {
+    String deneme = "";
+    await DailyWeatherService().readJson().then((value) {
+      WeatherLanguage text =
+          value[value.indexWhere((element) => element.code == code)];
+
+      for (var element in text.languages!) {
+        if (element.langIso == context.loc.localeName) {
+          deneme = element.dayText!;
+          break;
+        } else if (context.loc.localeName == "en") {
+          deneme = text.day!;
+          break;
+        }
+      }
+    });
+    return deneme;
   }
 }

@@ -1,15 +1,18 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ramadan_app/app/view/home/model/daily_weather/daily_weather_model.dart';
+import 'package:ramadan_app/app/view/home/model/daily_weather/weather_language_model.dart';
 import 'package:ramadan_app/app/view/location/cubit/location_cubit.dart';
 import 'package:ramadan_app/core/constants/app_endpoints.dart';
 import 'package:ramadan_app/core/init/network/network_client.dart';
 
 class DailyWeatherService {
   final NetworkClient _client;
-  final String baseUrl;
-  DailyWeatherService({required this.baseUrl})
+  DailyWeatherService()
       : _client = NetworkClient(Dio(), baseUrl: AppEndpoints.weatherBaseUrl);
 
   Future<DailyWeatherModel> dailyWeather(BuildContext context) async {
@@ -22,5 +25,14 @@ class DailyWeatherService {
     } catch (e) {
       throw Exception(e);
     }
+  }
+
+  Future<List<WeatherLanguage>> readJson() async {
+    final String response =
+        await rootBundle.loadString('assets/json/conditions.json');
+    final data = json.decode(response);
+    List<WeatherLanguage> list = List<WeatherLanguage>.from(
+        data.map((x) => WeatherLanguage.fromJson(x)));
+    return list;
   }
 }

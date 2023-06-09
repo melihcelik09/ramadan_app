@@ -30,7 +30,7 @@ class _LocationCardState extends State<LocationCard> {
           Align(
             alignment: Alignment.topLeft,
             child: Text(
-              "${location.region}, ${location.country}",
+              "Location",
               style: context.textTheme.titleMedium,
             ),
           ), // Your Location
@@ -38,8 +38,10 @@ class _LocationCardState extends State<LocationCard> {
             "assets/images/titles/Map.png",
             fit: BoxFit.fill,
           ),
-          const Text(
-            "Location",
+
+          Text(
+            "${location.region}, ${location.country}",
+            style: context.textTheme.titleMedium,
           ),
         ],
       ),

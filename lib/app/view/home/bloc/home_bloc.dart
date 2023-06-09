@@ -20,7 +20,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (event is HomeFetchEvent) {
       try {
         var dailyWeather =
-            await DailyWeatherService(baseUrl: AppEndpoints.weatherBaseUrl)
+            await DailyWeatherService()
                 .dailyWeather(context);
         emit(HomeLoaded(model: dailyWeather));
       } catch (e) {
