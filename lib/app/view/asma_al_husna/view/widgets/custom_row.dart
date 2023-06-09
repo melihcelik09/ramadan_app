@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class CustomRow extends StatelessWidget {
