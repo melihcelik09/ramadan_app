@@ -11,7 +11,7 @@ class BodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return SingleChildScrollView(
       padding: PaddingExtensionSymetric(context).horizontalPaddingNormal,
       child: Column(
         children: [
@@ -29,9 +29,7 @@ class BodyWidget extends StatelessWidget {
               );
             },
           ),
-          const Expanded(
-            child: DailyDuaCard(),
-          ),
+          const DailyDuaCard(),
           Align(
             alignment: Alignment.topLeft,
             child: Text(
@@ -45,7 +43,8 @@ class BodyWidget extends StatelessWidget {
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemCount: 3,
-              itemBuilder: (BuildContext context, int index) => CategoriesCard(
+              itemBuilder: (BuildContext context, int index) =>
+                  CategoriesCard(
                 index: index,
               ),
             ),

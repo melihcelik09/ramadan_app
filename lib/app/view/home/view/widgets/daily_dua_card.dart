@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ramadan_app/app/view/app_settings/bloc/app_settings_bloc.dart';
 import 'package:ramadan_app/app/view/home/service/daily_dua/daily_dua_service.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
-import 'package:ramadan_app/core/constants/app_endpoints.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -12,8 +11,7 @@ class DailyDuaCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DailyDuaService service =
-        DailyDuaService(baseUrl: AppEndpoints.randomAyahBaseUrl);
+    DailyDuaService service = DailyDuaService();
     return FutureBuilder(
       future: service.getDailyDua(),
       builder: (context, snapshot) {
@@ -40,7 +38,8 @@ class DailyDuaCard extends StatelessWidget {
                       )
                     ],
                   ),
-                  Expanded(
+                  Padding(
+                    padding: context.verticalPaddingLow,
                     child: Text(
                       context.read<AppSettingsBloc>().state.locale ==
                               const Locale("tr", "TR")
@@ -63,7 +62,7 @@ class DailyDuaCard extends StatelessWidget {
                   ),
                   Text(
                     "${snapshot.data!.data![0].surah!.englishName} ${snapshot.data!.data![0].numberInSurah}",
-                    style: context.textTheme.bodyMedium,
+                    style: context.textTheme.labelLarge,
                   ),
                 ],
               ),

@@ -2,14 +2,14 @@ import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:ramadan_app/app/view/home/model/daily_dua/daily_dua_model.dart';
+import 'package:ramadan_app/core/constants/app_endpoints.dart';
 import 'package:ramadan_app/core/init/network/network_client.dart';
 
 class DailyDuaService {
   final Random random = Random();
   final NetworkClient _client;
-  final String baseUrl;
-  DailyDuaService({required this.baseUrl})
-      : _client = NetworkClient(Dio(), baseUrl: baseUrl);
+  DailyDuaService()
+      : _client = NetworkClient(Dio(), baseUrl: AppEndpoints.randomAyahBaseUrl);
 
   Future<DailyDuaModel> getDailyDua() async {
     try {
