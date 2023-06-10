@@ -47,10 +47,12 @@ class _CurrentPrayerTimeWidgetState extends State<CurrentPrayerTimeWidget> {
           bool isToday = state.selectedPrayerIndex == 0;
           return Column(
             children: [
-              Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                child: const NextTimeCard(),
-              ),
+              isToday
+                  ? Card(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      child: const NextTimeCard(),
+                    )
+                  : Container(),
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
