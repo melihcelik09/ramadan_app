@@ -21,4 +21,4 @@ class CacheManager<T> {
   }
 }
 
-enum CacheManagerEnum { onboarding, location, baby }
+enum CacheManagerEnum { onboarding, location, baby, dua }
