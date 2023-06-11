@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:ramadan_app/app/view/asma_al_husna/model/asma_al_husna.dart';
 import 'package:ramadan_app/app/view/home/model/daily_dua/daily_dua_model.dart';
-
+import 'package:ramadan_app/app/view/home/model/daily_name/daily_name_model.dart';
 import 'package:ramadan_app/app/view/home/model/daily_weather/daily_weather_model.dart';
 import 'package:ramadan_app/app/view/location/model/location_model.dart';
-import 'package:ramadan_app/app/view/asma_al_husna/model/asma_al_husna.dart';
 import 'package:ramadan_app/app/view/location/model/user_location_model.dart';
 import 'package:ramadan_app/app/view/prayer_time/model/prayer_response_model.dart';
 import 'package:ramadan_app/app/view/ramadan_time/model/calendar_model.dart';
@@ -23,12 +23,11 @@ abstract class NetworkClient {
   Future<List<String>> getState(@Query("country") String country);
 
   @GET("/cities")
-  Future<List<String>> getCity(
-      @Query("country") String country, @Query("region") String region);
+  Future<List<String>> getCity(@Query("country") String country, @Query("region") String region);
 
   @GET("/coordinates")
-  Future<UserLocationModel> getCoordinate(@Query("country") String country,
-      @Query("region") String region, @Query("city") String city);
+  Future<UserLocationModel> getCoordinate(
+      @Query("country") String country, @Query("region") String region, @Query("city") String city);
 
   @GET("/timesFromCoordinates")
   Future<PrayerResponseModel> getTimesFromCoordinates(
@@ -49,19 +48,25 @@ abstract class NetworkClient {
 
   //baseUrl= https://api.aladhan.com/v1
   @GET("/qibla/{latitude}/{longitude}")
-  Future getQiblaDirection(
-      @Path("latitude") String latitude, @Path("longitude") String longitude);
+  Future getQiblaDirection(@Path("latitude") String latitude, @Path("longitude") String longitude);
 
   @GET("/name")
   Future<AsmaAlHusna> getAsmaulHusna(@Header("X-RapidAPI-Key") String key);
 
   //q= 37.84501,27.83963
   @GET("/current.json")
-  Future<DailyWeatherModel> getDailyWeather(
-      @Header("X-RapidAPI-Key") String key, @Query("q") String coordinates);
+  Future<DailyWeatherModel> getDailyWeather(@Header("X-RapidAPI-Key") String key, @Query("q") String coordinates);
 
   //baseUrl= https://api.aladhan.com/v1
   @GET("/hToG/{date}")
-  Future<CalendarModel> requestGregorianforHijri(
-      @Header("X-RapidAPI-Key") String key, @Path("date") String date);
+  Future<CalendarModel> requestGregorianforHijri(@Header("X-RapidAPI-Key") String key, @Path("date") String date);
+
+//baseUrl= https://www.behindthename.com/api
+  @GET("/random.json?")
+  Future<DailyNameModel> getDailyName(
+    @Query("key") String key,
+    @Query("gender") String gender,
+    @Query("number") String number,
+    @Query("usage") String language,
+  );
 }

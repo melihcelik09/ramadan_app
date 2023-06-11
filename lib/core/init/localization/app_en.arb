@@ -36,5 +36,6 @@
   "days": " Days",
   "hours": " Hours",
   "minutes": " Minutes",
-  "temp": "Temp"
+  "temp": "Temp",
+  "dailyName":"Daily Name"
 }
