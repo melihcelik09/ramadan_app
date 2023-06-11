@@ -77,6 +77,8 @@ class DailyDuaCard extends StatelessWidget {
             baseColor: Colors.grey.shade300,
             highlightColor: AppColors.cardColor,
             child: Container(
+              height: context.height * 0.2,
+              width: context.width * 0.9,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: AppColors.cardColor,

@@ -25,7 +25,7 @@ class BodyWidget extends StatelessWidget {
                 style: Theme.of(context).textTheme.displayMedium,
               ),
               Text(
-                context.loc.location,
+                context.loc.language,
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               CustomCard(
