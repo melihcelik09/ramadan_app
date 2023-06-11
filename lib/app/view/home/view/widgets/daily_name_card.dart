@@ -29,7 +29,7 @@ class DailyNameCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Günlük İsim",
+                        context.loc.dailyName,
                         style: context.textTheme.displaySmall,
                       ),
                       Image.asset(

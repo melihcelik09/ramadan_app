@@ -1,4 +1,4 @@
-{ 
+{
   "appTitle": "Ramazan Uygulaması",
   "@appTitle": {
     "description": "Uygulamanın başlığı"
@@ -36,5 +36,6 @@
   "days": " Gün",
   "hours": " Saat",
   "minutes": " Dakika",
-  "temp": "Derece"
+  "temp": "Derece",
+  "dailyName":"Günlük İsim"
 }
