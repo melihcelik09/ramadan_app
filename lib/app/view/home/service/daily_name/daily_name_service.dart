@@ -15,7 +15,7 @@ class DailyNameService {
     if (nameList != null) {
       DateTime parsed = DateFormat("dd-MM-yyyy").parse(nameList['date']);
       DateTime now = DateTime.now();
-      if (parsed.day == now.day && parsed.month == now.month && parsed.year == now.year) {
+      if (now.difference(parsed).inDays < 1 && nameList['language'] == language) {
         return nameList['names'];
       }
     }
@@ -28,6 +28,7 @@ class DailyNameService {
       String? babyGirl = results[0].names?[0];
       String? babyBoy = results[1].names?[0];
       Map<String, Object> cache = {
+        "language": language,
         "date": DateFormat("dd-MM-yyyy").format(DateTime.now()),
         "names": [babyGirl, babyBoy]
       };
