@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:ramadan_app/app/view/home/model/daily_weather/daily_weather_model.dart';
 import 'package:ramadan_app/app/view/home/model/daily_weather/weather_language_model.dart';
 import 'package:ramadan_app/app/view/location/cubit/location_cubit.dart';
@@ -17,10 +18,10 @@ class DailyWeatherService {
 
   Future<DailyWeatherModel> dailyWeather(BuildContext context) async {
     var location = context.read<LocationCubit>().fetchUserLocation();
+    String key = dotenv.env['X_RAPID_API_KEY'] ?? "";
     try {
       final response = await _client.getDailyWeather(
-          '77bd26fb72mshd52097b4eaa3e06p1a44b8jsn68fc3dc01507',
-          "${location.latitude},${location.longitude}");
+          key, "${location.latitude},${location.longitude}");
       return response;
     } catch (e) {
       throw Exception(e);
