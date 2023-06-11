@@ -10,7 +10,8 @@ class DailyNameCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DailyNameService service = DailyNameService(baseUrl: AppEndpoints.dailyNameBaseUrl);
+    DailyNameService service =
+        DailyNameService(baseUrl: AppEndpoints.dailyNameBaseUrl);
     return FutureBuilder(
       future: service.getDailyName(language: context.loc.localeName),
       builder: (context, snapshot) {
@@ -41,10 +42,16 @@ class DailyNameCard extends StatelessWidget {
                     runSpacing: 20,
                     children: [
                       Row(
-                        children: [Image.asset("assets/images/titles/Baby_girl.png"), Text(snapshot.data?[0])],
+                        children: [
+                          Image.asset("assets/images/titles/Baby_girl.png"),
+                          Text(snapshot.data?[0])
+                        ],
                       ),
                       Row(
-                        children: [Image.asset("assets/images/titles/Baby_boy.png"), Text(snapshot.data?[1])],
+                        children: [
+                          Image.asset("assets/images/titles/Baby_boy.png"),
+                          Text(snapshot.data?[1])
+                        ],
                       ),
                     ],
                   )
@@ -61,6 +68,8 @@ class DailyNameCard extends StatelessWidget {
             baseColor: Colors.grey.shade300,
             highlightColor: AppColors.cardColor,
             child: Container(
+              height: context.height * 0.2,
+              width: context.width * 0.9,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: AppColors.cardColor,
