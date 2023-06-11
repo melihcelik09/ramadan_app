@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ramadan_app/app/view/home/view/widgets/categories_card.dart';
 import 'package:ramadan_app/app/view/home/view/widgets/daily_dua_card.dart';
+import 'package:ramadan_app/app/view/home/view/widgets/daily_name_card.dart';
 import 'package:ramadan_app/app/view/home/view/widgets/titles_card.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 
@@ -30,6 +31,7 @@ class BodyWidget extends StatelessWidget {
             },
           ),
           const DailyDuaCard(),
+          const DailyNameCard(),
           Align(
             alignment: Alignment.topLeft,
             child: Text(
@@ -43,8 +45,7 @@ class BodyWidget extends StatelessWidget {
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemCount: 3,
-              itemBuilder: (BuildContext context, int index) =>
-                  CategoriesCard(
+              itemBuilder: (BuildContext context, int index) => CategoriesCard(
                 index: index,
               ),
             ),
