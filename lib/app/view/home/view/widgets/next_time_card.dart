@@ -111,7 +111,9 @@ class _NextTimeCardState extends State<NextTimeCard> {
                           style: context.textTheme.titleMedium,
                         ),
                         Text(
-                          "${remaningTime[0]}:${remaningTime[1]}",
+                          remaningTime[0] == 0
+                              ? "${remaningTime[1]} dk"
+                              : "${remaningTime[0]} sa ${remaningTime[1] == 0 ? "" : "${remaningTime[1]} dk"}",
                           style: context.textTheme.titleMedium,
                         ),
                       ],
