@@ -15,6 +15,7 @@ class ErrorView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Image.asset("assets/images/network-error.png"),
                 Text(message),
                 ElevatedButton(
                   onPressed: () {
