@@ -1,7 +1,5 @@
 import 'dart:math';
-
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ramadan_app/app/view/home/model/daily_dua/daily_dua_model.dart';
 import 'package:ramadan_app/core/init/cache/cache_manager.dart';
@@ -15,8 +13,8 @@ class DailyDuaService {
 
   Future<DailyDuaModel> getDailyDua(
       {int number = 1, required String language}) async {
-    Map<String, dynamic>? dua =
-        CacheManager().readData(key: CacheManagerEnum.dua.name);
+    Map<String, dynamic>? dua = CacheManager<Map<String, dynamic>>()
+        .readData(key: CacheManagerEnum.dua.name);
 
     if (dua != null) {
       DateTime parsed = DateFormat("dd-MM-yyyy").parse(dua['date']);
@@ -24,7 +22,8 @@ class DailyDuaService {
       if (parsed.day == now.day &&
           parsed.month == now.month &&
           parsed.year == now.year) {
-        return dua['dua'];
+        DailyDuaModel response = DailyDuaModel.fromJson(dua['dua']);
+        return response;
       }
     }
 
@@ -32,23 +31,15 @@ class DailyDuaService {
       DailyDuaModel response = await _client.getAyah(
         random.nextInt(6236).toString(),
       );
-      Map<String, Object> cache = {
+      Map<String, dynamic> cache = {
         "date": DateFormat("dd-MM-yyyy").format(DateTime.now()),
         "dua": response
       };
-      debugPrint(cache.toString());
-      await CacheManager()
+      await CacheManager<Map<String, dynamic>>()
           .writeData(key: CacheManagerEnum.dua.name, value: cache);
       return response;
     } catch (e) {
       throw Exception(e);
     }
-
-    // try {
-    //   final response = await _client.getAyah(random.nextInt(6236).toString());
-    //   return response;
-    // } catch (e) {
-    //   throw Exception(e);
-    // }
   }
 }
