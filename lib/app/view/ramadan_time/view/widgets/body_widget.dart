@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ramadan_app/app/view/ramadan_time/service/countdown_service.dart';
 import 'package:ramadan_app/app/view/ramadan_time/view/widgets/countdown.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class BodyWidget extends StatelessWidget {
@@ -42,7 +41,7 @@ class BodyWidget extends StatelessWidget {
                     snapshot.hasData) {
                   return Container(
                     decoration: BoxDecoration(
-                        color: AppColors.cardColor,
+                        color: context.theme.cardColor,
                         borderRadius: BorderRadius.circular(16)),
                     height: context.height / 2.5,
                     width: context.width,
@@ -55,7 +54,7 @@ class BodyWidget extends StatelessWidget {
                 } else {
                   return Container(
                       decoration: BoxDecoration(
-                          color: AppColors.cardColor,
+                          color: context.theme.cardColor,
                           borderRadius: BorderRadius.circular(16)),
                       height: context.height / 2.5,
                       width: context.width,

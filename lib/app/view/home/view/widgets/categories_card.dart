@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 import 'package:ramadan_app/core/init/navigation/app_router.dart';
 
@@ -24,7 +23,7 @@ class CategoriesCard extends StatelessWidget {
       "assets/images/categories/Allah.png",
     ];
     return Card(
-      color: AppColors.cardColor,
+      color: context.theme.cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),

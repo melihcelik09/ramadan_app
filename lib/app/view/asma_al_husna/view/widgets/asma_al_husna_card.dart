@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ramadan_app/app/view/asma_al_husna/service/asma_al_husna_service.dart';
 import 'package:ramadan_app/app/view/asma_al_husna/view/widgets/custom_card.dart';
 import 'package:ramadan_app/app/view/asma_al_husna/view/widgets/custom_row.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/constants/app_endpoints.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 import 'package:shimmer/shimmer.dart';
@@ -25,7 +24,7 @@ class AsmaAlHusnaCard extends StatelessWidget {
             onTap: () {
               showModalBottomSheet(
                   useSafeArea: true,
-                  backgroundColor: AppColors.cardColor,
+                  backgroundColor: context.theme.cardColor,
                   isScrollControlled: true,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(
@@ -39,9 +38,9 @@ class AsmaAlHusnaCard extends StatelessWidget {
                           children: [
                             Padding(
                               padding: context.horizontalPaddingHigh * 2,
-                              child: const Divider(
+                              child: Divider(
                                 thickness: 3,
-                                color: AppColors.secondaryColor,
+                                color: context.theme.secondaryHeaderColor,
                               ),
                             ),
                             Wrap(
@@ -83,18 +82,18 @@ class AsmaAlHusnaCard extends StatelessWidget {
             child: CustomCard(
               data: data,
               index: index,
-              color: AppColors.cardColor,
+              color: context.theme.cardColor,
             ),
           );
         } else {
           return Shimmer.fromColors(
             enabled: true,
             baseColor: Colors.grey.shade300,
-            highlightColor: AppColors.cardColor,
+            highlightColor: context.theme.cardColor,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                color: AppColors.cardColor,
+                color: context.theme.cardColor,
               ),
             ),
           );

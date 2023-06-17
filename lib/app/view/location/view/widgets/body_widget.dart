@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ramadan_app/app/view/location/cubit/location_cubit.dart';
 import 'package:ramadan_app/app/view/location/view/widgets/custom_dropdown_button.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 import 'package:ramadan_app/core/init/navigation/app_router.dart';
 
@@ -39,13 +38,13 @@ class _BodyWidgetState extends State<BodyWidget> {
                 'Select Location',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: AppColors.secondaryColor,
+                      color: context.theme.secondaryHeaderColor,
                     ),
               ),
               Text(
                 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium ',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppColors.secondaryColor,
+                      color: context.theme.secondaryHeaderColor,
                       fontSize: 18,
                     ),
               ),
@@ -128,7 +127,7 @@ class _BodyWidgetState extends State<BodyWidget> {
                   style: Theme.of(context)
                       .textTheme
                       .labelLarge
-                      ?.copyWith(color: AppColors.secondaryColor, fontSize: 16, fontWeight: FontWeight.bold),
+                      ?.copyWith(color: context.theme.secondaryHeaderColor, fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
             ],

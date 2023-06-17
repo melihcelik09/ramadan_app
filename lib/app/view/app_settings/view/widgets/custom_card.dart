@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class CustomCard extends StatelessWidget {
@@ -17,7 +16,7 @@ class CustomCard extends StatelessWidget {
       padding: context.paddingMedium.copyWith(bottom: 16, top: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: AppColors.cardColor,
+        color: context.theme.cardColor,
       ),
       width: context.width,
       height: height,

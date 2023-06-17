@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class CustomDropdownButton<T> extends StatelessWidget {
@@ -31,21 +30,21 @@ class CustomDropdownButton<T> extends StatelessWidget {
             )
           : InputDecoration(
               filled: true,
-              fillColor: AppColors.primaryColor,
+              fillColor: Theme.of(context).primaryColor,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide.none,
               ),
             ),
       icon: Icon(Icons.expand_more,
-          color: appSettings ? AppColors.secondaryColor : Colors.white),
+          color: appSettings ? context.theme.secondaryHeaderColor : Colors.white),
       items: items,
       onChanged: onChanged,
       value: value,
       hint: Text(
         hint ?? 'Select',
         style: context.textTheme.titleLarge?.copyWith(
-          color: appSettings ? AppColors.secondaryColor : Colors.white,
+          color: appSettings ? context.theme.secondaryHeaderColor : Colors.white,
         ),
       ),
     );

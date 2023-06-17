@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:ramadan_app/app/view/app_settings/bloc/app_settings_bloc.dart';
+import 'package:ramadan_app/app/view/app_settings/repository/app_settings_repository.dart';
 import 'package:ramadan_app/app/view/bottom_navbar/bloc/bottom_navbar_bloc.dart';
 import 'package:ramadan_app/app/view/home/bloc/home_bloc.dart';
 import 'package:ramadan_app/app/view/location/cubit/location_cubit.dart';
@@ -18,13 +19,16 @@ class BlocList {
   }
 
   List<SingleChildWidget> items = [
-    BlocProvider<ConnectivityBloc>(create: (context) => ConnectivityBloc()..add(ConnectivityCheck())),
+    BlocProvider<ConnectivityBloc>(
+        create: (context) => ConnectivityBloc()..add(ConnectivityCheck())),
     BlocProvider<OnboardingBloc>(create: (context) => OnboardingBloc()),
     BlocProvider<HomeBloc>(create: (context) => HomeBloc()),
     BlocProvider<BottomNavbarBloc>(create: (context) => BottomNavbarBloc()),
-    BlocProvider<AppSettingsBloc>(create: (context) => AppSettingsBloc()),
+    BlocProvider<AppSettingsBloc>(
+        create: (context) => AppSettingsBloc(themeData: selectedTheme[0], selectedRadioButton: selectedTheme[1])),
     BlocProvider<LocationCubit>(create: (context) => LocationCubit()),
-    BlocProvider<SplashBloc>(create: (context) => SplashBloc()..add(SplashInitialEvent())),
+    BlocProvider<SplashBloc>(
+        create: (context) => SplashBloc()..add(SplashInitialEvent())),
     BlocProvider<PrayerBloc>(create: (context) => PrayerBloc())
   ];
 }

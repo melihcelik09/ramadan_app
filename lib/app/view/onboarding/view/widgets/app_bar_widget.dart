@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
+import 'package:ramadan_app/core/extensions/context_extension.dart';
 import 'package:ramadan_app/core/init/cache/cache_manager.dart';
 import 'package:ramadan_app/core/init/navigation/app_router.dart';
 
@@ -21,7 +21,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                   (value) => context.router.replaceNamed(NavigationPaths.location.path),
                 );
           },
-          child: const Text('Skip', style: TextStyle(color: AppColors.secondaryColor)),
+          child: Text('Skip', style: TextStyle(color: context.theme.secondaryHeaderColor)),
         ),
       ],
     );

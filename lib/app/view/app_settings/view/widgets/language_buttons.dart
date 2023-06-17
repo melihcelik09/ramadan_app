@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ramadan_app/app/view/app_settings/bloc/app_settings_bloc.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
+import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class LanguageButtons extends StatelessWidget {
   const LanguageButtons({super.key});
@@ -20,7 +20,7 @@ class LanguageButtons extends StatelessWidget {
               style: Theme.of(context).textTheme.titleLarge,
             ),
             Radio<Languages>(
-              activeColor: AppColors.primaryColor,
+              activeColor: context.theme.primaryColor,
               visualDensity: const VisualDensity(
                 horizontal: VisualDensity.minimumDensity,
                 vertical: VisualDensity.minimumDensity,
@@ -47,7 +47,7 @@ class LanguageButtons extends StatelessWidget {
               style: Theme.of(context).textTheme.titleLarge,
             ),
             Radio<Languages>(
-              activeColor: AppColors.primaryColor,
+              activeColor: context.theme.primaryColor,
               visualDensity: const VisualDensity(
                 horizontal: VisualDensity.minimumDensity,
                 vertical: VisualDensity.minimumDensity,

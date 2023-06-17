@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ramadan_app/app/view/home/service/daily_name/daily_name_service.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/constants/app_endpoints.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 import 'package:shimmer/shimmer.dart';
@@ -17,7 +16,7 @@ class DailyNameCard extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Card(
-            color: AppColors.cardColor,
+            color: context.theme.cardColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
@@ -66,13 +65,13 @@ class DailyNameCard extends StatelessWidget {
         } else {
           return Shimmer.fromColors(
             baseColor: Colors.grey.shade300,
-            highlightColor: AppColors.cardColor,
+            highlightColor: context.theme.cardColor,
             child: Container(
               height: context.height * 0.2,
               width: context.width * 0.9,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: AppColors.cardColor,
+                color: context.theme.cardColor,
               ),
             ),
           );

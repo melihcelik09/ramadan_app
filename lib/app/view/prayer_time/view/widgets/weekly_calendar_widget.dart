@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:ramadan_app/app/view/prayer_time/bloc/prayer_bloc.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class WeeklyCalendarWidget extends StatelessWidget {
@@ -39,7 +38,7 @@ class WeeklyCalendarWidget extends StatelessWidget {
                           builder: (context, state) {
                             return Card(
                               color: (state is PrayerLoaded) && state.selectedPrayerIndex == index
-                                  ? AppColors.primaryColor
+                                  ? context.theme.primaryColor
                                   : context.theme.cardColor,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(16),

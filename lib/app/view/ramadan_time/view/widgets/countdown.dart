@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ramadan_app/app/view/ramadan_time/view/widgets/countdown_titles.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class Countdown extends StatelessWidget {
@@ -59,11 +58,11 @@ class Countdown extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .displaySmall!
-                  .copyWith(color: AppColors.secondaryColor),
+                  .copyWith(color: context.theme.secondaryHeaderColor),
             ),
             CupertinoSwitch(
               value: true,
-              activeColor: AppColors.secondaryColor,
+              activeColor: context.theme.hoverColor,
               onChanged: (value) {},
             ),
           ],
