@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class TimeAlertCard extends StatelessWidget {
@@ -26,7 +25,7 @@ class TimeAlertCard extends StatelessWidget {
           ),
           CupertinoSwitch(
             value: true,
-            activeColor: AppColors.secondaryColor,
+            activeColor: context.theme.hoverColor,
             onChanged: (value) {},
           )
         ],

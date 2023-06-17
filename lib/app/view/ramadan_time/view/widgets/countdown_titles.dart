@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
+import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class CountdownTitles extends StatelessWidget {
   const CountdownTitles({
@@ -16,7 +16,7 @@ class CountdownTitles extends StatelessWidget {
       text,
       style: isTypeTitle
           ? Theme.of(context).textTheme.displayLarge!.copyWith(
-                color: AppColors.primaryColor,
+                color: context.theme.primaryColor,
               )
           : Theme.of(context).textTheme.displayLarge,
     );

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ramadan_app/app/view/prayer_time/view/widgets/calendar_widget.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class PrayerTimeView extends StatelessWidget {
@@ -12,7 +11,7 @@ class PrayerTimeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        foregroundColor: AppColors.secondaryColor,
+        foregroundColor: context.theme.secondaryHeaderColor,
         elevation: 0,
         actions: [
           Padding(

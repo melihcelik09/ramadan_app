@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:ramadan_app/app/view/prayer_time/bloc/prayer_bloc.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -127,11 +126,11 @@ class _NextTimeCardState extends State<NextTimeCard> {
           return Shimmer.fromColors(
             enabled: true,
             baseColor: Colors.grey.shade300,
-            highlightColor: AppColors.cardColor,
+            highlightColor: context.theme.cardColor,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                color: AppColors.cardColor,
+                color: context.theme.cardColor,
               ),
             ),
           );

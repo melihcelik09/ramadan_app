@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ramadan_app/app/view/home/model/daily_weather/daily_weather_model.dart';
 import 'package:ramadan_app/app/view/home/model/daily_weather/weather_language_model.dart';
 import 'package:ramadan_app/app/view/home/service/daily_service/daily_weather_service.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -44,11 +43,11 @@ class _DailyWeatherCardState extends State<DailyWeatherCard> {
                       return Shimmer.fromColors(
                         enabled: true,
                         baseColor: Colors.grey.shade300,
-                        highlightColor: AppColors.cardColor,
+                        highlightColor: context.theme.cardColor,
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),
-                            color: AppColors.cardColor,
+                            color: context.theme.cardColor,
                           ),
                           height: 20,
                           width: 100,
@@ -87,9 +86,9 @@ class _DailyWeatherCardState extends State<DailyWeatherCard> {
                       onTap: () {
                         setState(() {});
                       },
-                      child: const Icon(
+                      child: Icon(
                         Icons.refresh,
-                        color: AppColors.secondaryColor,
+                        color: context.theme.secondaryHeaderColor,
                       ),
                     ),
                   ],
@@ -105,11 +104,11 @@ class _DailyWeatherCardState extends State<DailyWeatherCard> {
           return Shimmer.fromColors(
             enabled: true,
             baseColor: Colors.grey.shade300,
-            highlightColor: AppColors.cardColor,
+            highlightColor: context.theme.cardColor,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                color: AppColors.cardColor,
+                color: context.theme.cardColor,
               ),
             ),
           );

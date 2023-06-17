@@ -7,7 +7,7 @@ import 'package:ramadan_app/app/view/home/view/widgets/time_alert_card.dart';
 import 'package:ramadan_app/app/view/location/cubit/location_cubit.dart';
 import 'package:ramadan_app/app/view/location/model/user_location_model.dart';
 import 'package:ramadan_app/app/view/prayer_time/bloc/prayer_bloc.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
+import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class TitlesCard extends StatefulWidget {
   const TitlesCard({
@@ -33,7 +33,7 @@ class _TitlesCardState extends State<TitlesCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: AppColors.cardColor,
+      color: context.theme.cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),

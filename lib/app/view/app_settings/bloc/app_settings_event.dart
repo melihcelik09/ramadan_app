@@ -12,16 +12,16 @@ class SelectLanguage extends AppSettingsEvent {
   final Locale? locale;
 
   const SelectLanguage({this.locale, this.language});
-  
+
   @override
   List<Object> get props => [language!, locale!];
 }
 
 class SelectTheme extends AppSettingsEvent {
-  final Themes? theme;
+  final AppTheme? appTheme;
 
-  const SelectTheme({this.theme});
+  const SelectTheme({this.appTheme});
 
   @override
-  List<Object> get props => [theme!];
+  List<Object> get props => [appTheme!];
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ramadan_app/app/view/bottom_navbar/bloc/bottom_navbar_bloc.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
+import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class NavbarWidget extends StatelessWidget {
   const NavbarWidget({
@@ -13,9 +13,11 @@ class NavbarWidget extends StatelessWidget {
     return BottomNavigationBar(
       showSelectedLabels: false,
       showUnselectedLabels: false,
-      onTap: (index) => context.read<BottomNavbarBloc>().add(BottomNavbarEventChange(index: index)),
+      onTap: (index) => context
+          .read<BottomNavbarBloc>()
+          .add(BottomNavbarEventChange(index: index)),
       currentIndex: context.watch<BottomNavbarBloc>().state.currentPage,
-      fixedColor: AppColors.primaryColor,
+      fixedColor: context.theme.primaryColor,
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),

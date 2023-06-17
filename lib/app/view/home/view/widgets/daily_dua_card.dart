@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ramadan_app/app/view/app_settings/bloc/app_settings_bloc.dart';
 import 'package:ramadan_app/app/view/home/model/daily_dua/daily_dua_model.dart';
 import 'package:ramadan_app/app/view/home/service/daily_dua/daily_dua_service.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/constants/app_endpoints.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 import 'package:shimmer/shimmer.dart';
@@ -21,7 +20,7 @@ class DailyDuaCard extends StatelessWidget {
       builder: (context, AsyncSnapshot<DailyDuaModel> snapshot) {
         if (snapshot.hasData) {
           return Card(
-            color: AppColors.cardColor,
+            color: context.theme.cardColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
@@ -78,13 +77,13 @@ class DailyDuaCard extends StatelessWidget {
         } else {
           return Shimmer.fromColors(
             baseColor: Colors.grey.shade300,
-            highlightColor: AppColors.cardColor,
+            highlightColor: context.theme.cardColor,
             child: Container(
               height: context.height * 0.2,
               width: context.width * 0.9,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: AppColors.cardColor,
+                color: context.theme.cardColor,
               ),
             ),
           );

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ramadan_app/app/view/app_settings/bloc/app_settings_bloc.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
+import 'package:ramadan_app/core/init/theme/theme.dart';
 
 class ThemeButtons extends StatelessWidget {
   const ThemeButtons({super.key});
@@ -20,17 +20,21 @@ class ThemeButtons extends StatelessWidget {
               context.loc.system,
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            Radio<Themes>(
-              activeColor: AppColors.primaryColor,
+            Radio<AppTheme>(
+              activeColor: context.theme.primaryColor,
               visualDensity: const VisualDensity(
                 horizontal: VisualDensity.minimumDensity,
                 vertical: VisualDensity.minimumDensity,
               ),
               materialTapTargetSize: MaterialTapTargetSize.padded,
-              value: Themes.system,
+              value: AppTheme.systemTheme,
               groupValue: context.watch<AppSettingsBloc>().state.theme,
-              onChanged: (Themes? value) {
-                context.read<AppSettingsBloc>().add(SelectTheme(theme: value));
+              onChanged: (AppTheme? value) {
+                context.read<AppSettingsBloc>().add(
+                      SelectTheme(
+                        appTheme: value,
+                      ),
+                    );
               },
             )
           ],
@@ -42,18 +46,20 @@ class ThemeButtons extends StatelessWidget {
               context.loc.light,
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            Radio<Themes>(
-              activeColor: AppColors.primaryColor,
+            Radio<AppTheme>(
+              activeColor: context.theme.primaryColor,
               visualDensity: const VisualDensity(
                 horizontal: VisualDensity.minimumDensity,
                 vertical: VisualDensity.minimumDensity,
               ),
               materialTapTargetSize: MaterialTapTargetSize.padded,
-              value: Themes.light,
+              value: AppTheme.lightTheme,
               groupValue: context.watch<AppSettingsBloc>().state.theme,
-              onChanged: (Themes? value) {
+              onChanged: (AppTheme? value) {
                 context.read<AppSettingsBloc>().add(
-                      SelectTheme(theme: value),
+                      SelectTheme(
+                        appTheme: value,
+                      ),
                     );
               },
             )
@@ -66,18 +72,20 @@ class ThemeButtons extends StatelessWidget {
               context.loc.dark,
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            Radio<Themes>(
-              activeColor: AppColors.primaryColor,
+            Radio<AppTheme>(
+              activeColor: context.theme.primaryColor,
               visualDensity: const VisualDensity(
                 horizontal: VisualDensity.minimumDensity,
                 vertical: VisualDensity.minimumDensity,
               ),
               materialTapTargetSize: MaterialTapTargetSize.padded,
-              value: Themes.dark,
+              value: AppTheme.darkTheme,
               groupValue: context.watch<AppSettingsBloc>().state.theme,
-              onChanged: (Themes? value) {
+              onChanged: (AppTheme? value) {
                 context.read<AppSettingsBloc>().add(
-                      SelectTheme(theme: value),
+                      SelectTheme(
+                        appTheme: value,
+                      ),
                     );
               },
             )

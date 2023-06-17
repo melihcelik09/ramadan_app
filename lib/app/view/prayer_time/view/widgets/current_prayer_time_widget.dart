@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:ramadan_app/app/view/home/view/widgets/next_time_card.dart';
 import 'package:ramadan_app/app/view/prayer_time/bloc/prayer_bloc.dart';
-import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -60,7 +59,7 @@ class _CurrentPrayerTimeWidgetState extends State<CurrentPrayerTimeWidget> {
                 itemBuilder: (context, index) {
                   var prayerTime = times[index];
                   return Card(
-                    color: isToday ? getColorForPrayerTime(currentTime: currentTime, prayerTime: prayerTime) : null,
+                    color: isToday ? getColorForPrayerTime(currentTime: currentTime, prayerTime: prayerTime, context: context) : null,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(16),
@@ -104,13 +103,13 @@ class _CurrentPrayerTimeWidgetState extends State<CurrentPrayerTimeWidget> {
                 child: Shimmer.fromColors(
                     enabled: true,
                     baseColor: Colors.grey.shade300,
-                    highlightColor: AppColors.cardColor,
+                    highlightColor: context.theme.cardColor,
                     child: Card(
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),
-                          color: AppColors.cardColor,
+                          color: context.theme.cardColor,
                         ),
                       ),
                     )),
@@ -126,23 +125,23 @@ class _CurrentPrayerTimeWidgetState extends State<CurrentPrayerTimeWidget> {
   }
 }
 
-Color? getColorForPrayerTime({required String currentTime, required String prayerTime}) {
+Color? getColorForPrayerTime({required String currentTime, required String prayerTime, required BuildContext context}) {
   DateTime convertedCurrent = DateFormat('kk:mm').parse(currentTime);
   DateTime convertedPrayer = DateFormat('kk:mm').parse(prayerTime);
 
   if (convertedCurrent.isBefore(convertedPrayer)) {
     //Upcoming prayer times
     if (convertedPrayer.difference(convertedCurrent).inMinutes < 15) {
-      return AppColors.primaryColor.withOpacity(0.7);
+      return context.theme.primaryColor.withOpacity(0.7);
     } else {
       return null;
     }
   } else if (convertedCurrent.isAfter(convertedPrayer)) {
     // Prayer time is passed
-    return AppColors.primaryColor.withOpacity(0.5);
+    return context.theme.primaryColor.withOpacity(0.5);
   } else {
     // Prayer time is now
-    return AppColors.primaryColor;
+    return context.theme.primaryColor;
   }
 }
 
