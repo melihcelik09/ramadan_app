@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ramadan_app/app/view/app_settings/bloc/app_settings_bloc.dart';
+import 'package:ramadan_app/app/view/home/model/daily_dua/daily_dua_model.dart';
 import 'package:ramadan_app/app/view/home/service/daily_dua/daily_dua_service.dart';
 import 'package:ramadan_app/core/constants/app_colors.dart';
 import 'package:ramadan_app/core/constants/app_endpoints.dart';
@@ -17,7 +18,7 @@ class DailyDuaCard extends StatelessWidget {
     return FutureBuilder(
       future: service.getDailyDua(
           language: context.read<AppSettingsBloc>().state.locale.languageCode),
-      builder: (context, snapshot) {
+      builder: (context, AsyncSnapshot<DailyDuaModel> snapshot) {
         if (snapshot.hasData) {
           return Card(
             color: AppColors.cardColor,
@@ -71,8 +72,8 @@ class DailyDuaCard extends StatelessWidget {
             ),
           );
         } else if (snapshot.hasError) {
-          return const Center(
-            child: Text("Error"),
+          return Center(
+            child: Text(snapshot.error.toString()),
           );
         } else {
           return Shimmer.fromColors(
