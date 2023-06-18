@@ -14,65 +14,90 @@ class BodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<OnboardingModel> model = [
+      OnboardingModel(
+        image: 'assets/images/onboarding/1.svg',
+        title: context.loc.welcomeToRamadanApp,
+        description: context.loc.welcomeDescription,
+      ),
+      OnboardingModel(
+        image: 'assets/images/onboarding/2.svg',
+        title: context.loc.prayerTimes,
+        description: context.loc.prayerTimesDescription,
+      ),
+      OnboardingModel(
+        image: 'assets/images/onboarding/3.svg',
+        title: context.loc.dailyDua,
+        description: context.loc.dailyDuaDescription,
+      ),
+    ];
     return BlocBuilder<OnboardingBloc, OnboardingState>(
       builder: (context, state) {
-        return PageView.builder(
-            controller: state.pageController,
-            onPageChanged: (value) => context
-                .read<OnboardingBloc>()
-                .add(ChangePageEvent(index: value)),
-            itemCount: state.model.length,
-            itemBuilder: (context, index) {
-              OnboardingModel target = state.model[index];
-              return Padding(
-                padding: context.paddingNormal,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SvgPicture.asset(target.image,
-                        semanticsLabel: 'Onboarding image $index'),
-                    Text(
-                      target.title,
-                      style: context.textTheme.headlineMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: context.theme.secondaryHeaderColor,
-                      ),
-                    ),
-                    Text(
-                      target.description,
-                      style: context.textTheme.bodyMedium?.copyWith(
-                        color: context.theme.secondaryHeaderColor,
-                        fontSize: 18,
-                      ),
-                    ),
-                    SizedBox(
-                      height: kToolbarHeight,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SmoothPageIndicator(
-                            controller: context
-                                .read<OnboardingBloc>()
-                                .state
-                                .pageController,
-                            count: state.model.length,
-                            effect: ExpandingDotsEffect(
-                              dotHeight: 9,
-                              dotWidth: 9,
-                              activeDotColor: context.theme.primaryColor,
-                            ),
+        return Column(
+          children: [
+            Expanded(
+              child: PageView.builder(
+                controller: state.pageController,
+                onPageChanged: (value) => context
+                    .read<OnboardingBloc>()
+                    .add(ChangePageEvent(index: value)),
+                itemCount: model.length,
+                itemBuilder: (context, index) {
+                  OnboardingModel target = model[index];
+                  return Padding(
+                    padding: context.paddingNormal,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SvgPicture.asset(target.image,
+                            semanticsLabel: 'Onboarding image $index'),
+                        Text(
+                          target.title,
+                          style: context.textTheme.headlineMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: context.theme.secondaryHeaderColor,
                           ),
-                          NextButtonWidget(
-                              index: index,
-                              isLastPage: index == state.model.length - 1),
-                        ],
+                        ),
+                        Text(
+                          target.description,
+                          style: context.textTheme.bodyMedium?.copyWith(
+                            color: context.theme.secondaryHeaderColor,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: context.paddingNormal,
+              child: SizedBox(
+                height: kToolbarHeight,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SmoothPageIndicator(
+                      controller:
+                          context.read<OnboardingBloc>().state.pageController,
+                      count: model.length,
+                      effect: ExpandingDotsEffect(
+                        dotHeight: 9,
+                        dotWidth: 9,
+                        activeDotColor: context.theme.primaryColor,
                       ),
-                    )
+                    ),
+                    NextButtonWidget(
+                        index: state.currentIndex,
+                        isLastPage: state.currentIndex == model.length - 1),
                   ],
                 ),
-              );
-            });
+              ),
+            )
+          ],
+        );
       },
     );
   }

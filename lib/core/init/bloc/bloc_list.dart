@@ -25,7 +25,13 @@ class BlocList {
     BlocProvider<HomeBloc>(create: (context) => HomeBloc()),
     BlocProvider<BottomNavbarBloc>(create: (context) => BottomNavbarBloc()),
     BlocProvider<AppSettingsBloc>(
-        create: (context) => AppSettingsBloc(themeData: selectedTheme[0], selectedRadioButton: selectedTheme[1])),
+      create: (context) => AppSettingsBloc(
+        themeData: selectedTheme[0],
+        selectedThemeButton: selectedTheme[1],
+        locale: selectedLanguage[0],
+        selectedLanguageButton: selectedLanguage[1],
+      ),
+    ),
     BlocProvider<LocationCubit>(create: (context) => LocationCubit()),
     BlocProvider<SplashBloc>(
         create: (context) => SplashBloc()..add(SplashInitialEvent())),

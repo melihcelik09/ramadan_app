@@ -63,11 +63,13 @@ class _NextTimeCardState extends State<NextTimeCard> {
             times = state.prayers[state.selectedPrayerIndex + 1];
             index = 0;
           }
-          List<int> remaningTime;
+          List<int> remainingTime;
           try {
-            remaningTime = calculateRemainingTime(currentTime, times[index], 0);
+            remainingTime =
+                calculateRemainingTime(currentTime, times[index], 0);
           } catch (e) {
-            remaningTime = calculateRemainingTime(currentTime, times[index], 1);
+            remainingTime =
+                calculateRemainingTime(currentTime, times[index], 1);
           }
 
           return Padding(
@@ -110,9 +112,13 @@ class _NextTimeCardState extends State<NextTimeCard> {
                           style: context.textTheme.titleMedium,
                         ),
                         Text(
-                          remaningTime[0] == 0
-                              ? "${remaningTime[1]} dk"
-                              : "${remaningTime[0]} sa ${remaningTime[1] == 0 ? "" : "${remaningTime[1]} dk"}",
+                          context.loc.localeName == "tr"
+                              ? remainingTime[0] == 0
+                                  ? "${remainingTime[1]} dk"
+                                  : "${remainingTime[0]} sa ${remainingTime[1] == 0 ? "" : "${remainingTime[1]} dk"}"
+                              : remainingTime[0] == 0
+                                  ? "${remainingTime[1]} m"
+                                  : "${remainingTime[0]} h ${remainingTime[1] == 0 ? "" : "${remainingTime[1]} m"}",
                           style: context.textTheme.titleMedium,
                         ),
                       ],

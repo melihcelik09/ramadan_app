@@ -37,5 +37,11 @@
   "hours": " Saat",
   "minutes": " Dakika",
   "temp": "Derece",
-  "dailyName":"Günlük İsim"
+  "dailyName":"Günlük İsim",
+  "skip": "Geç",
+  "welcomeToRamadanApp": "Ramazan uygulamasına hoş geldiniz!",
+  "welcomeDescription": "Bu uygulama sizin ibadeti kolaylaştırmanız için tasarlanmıştır.",
+  "prayerTimes": "İbadet Zamanları",
+  "prayerTimesDescription": "Bu uygulama, bulunduğunuz yere göre size namaz vakitleri sağlar.",
+  "dailyDuaDescription": "Sizlere her gün Kur'an'dan ayetler sunuyoruz."
 }

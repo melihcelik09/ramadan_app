@@ -21,7 +21,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                   (value) => context.router.replaceNamed(NavigationPaths.location.path),
                 );
           },
-          child: Text('Skip', style: TextStyle(color: context.theme.secondaryHeaderColor)),
+          child: Text(context.loc.skip, style: TextStyle(color: context.theme.secondaryHeaderColor)),
         ),
       ],
     );
