@@ -37,5 +37,11 @@
   "hours": " Hours",
   "minutes": " Minutes",
   "temp": "Temp",
-  "dailyName":"Daily Name"
+  "dailyName":"Daily Name",
+  "skip": "Skip",
+  "welcomeToRamadanApp": "Welcome to Ramadan App!",
+  "welcomeDescription": "This app is designed to make worship easier for you.",
+  "prayerTimes": "Prayer Times",
+  "prayerTimesDescription": "This app provides you with prayer times based on your location.",
+  "dailyDuaDescription": "We present you with verses from the Quran every day."
 }
