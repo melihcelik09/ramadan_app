@@ -38,9 +38,7 @@ class BodyWidget extends StatelessWidget {
             Expanded(
               child: PageView.builder(
                 controller: state.pageController,
-                onPageChanged: (value) => context
-                    .read<OnboardingBloc>()
-                    .add(ChangePageEvent(index: value)),
+                onPageChanged: (value) => context.read<OnboardingBloc>().add(ChangePageEvent(index: value)),
                 itemCount: model.length,
                 itemBuilder: (context, index) {
                   OnboardingModel target = model[index];
@@ -50,8 +48,7 @@ class BodyWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SvgPicture.asset(target.image,
-                            semanticsLabel: 'Onboarding image $index'),
+                        SvgPicture.asset(target.image, semanticsLabel: 'Onboarding image $index'),
                         Text(
                           target.title,
                           style: context.textTheme.headlineMedium?.copyWith(
@@ -80,8 +77,7 @@ class BodyWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SmoothPageIndicator(
-                      controller:
-                          context.read<OnboardingBloc>().state.pageController,
+                      controller: context.read<OnboardingBloc>().state.pageController,
                       count: model.length,
                       effect: ExpandingDotsEffect(
                         dotHeight: 9,
@@ -89,9 +85,7 @@ class BodyWidget extends StatelessWidget {
                         activeDotColor: context.theme.primaryColor,
                       ),
                     ),
-                    NextButtonWidget(
-                        index: state.currentIndex,
-                        isLastPage: state.currentIndex == model.length - 1),
+                    NextButtonWidget(index: state.currentIndex, isLastPage: state.currentIndex == model.length - 1),
                   ],
                 ),
               ),
@@ -116,16 +110,12 @@ class NextButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       backgroundColor: context.theme.primaryColor,
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(16))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
       child: const Icon(Icons.arrow_forward_ios),
       onPressed: () async {
         if (isLastPage) {
-          await CacheManager<bool>()
-              .writeData(key: CacheManagerEnum.onboarding.name, value: true)
-              .then(
-                (value) =>
-                    context.router.replaceNamed(NavigationPaths.location.path),
+          await CacheManager<bool>().writeData(key: CacheManagerEnum.onboarding.name, value: true).then(
+                (value) => context.router.replaceNamed(NavigationPaths.permission.path),
               );
         } else {
           context.read<OnboardingBloc>().add(ChangePageEvent(index: index + 1));

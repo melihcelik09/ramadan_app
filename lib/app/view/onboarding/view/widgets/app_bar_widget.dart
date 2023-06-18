@@ -18,7 +18,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         TextButton(
           onPressed: () async {
             await CacheManager<bool>().writeData(key: CacheManagerEnum.onboarding.name, value: true).then(
-                  (value) => context.router.replaceNamed(NavigationPaths.location.path),
+                  (value) => context.router.replaceNamed(NavigationPaths.permission.path),
                 );
           },
           child: Text(context.loc.skip, style: TextStyle(color: context.theme.secondaryHeaderColor)),

@@ -23,6 +23,7 @@ dependencies:
   google_fonts: any
   intl: ^0.17.0
   json_annotation: ^4.8.0
+  permission_handler: ^10.3.0
   retrofit: ^4.0.1
   shimmer: ^3.0.0
   smooth_compass: ^2.0.17
@@ -52,4 +53,5 @@ flutter:
     - assets/icons/
     - assets/images/onboarding/
     - assets/images/error/
+    - assets/images/permission/
     - assets/json/
