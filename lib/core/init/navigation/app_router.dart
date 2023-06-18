@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
 import 'package:ramadan_app/app/view/asma_al_husna/view/asma_al_husna_view.dart';
 import 'package:ramadan_app/app/view/bottom_navbar/view/bottom_navbar_view.dart';
 import 'package:ramadan_app/app/view/location/view/location_view.dart';
 import 'package:ramadan_app/app/view/onboarding/view/onboarding_view.dart';
-import 'package:ramadan_app/app/view/ramadan_time/view/ramadan_time_view.dart';
+import 'package:ramadan_app/app/view/permission/view/permission_view.dart';
 import 'package:ramadan_app/app/view/qiable_finder/view/qiable_finder_view.dart';
+import 'package:ramadan_app/app/view/ramadan_time/view/ramadan_time_view.dart';
 import 'package:ramadan_app/app/view/splash/view/splash_view.dart';
 
 part 'app_router.gr.dart';
@@ -38,7 +38,14 @@ class AppRouter extends _$AppRouter {
       page: RamadanTimeRoute.page,
       path: NavigationPaths.ramadanTime.path,
     ),
-    AutoRoute(page: QiableFinderRoute.page, path: NavigationPaths.qiableFinder.path)
+    AutoRoute(
+      page: QiableFinderRoute.page,
+      path: NavigationPaths.qiableFinder.path,
+    ),
+    AutoRoute(
+      page: PermissionRoute.page,
+      path: NavigationPaths.permission.path,
+    ),
   ];
 }
 
@@ -47,6 +54,7 @@ enum NavigationPaths {
   onboarding("/onboarding"),
   home("/home"),
   location("/location"),
+  permission("/permission"),
   ramadanTime("/ramadanTime"),
   qiableFinder("/qiableFinder"),
   asmaAlHusna("/asmaAlHusna");
