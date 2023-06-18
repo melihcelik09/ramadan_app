@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ramadan_app/app/view/app_settings/bloc/app_settings_bloc.dart';
 import 'package:ramadan_app/app/view/home/service/daily_name/daily_name_service.dart';
 import 'package:ramadan_app/core/constants/app_endpoints.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
+import 'package:ramadan_app/core/init/theme/theme.dart';
 import 'package:shimmer/shimmer.dart';
 
 class DailyNameCard extends StatelessWidget {
@@ -34,6 +37,10 @@ class DailyNameCard extends StatelessWidget {
                       ),
                       Image.asset(
                         "assets/images/titles/Birth.png",
+                        color: context.read<AppSettingsBloc>().state.theme ==
+                                AppTheme.lightTheme
+                            ? Colors.black
+                            : Colors.white,
                       )
                     ],
                   ),

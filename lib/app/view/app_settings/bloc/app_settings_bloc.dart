@@ -8,20 +8,33 @@ part 'app_settings_state.dart';
 
 class AppSettingsBloc extends Bloc<AppSettingsEvent, AppSettingsState> {
   final ThemeData themeData;
-  final AppTheme selectedRadioButton;
-  AppSettingsBloc({required this.themeData, required this.selectedRadioButton})
-      : super(
+  final AppTheme selectedThemeButton;
+  final Locale locale;
+  final Languages selectedLanguageButton;
+  AppSettingsBloc({
+    required this.themeData,
+    required this.selectedThemeButton,
+    required this.locale,
+    required this.selectedLanguageButton,
+  }) : super(
           AppSettingsState(
-            language: Languages.turkce,
-            locale: const Locale("tr", "TR"),
-            theme: selectedRadioButton,
+            language: selectedLanguageButton,
+            locale: locale,
+            theme: selectedThemeButton,
             themeData: themeData,
           ),
         ) {
-    on<SelectLanguage>((event, emit) {
-      emit(state.copyWith(locale: event.locale));
-      emit(state.copyWith(language: event.language));
-    });
+    on<SelectLanguage>(
+      (event, emit) async {
+        emit(state.copyWith(locale: event.locale));
+        emit(state.copyWith(language: event.language));
+        Map<String, int> cache = {
+          "language": event.language!.index,
+        };
+        await CacheManager<Map<String, int>>()
+            .writeData(key: CacheManagerEnum.language.name, value: cache);
+      },
+    );
     on<SelectTheme>(
       (event, emit) async {
         emit(state.copyWith(theme: event.appTheme));

@@ -5,6 +5,7 @@ import 'package:ramadan_app/app/view/home/model/daily_dua/daily_dua_model.dart';
 import 'package:ramadan_app/app/view/home/service/daily_dua/daily_dua_service.dart';
 import 'package:ramadan_app/core/constants/app_endpoints.dart';
 import 'package:ramadan_app/core/extensions/context_extension.dart';
+import 'package:ramadan_app/core/init/theme/theme.dart';
 import 'package:shimmer/shimmer.dart';
 
 class DailyDuaCard extends StatelessWidget {
@@ -38,6 +39,10 @@ class DailyDuaCard extends StatelessWidget {
                       ),
                       Image.asset(
                         "assets/images/titles/Dua Hands.png",
+                        color: context.read<AppSettingsBloc>().state.theme ==
+                                AppTheme.lightTheme
+                            ? Colors.black
+                            : Colors.white,
                       )
                     ],
                   ),
