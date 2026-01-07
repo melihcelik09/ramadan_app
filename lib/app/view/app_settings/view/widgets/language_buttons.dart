@@ -8,65 +8,54 @@ class LanguageButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "Türkçe",
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            Radio<Languages>(
-              activeColor: context.theme.primaryColor,
-              visualDensity: const VisualDensity(
-                horizontal: VisualDensity.minimumDensity,
-                vertical: VisualDensity.minimumDensity,
+    return RadioGroup<Languages>(
+      onChanged: (Languages? value) {
+        if (value == null) return;
+
+        final locale = value == Languages.turkce
+            ? const Locale("tr", "TR")
+            : const Locale("en", "EN");
+
+        context.read<AppSettingsBloc>().add(
+          SelectLanguage(language: value, locale: locale),
+        );
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Türkçe", style: Theme.of(context).textTheme.titleLarge),
+              Radio<Languages>(
+                activeColor: context.theme.primaryColor,
+                visualDensity: const VisualDensity(
+                  horizontal: VisualDensity.minimumDensity,
+                  vertical: VisualDensity.minimumDensity,
+                ),
+                materialTapTargetSize: MaterialTapTargetSize.padded,
+                value: Languages.turkce,
               ),
-              materialTapTargetSize: MaterialTapTargetSize.padded,
-              value: Languages.turkce,
-              groupValue: context.watch<AppSettingsBloc>().state.language,
-              onChanged: (Languages? value) {
-                context.read<AppSettingsBloc>().add(
-                      SelectLanguage(
-                        language: value,
-                        locale: const Locale("tr", "TR"),
-                      ),
-                    );
-              },
-            )
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "English",
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            Radio<Languages>(
-              activeColor: context.theme.primaryColor,
-              visualDensity: const VisualDensity(
-                horizontal: VisualDensity.minimumDensity,
-                vertical: VisualDensity.minimumDensity,
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("English", style: Theme.of(context).textTheme.titleLarge),
+              Radio<Languages>(
+                activeColor: context.theme.primaryColor,
+                visualDensity: const VisualDensity(
+                  horizontal: VisualDensity.minimumDensity,
+                  vertical: VisualDensity.minimumDensity,
+                ),
+                materialTapTargetSize: MaterialTapTargetSize.padded,
+                value: Languages.english,
               ),
-              materialTapTargetSize: MaterialTapTargetSize.padded,
-              value: Languages.english,
-              groupValue: context.watch<AppSettingsBloc>().state.language,
-              onChanged: (Languages? value) {
-                context.read<AppSettingsBloc>().add(
-                      SelectLanguage(
-                        language: value,
-                        locale: const Locale("en", "EN"),
-                      ),
-                    );
-              },
-            )
-          ],
-        )
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

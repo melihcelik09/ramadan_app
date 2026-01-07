@@ -21,12 +21,14 @@ class _LocationSelectState extends State<LocationSelect> {
     super.initState();
   }
 
-  fillLocation() async {
+  Future<void> fillLocation() async {
     UserLocationModel userLocation = _cubit.fetchUserLocation();
     await _cubit.fetchCountries();
     await _cubit.fetchStates(country: userLocation.country!);
     await _cubit.fetchCities(
-        country: userLocation.country!, state: userLocation.region!);
+      country: userLocation.country!,
+      state: userLocation.region!,
+    );
     _cubit.selectCountry(country: userLocation.country!);
     _cubit.selectState(state: userLocation.region!);
     _cubit.selectCity(city: userLocation.city!);
@@ -71,10 +73,7 @@ class _LocationSelectState extends State<LocationSelect> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    context.loc.state,
-                    style: context.textTheme.titleLarge,
-                  ),
+                  Text(context.loc.state, style: context.textTheme.titleLarge),
                   SizedBox(
                     width: context.dynamicWidth(0.4),
                     child: CustomDropdownButton<String>(
@@ -101,10 +100,7 @@ class _LocationSelectState extends State<LocationSelect> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    context.loc.city,
-                    style: context.textTheme.titleLarge,
-                  ),
+                  Text(context.loc.city, style: context.textTheme.titleLarge),
                   SizedBox(
                     width: context.dynamicWidth(0.4),
                     child: CustomDropdownButton<String>(

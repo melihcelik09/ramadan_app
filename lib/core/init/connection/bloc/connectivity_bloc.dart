@@ -14,7 +14,7 @@ class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
   final Connectivity _connectivity = Connectivity();
 
   // This field is a StreamSubscription object that listens for network changes.
-  StreamSubscription<ConnectivityResult>? _subscription;
+  StreamSubscription<List<ConnectivityResult>>? _subscription;
 
   // This constructor initializes the ConnectivityBloc object.
   ConnectivityBloc() : super(ConnectivityInitial()) {
@@ -29,37 +29,33 @@ class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
       // This method emits a ConnectivityDisconnectedState object with a message.
       emit(
         const ConnectivityDisconnectedState(
-          message: "No Internet Connection. Please check your internet connection and try again.",
+          message:
+              "No Internet Connection. Please check your internet connection and try again.",
         ),
       );
     });
 
     // This method listens for the ConnectivityCheck event.
-    on<ConnectivityCheck>(
-      (event, emit) {
-        // This method emits a ConnectivityInitialState object.
-        emit(ConnectivityInitial());
-        _checkConnectivity();
-      },
-    );
+    on<ConnectivityCheck>((event, emit) {
+      // This method emits a ConnectivityInitialState object.
+      emit(ConnectivityInitial());
+      _checkConnectivity();
+    });
   }
 
   // This method checks the device's network connectivity.
   void _checkConnectivity() {
-    // This method creates a StreamSubscription object.
-    _subscription = _connectivity.onConnectivityChanged.listen((event) {
-      // This if statement checks if the device is connected to the internet.
-      if (event == ConnectivityResult.mobile || event == ConnectivityResult.wifi) {
-        // This method prints a message to the console.
-        debugPrint("Internet Connection $event");
+    _subscription = _connectivity.onConnectivityChanged.listen((results) {
+      final hasConnection =
+          results.contains(ConnectivityResult.mobile) ||
+          results.contains(ConnectivityResult.wifi) ||
+          results.contains(ConnectivityResult.ethernet);
 
-        // This method emits a ConnectivityConnectedState object.
+      if (hasConnection) {
+        debugPrint("Internet Connection: $results");
         add(ConnectivityConnected());
       } else {
-        // This method prints a message to the console.
-        debugPrint("No Internet Connection $event");
-
-        // This method emits a ConnectivityDisconnectedState object.
+        debugPrint("No Internet Connection: $results");
         add(ConnectivityDisconnected());
       }
     });

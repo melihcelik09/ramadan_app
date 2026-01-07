@@ -4,10 +4,7 @@ import 'package:ramadan_app/core/extensions/context_extension.dart';
 import 'package:ramadan_app/core/init/navigation/app_router.dart';
 
 class CategoriesCard extends StatelessWidget {
-  const CategoriesCard({
-    super.key,
-    required this.index,
-  });
+  const CategoriesCard({super.key, required this.index});
   final int index;
 
   @override
@@ -15,7 +12,7 @@ class CategoriesCard extends StatelessWidget {
     List<String> titles = [
       context.loc.qiableFinder,
       context.loc.ramadanCountdownV2,
-      context.loc.asmaAlHusna
+      context.loc.asmaAlHusna,
     ];
     List<String> imageUrls = [
       "assets/images/categories/Qibla.png",
@@ -24,21 +21,19 @@ class CategoriesCard extends StatelessWidget {
     ];
     return Card(
       color: context.theme.cardColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
         onTap: () {
           switch (index) {
             case 0:
-              context.router.pushNamed(NavigationPaths.qiableFinder.path);
+              context.router.pushPath(NavigationPaths.qiableFinder.path);
               break;
             case 1:
-              context.router.pushNamed(NavigationPaths.ramadanTime.path);
+              context.router.pushPath(NavigationPaths.ramadanTime.path);
               break;
             case 2:
-              context.router.pushNamed(NavigationPaths.asmaAlHusna.path);
+              context.router.pushPath(NavigationPaths.asmaAlHusna.path);
               break;
             default:
           }
@@ -49,14 +44,8 @@ class CategoriesCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset(
-                imageUrls[index],
-                fit: BoxFit.fill,
-              ),
-              Text(
-                titles[index],
-                style: context.textTheme.labelLarge,
-              ),
+              Image.asset(imageUrls[index], fit: BoxFit.fill),
+              Text(titles[index], style: context.textTheme.labelLarge),
             ],
           ),
         ),

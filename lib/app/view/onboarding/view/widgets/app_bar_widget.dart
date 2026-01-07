@@ -5,9 +5,7 @@ import 'package:ramadan_app/core/init/cache/cache_manager.dart';
 import 'package:ramadan_app/core/init/navigation/app_router.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
-  const AppBarWidget({
-    super.key,
-  });
+  const AppBarWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +15,17 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         TextButton(
           onPressed: () async {
-            await CacheManager<bool>().writeData(key: CacheManagerEnum.onboarding.name, value: true).then(
-                  (value) => context.router.replaceNamed(NavigationPaths.permission.path),
-                );
+            await CacheManager<bool>().writeData(
+              key: CacheManagerEnum.onboarding.name,
+              value: true,
+            );
+            if (!context.mounted) return;
+            context.router.replacePath(NavigationPaths.home.path);
           },
-          child: Text(context.loc.skip, style: TextStyle(color: context.theme.secondaryHeaderColor)),
+          child: Text(
+            context.loc.skip,
+            style: TextStyle(color: context.theme.secondaryHeaderColor),
+          ),
         ),
       ],
     );

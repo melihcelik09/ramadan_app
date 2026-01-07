@@ -9,7 +9,7 @@ import 'package:ramadan_app/core/init/navigation/app_router.dart';
 
 @RoutePage()
 class SplashView extends StatefulWidget {
-  const SplashView({Key? key}) : super(key: key);
+  const SplashView({super.key});
 
   @override
   State<SplashView> createState() => _SplashViewState();
@@ -39,11 +39,11 @@ class _SplashViewState extends State<SplashView> {
             return BlocListener<SplashBloc, SplashState>(
               listener: (context, state) {
                 if (state is SplashNavigateHome) {
-                  context.router.replaceNamed(NavigationPaths.home.path);
+                  context.router.replacePath(NavigationPaths.home.path);
                 } else if (state is SplashNavigateLocation) {
-                  context.router.replaceNamed(NavigationPaths.location.path);
+                  context.router.replacePath(NavigationPaths.location.path);
                 } else if (state is SplashNavigateOnboarding) {
-                  context.router.replaceNamed(NavigationPaths.onboarding.path);
+                  context.router.replacePath(NavigationPaths.onboarding.path);
                 }
               },
               child: const Center(child: CircularProgressIndicator()),

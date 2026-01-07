@@ -5,7 +5,7 @@ part 'asma_al_husna.g.dart';
 
 @JsonSerializable()
 class AsmaAlHusna with EquatableMixin {
-  List<Main>? main;
+  final List<Main>? main;
 
   AsmaAlHusna({
     this.main,
@@ -30,12 +30,12 @@ class AsmaAlHusna with EquatableMixin {
 
 @JsonSerializable()
 class Main with EquatableMixin {
-  String? id;
-  String? arName;
-  String? enName;
-  String? meaning;
-  String? explanation;
-  String? benefit;
+  final String? id;
+  final String? arName;
+  final String? enName;
+  final String? meaning;
+  final String? explanation;
+  final String? benefit;
 
   Main({
     this.id,

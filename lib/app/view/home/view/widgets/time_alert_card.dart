@@ -19,15 +19,12 @@ class TimeAlertCard extends StatelessWidget {
               style: context.textTheme.titleMedium,
             ),
           ), // Your Location
-          Image.asset(
-            "assets/images/titles/Alarm.png",
-            fit: BoxFit.fill,
-          ),
+          Image.asset("assets/images/titles/Alarm.png", fit: BoxFit.fill),
           CupertinoSwitch(
             value: true,
-            activeColor: context.theme.hoverColor,
+            activeTrackColor: context.theme.hoverColor,
             onChanged: (value) {},
-          )
+          ),
         ],
       ),
     );

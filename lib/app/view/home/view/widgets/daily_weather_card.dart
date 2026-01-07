@@ -65,10 +65,7 @@ class _DailyWeatherCardState extends State<DailyWeatherCard> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "Temp",
-                      style: context.textTheme.titleMedium,
-                    ),
+                    Text("Temp", style: context.textTheme.titleMedium),
                     Text(
                       "${snapshot.data!.current!.tempCelcius}C°",
                       style: context.textTheme.titleMedium,
@@ -92,14 +89,12 @@ class _DailyWeatherCardState extends State<DailyWeatherCard> {
                       ),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           );
         } else if (snapshot.hasError) {
-          return const Center(
-            child: Text("Error"),
-          );
+          return const Center(child: Text("Error"));
         } else {
           return Shimmer.fromColors(
             enabled: true,
@@ -124,7 +119,7 @@ extension GetLanguage on ConditionModel {
     await DailyWeatherService().readJson().then((value) {
       WeatherLanguage text =
           value[value.indexWhere((element) => element.code == code)];
-
+      if (!context.mounted) return;
       for (var element in text.languages!) {
         if (element.langIso == context.loc.localeName) {
           deneme = element.dayText!;

@@ -28,22 +28,19 @@ class Countdown extends StatelessWidget {
               Row(
                 children: [
                   CountdownTitles(text: day),
-                  CountdownTitles(
-                    text: context.loc.days,
-                    isTypeTitle: true,
-                  )
+                  CountdownTitles(text: context.loc.days, isTypeTitle: true),
                 ],
               ),
               Row(
                 children: [
                   CountdownTitles(text: hour),
-                  CountdownTitles(text: context.loc.hours, isTypeTitle: true)
+                  CountdownTitles(text: context.loc.hours, isTypeTitle: true),
                 ],
               ),
               Row(
                 children: [
                   CountdownTitles(text: minute),
-                  CountdownTitles(text: context.loc.minutes, isTypeTitle: true)
+                  CountdownTitles(text: context.loc.minutes, isTypeTitle: true),
                 ],
               ),
             ],
@@ -55,14 +52,13 @@ class Countdown extends StatelessWidget {
           children: [
             Text(
               context.loc.alert,
-              style: Theme.of(context)
-                  .textTheme
-                  .displaySmall!
-                  .copyWith(color: context.theme.secondaryHeaderColor),
+              style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                color: context.theme.secondaryHeaderColor,
+              ),
             ),
             CupertinoSwitch(
               value: true,
-              activeColor: context.theme.hoverColor,
+              activeTrackColor: context.theme.hoverColor,
               onChanged: (value) {},
             ),
           ],

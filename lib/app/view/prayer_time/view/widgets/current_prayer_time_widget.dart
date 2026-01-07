@@ -9,12 +9,11 @@ import 'package:ramadan_app/core/extensions/context_extension.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CurrentPrayerTimeWidget extends StatefulWidget {
-  const CurrentPrayerTimeWidget({
-    super.key,
-  });
+  const CurrentPrayerTimeWidget({super.key});
 
   @override
-  State<CurrentPrayerTimeWidget> createState() => _CurrentPrayerTimeWidgetState();
+  State<CurrentPrayerTimeWidget> createState() =>
+      _CurrentPrayerTimeWidgetState();
 }
 
 class _CurrentPrayerTimeWidgetState extends State<CurrentPrayerTimeWidget> {
@@ -48,7 +47,9 @@ class _CurrentPrayerTimeWidgetState extends State<CurrentPrayerTimeWidget> {
             children: [
               isToday
                   ? Card(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
                       child: const NextTimeCard(),
                     )
                   : Container(),
@@ -59,8 +60,16 @@ class _CurrentPrayerTimeWidgetState extends State<CurrentPrayerTimeWidget> {
                 itemBuilder: (context, index) {
                   var prayerTime = times[index];
                   return Card(
-                    color: isToday ? getColorForPrayerTime(currentTime: currentTime, prayerTime: prayerTime, context: context) : null,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    color: isToday
+                        ? getColorForPrayerTime(
+                            currentTime: currentTime,
+                            prayerTime: prayerTime,
+                            context: context,
+                          )
+                        : null,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(16),
                       onTap: () {},
@@ -76,13 +85,20 @@ class _CurrentPrayerTimeWidgetState extends State<CurrentPrayerTimeWidget> {
                             SizedBox(
                               width: context.dynamicWidth(0.6),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(PrayerTimes.values[index].name(context), style: context.textTheme.displaySmall),
-                                  Text(prayerTime, style: context.textTheme.displaySmall),
+                                  Text(
+                                    PrayerTimes.values[index].name(context),
+                                    style: context.textTheme.displaySmall,
+                                  ),
+                                  Text(
+                                    prayerTime,
+                                    style: context.textTheme.displaySmall,
+                                  ),
                                 ],
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -101,18 +117,21 @@ class _CurrentPrayerTimeWidgetState extends State<CurrentPrayerTimeWidget> {
                 height: context.width * 0.3,
                 width: context.width * 0.8,
                 child: Shimmer.fromColors(
-                    enabled: true,
-                    baseColor: Colors.grey.shade300,
-                    highlightColor: context.theme.cardColor,
-                    child: Card(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: context.theme.cardColor,
-                        ),
+                  enabled: true,
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: context.theme.cardColor,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: context.theme.cardColor,
                       ),
-                    )),
+                    ),
+                  ),
+                ),
               );
             },
             itemCount: 7,
@@ -125,20 +144,24 @@ class _CurrentPrayerTimeWidgetState extends State<CurrentPrayerTimeWidget> {
   }
 }
 
-Color? getColorForPrayerTime({required String currentTime, required String prayerTime, required BuildContext context}) {
+Color? getColorForPrayerTime({
+  required String currentTime,
+  required String prayerTime,
+  required BuildContext context,
+}) {
   DateTime convertedCurrent = DateFormat('kk:mm').parse(currentTime);
   DateTime convertedPrayer = DateFormat('kk:mm').parse(prayerTime);
 
   if (convertedCurrent.isBefore(convertedPrayer)) {
     //Upcoming prayer times
     if (convertedPrayer.difference(convertedCurrent).inMinutes < 15) {
-      return context.theme.primaryColor.withOpacity(0.7);
+      return context.theme.primaryColor.withValues(alpha: 0.7);
     } else {
       return null;
     }
   } else if (convertedCurrent.isAfter(convertedPrayer)) {
     // Prayer time is passed
-    return context.theme.primaryColor.withOpacity(0.5);
+    return context.theme.primaryColor.withValues(alpha: 0.5);
   } else {
     // Prayer time is now
     return context.theme.primaryColor;

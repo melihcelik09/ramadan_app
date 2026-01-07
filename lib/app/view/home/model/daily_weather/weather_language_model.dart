@@ -1,22 +1,17 @@
-import 'package:json_annotation/json_annotation.dart';
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
+
 part 'weather_language_model.g.dart';
 
 @JsonSerializable()
 class WeatherLanguage with EquatableMixin {
-  int? code;
-  String? day;
-  String? night;
-  int? icon;
-  List<Languages>? languages;
+  final int? code;
+  final String? day;
+  final String? night;
+  final int? icon;
+  final List<Languages>? languages;
 
-  WeatherLanguage({
-    this.code,
-    this.day,
-    this.night,
-    this.icon,
-    this.languages,
-  });
+  WeatherLanguage({this.code, this.day, this.night, this.icon, this.languages});
 
   factory WeatherLanguage.fromJson(Map<String, dynamic> json) =>
       _$WeatherLanguageFromJson(json);
@@ -45,20 +40,15 @@ class WeatherLanguage with EquatableMixin {
 
 @JsonSerializable()
 class Languages with EquatableMixin {
-  String? langName;
+  final String? langName;
   @JsonKey(name: 'lang_iso')
-  String? langIso;
+  final String? langIso;
   @JsonKey(name: 'day_text')
-  String? dayText;
+  final String? dayText;
   @JsonKey(name: 'night_text')
-  String? nightText;
+  final String? nightText;
 
-  Languages({
-    this.langName,
-    this.langIso,
-    this.dayText,
-    this.nightText,
-  });
+  Languages({this.langName, this.langIso, this.dayText, this.nightText});
 
   factory Languages.fromJson(Map<String, dynamic> json) =>
       _$LanguagesFromJson(json);

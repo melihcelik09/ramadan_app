@@ -8,8 +8,10 @@ import 'package:ramadan_app/core/init/theme/theme.dart';
 List<dynamic> get selectedTheme {
   List<dynamic> selectedTheme = [];
   ThemeData themeData;
-  int initialTheme = CacheManager<Map<String, dynamic>>()
-          .readData(key: CacheManagerEnum.theme.name)?["theme"] ??
+  int initialTheme =
+      CacheManager<Map<String, dynamic>>().readData(
+        key: CacheManagerEnum.theme.name,
+      )?["theme"] ??
       2;
 
   switch (initialTheme) {
@@ -23,9 +25,10 @@ List<dynamic> get selectedTheme {
       return selectedTheme;
     default:
       themeData =
-          WidgetsBinding.instance.window.platformBrightness == Brightness.dark
-              ? CustomTheme.appThemeData[AppTheme.darkTheme]!
-              : CustomTheme.appThemeData[AppTheme.lightTheme]!;
+          WidgetsBinding.instance.platformDispatcher.platformBrightness ==
+              Brightness.dark
+          ? CustomTheme.appThemeData[AppTheme.darkTheme]!
+          : CustomTheme.appThemeData[AppTheme.lightTheme]!;
       selectedTheme.addAll([themeData, AppTheme.systemTheme]);
       return selectedTheme;
   }
@@ -34,8 +37,10 @@ List<dynamic> get selectedTheme {
 List<dynamic> get selectedLanguage {
   List<dynamic> selectedLanguage = [];
   Locale locale;
-  int initialLangauge = CacheManager<Map<String, dynamic>>()
-              .readData(key: CacheManagerEnum.language.name)?["language"] ??
+  int initialLangauge =
+      CacheManager<Map<String, dynamic>>().readData(
+            key: CacheManagerEnum.language.name,
+          )?["language"] ??
           Platform.localeName == "tr_TR"
       ? 0
       : 1;

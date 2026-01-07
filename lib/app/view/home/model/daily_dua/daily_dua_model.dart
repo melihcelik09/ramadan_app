@@ -1,18 +1,15 @@
-import 'package:json_annotation/json_annotation.dart';
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
+
 part 'daily_dua_model.g.dart';
 
 @JsonSerializable()
 class DailyDuaModel with EquatableMixin {
-  int? code;
-  String? status;
-  List<Data>? data;
+  final int? code;
+  final String? status;
+  final List<Data>? data;
 
-  DailyDuaModel({
-    this.code,
-    this.status,
-    this.data,
-  });
+  DailyDuaModel({this.code, this.status, this.data});
 
   factory DailyDuaModel.fromJson(Map<String, dynamic> json) =>
       _$DailyDuaModelFromJson(json);
@@ -22,11 +19,7 @@ class DailyDuaModel with EquatableMixin {
   @override
   List<Object?> get props => [code, status, data];
 
-  DailyDuaModel copyWith({
-    int? code,
-    String? status,
-    List<Data>? data,
-  }) {
+  DailyDuaModel copyWith({int? code, String? status, List<Data>? data}) {
     return DailyDuaModel(
       code: code ?? this.code,
       status: status ?? this.status,
@@ -37,17 +30,17 @@ class DailyDuaModel with EquatableMixin {
 
 @JsonSerializable()
 class Data with EquatableMixin {
-  int? number;
-  String? text;
-  Edition? edition;
-  Surah? surah;
-  int? numberInSurah;
-  int? juz;
-  int? manzil;
-  int? page;
-  int? ruku;
-  int? hizbQuarter;
-  bool? sajda;
+  final int? number;
+  final String? text;
+  final Edition? edition;
+  final Surah? surah;
+  final int? numberInSurah;
+  final int? juz;
+  final int? manzil;
+  final int? page;
+  final int? ruku;
+  final int? hizbQuarter;
+  final bool? sajda;
 
   Data({
     this.number,
@@ -69,18 +62,18 @@ class Data with EquatableMixin {
 
   @override
   List<Object?> get props => [
-        number,
-        text,
-        edition,
-        surah,
-        numberInSurah,
-        juz,
-        manzil,
-        page,
-        ruku,
-        hizbQuarter,
-        sajda
-      ];
+    number,
+    text,
+    edition,
+    surah,
+    numberInSurah,
+    juz,
+    manzil,
+    page,
+    ruku,
+    hizbQuarter,
+    sajda,
+  ];
 
   Data copyWith({
     int? number,
@@ -113,13 +106,13 @@ class Data with EquatableMixin {
 
 @JsonSerializable()
 class Edition with EquatableMixin {
-  String? identifier;
-  String? language;
-  String? name;
-  String? englishName;
-  String? format;
-  String? type;
-  String? direction;
+  final String? identifier;
+  final String? language;
+  final String? name;
+  final String? englishName;
+  final String? format;
+  final String? type;
+  final String? direction;
 
   Edition({
     this.identifier,
@@ -137,8 +130,15 @@ class Edition with EquatableMixin {
   Map<String, dynamic> toJson() => _$EditionToJson(this);
 
   @override
-  List<Object?> get props =>
-      [identifier, language, name, englishName, format, type, direction];
+  List<Object?> get props => [
+    identifier,
+    language,
+    name,
+    englishName,
+    format,
+    type,
+    direction,
+  ];
 
   Edition copyWith({
     String? identifier,
@@ -163,12 +163,12 @@ class Edition with EquatableMixin {
 
 @JsonSerializable()
 class Surah with EquatableMixin {
-  int? number;
-  String? name;
-  String? englishName;
-  String? englishNameTranslation;
-  int? numberOfAyahs;
-  String? revelationType;
+  final int? number;
+  final String? name;
+  final String? englishName;
+  final String? englishNameTranslation;
+  final int? numberOfAyahs;
+  final String? revelationType;
 
   Surah({
     this.number,
@@ -185,13 +185,13 @@ class Surah with EquatableMixin {
 
   @override
   List<Object?> get props => [
-        number,
-        name,
-        englishName,
-        englishNameTranslation,
-        numberOfAyahs,
-        revelationType
-      ];
+    number,
+    name,
+    englishName,
+    englishNameTranslation,
+    numberOfAyahs,
+    revelationType,
+  ];
 
   Surah copyWith({
     int? number,

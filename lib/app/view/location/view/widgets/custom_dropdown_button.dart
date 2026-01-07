@@ -24,9 +24,7 @@ class CustomDropdownButton<T> extends StatelessWidget {
       decoration: appSettings
           ? const InputDecoration.collapsed(
               hintText: "",
-              border: UnderlineInputBorder(
-                borderSide: BorderSide.none,
-              ),
+              border: UnderlineInputBorder(borderSide: BorderSide.none),
             )
           : InputDecoration(
               filled: true,
@@ -36,15 +34,19 @@ class CustomDropdownButton<T> extends StatelessWidget {
                 borderSide: BorderSide.none,
               ),
             ),
-      icon: Icon(Icons.expand_more,
-          color: appSettings ? context.theme.secondaryHeaderColor : Colors.white),
+      icon: Icon(
+        Icons.expand_more,
+        color: appSettings ? context.theme.secondaryHeaderColor : Colors.white,
+      ),
       items: items,
       onChanged: onChanged,
-      value: value,
+      initialValue: value,
       hint: Text(
         hint ?? 'Select',
         style: context.textTheme.titleLarge?.copyWith(
-          color: appSettings ? context.theme.secondaryHeaderColor : Colors.white,
+          color: appSettings
+              ? context.theme.secondaryHeaderColor
+              : Colors.white,
         ),
       ),
     );

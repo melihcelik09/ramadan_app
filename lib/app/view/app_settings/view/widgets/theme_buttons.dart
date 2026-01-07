@@ -9,89 +9,77 @@ class ThemeButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              context.loc.system,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            Radio<AppTheme>(
-              activeColor: context.theme.primaryColor,
-              visualDensity: const VisualDensity(
-                horizontal: VisualDensity.minimumDensity,
-                vertical: VisualDensity.minimumDensity,
+    return RadioGroup<AppTheme>(
+      onChanged: (AppTheme? value) {
+        if (value != null) {
+          context.read<AppSettingsBloc>().add(SelectTheme(appTheme: value));
+        }
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // SYSTEM THEME
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                context.loc.system,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
-              materialTapTargetSize: MaterialTapTargetSize.padded,
-              value: AppTheme.systemTheme,
-              groupValue: context.watch<AppSettingsBloc>().state.theme,
-              onChanged: (AppTheme? value) {
-                context.read<AppSettingsBloc>().add(
-                      SelectTheme(
-                        appTheme: value,
-                      ),
-                    );
-              },
-            )
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              context.loc.light,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            Radio<AppTheme>(
-              activeColor: context.theme.primaryColor,
-              visualDensity: const VisualDensity(
-                horizontal: VisualDensity.minimumDensity,
-                vertical: VisualDensity.minimumDensity,
+              Radio<AppTheme>(
+                activeColor: context.theme.primaryColor,
+                visualDensity: const VisualDensity(
+                  horizontal: VisualDensity.minimumDensity,
+                  vertical: VisualDensity.minimumDensity,
+                ),
+                materialTapTargetSize: MaterialTapTargetSize.padded,
+                value: AppTheme.systemTheme,
               ),
-              materialTapTargetSize: MaterialTapTargetSize.padded,
-              value: AppTheme.lightTheme,
-              groupValue: context.watch<AppSettingsBloc>().state.theme,
-              onChanged: (AppTheme? value) {
-                context.read<AppSettingsBloc>().add(
-                      SelectTheme(
-                        appTheme: value,
-                      ),
-                    );
-              },
-            )
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              context.loc.dark,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            Radio<AppTheme>(
-              activeColor: context.theme.primaryColor,
-              visualDensity: const VisualDensity(
-                horizontal: VisualDensity.minimumDensity,
-                vertical: VisualDensity.minimumDensity,
+            ],
+          ),
+
+          // LIGHT THEME
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                context.loc.light,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
-              materialTapTargetSize: MaterialTapTargetSize.padded,
-              value: AppTheme.darkTheme,
-              groupValue: context.watch<AppSettingsBloc>().state.theme,
-              onChanged: (AppTheme? value) {
-                context.read<AppSettingsBloc>().add(
-                      SelectTheme(
-                        appTheme: value,
-                      ),
-                    );
-              },
-            )
-          ],
-        ),
-      ],
+              Radio<AppTheme>(
+                activeColor: context.theme.primaryColor,
+                visualDensity: const VisualDensity(
+                  horizontal: VisualDensity.minimumDensity,
+                  vertical: VisualDensity.minimumDensity,
+                ),
+                materialTapTargetSize: MaterialTapTargetSize.padded,
+                value: AppTheme.lightTheme,
+              ),
+            ],
+          ),
+
+          // DARK THEME
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                context.loc.dark,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              Radio<AppTheme>(
+                activeColor: context.theme.primaryColor,
+                visualDensity: const VisualDensity(
+                  horizontal: VisualDensity.minimumDensity,
+                  vertical: VisualDensity.minimumDensity,
+                ),
+                materialTapTargetSize: MaterialTapTargetSize.padded,
+                value: AppTheme.darkTheme,
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

@@ -5,8 +5,8 @@ part 'location_model.g.dart';
 
 @JsonSerializable()
 class LocationModel with EquatableMixin {
-  String? code;
-  String? name;
+  final String? code;
+  final String? name;
 
   LocationModel({
     this.code,

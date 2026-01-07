@@ -4,7 +4,7 @@ import 'package:ramadan_app/app/view/prayer_time/view/widgets/calendar_widget.da
 import 'package:ramadan_app/core/extensions/context_extension.dart';
 
 class PrayerTimeView extends StatelessWidget {
-  const PrayerTimeView({Key? key}) : super(key: key);
+  const PrayerTimeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,10 @@ class PrayerTimeView extends StatelessWidget {
           Padding(
             padding: context.paddingLow,
             child: Text(
-              DateFormat('EEEE, d MMMM', context.loc.localeName).format(DateTime.now()),
+              DateFormat(
+                'EEEE, d MMMM',
+                context.loc.localeName,
+              ).format(DateTime.now()),
               style: context.textTheme.headlineMedium,
             ),
           ),

@@ -9,7 +9,7 @@ import 'package:ramadan_app/core/init/navigation/app_router.dart';
 
 @RoutePage()
 class PermissionView extends StatelessWidget {
-  const PermissionView({Key? key}) : super(key: key);
+  const PermissionView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,8 @@ class PermissionView extends StatelessWidget {
         elevation: 0,
         actions: [
           TextButton(
-            onPressed: () => context.router.replaceNamed(NavigationPaths.location.path),
+            onPressed: () =>
+                context.router.replacePath(NavigationPaths.location.path),
             child: Text(context.loc.skip, style: context.textTheme.bodyLarge),
           ),
         ],
@@ -43,36 +44,50 @@ class PermissionView extends StatelessWidget {
           return Padding(
             padding: context.paddingNormal,
             child: PageView.builder(
-                controller: state.controller,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: permissionList.length,
-                itemBuilder: (context, index) {
-                  PermissionModel permission = permissionList[index];
-                  return Column(
-                    children: [
-                      Expanded(flex: 3, child: Image.asset(permission.imagePath ?? '')),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Text(permission.titleText ?? '', style: context.textTheme.displayMedium),
-                            Text(permission.subText ?? '', style: context.textTheme.bodyLarge),
-                          ],
+              controller: state.controller,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: permissionList.length,
+              itemBuilder: (context, index) {
+                PermissionModel permission = permissionList[index];
+                return Column(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Image.asset(permission.imagePath ?? ''),
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Text(
+                            permission.titleText ?? '',
+                            style: context.textTheme.displayMedium,
+                          ),
+                          Text(
+                            permission.subText ?? '',
+                            style: context.textTheme.bodyLarge,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.dynamicWidth(0.8),
+                      child: ElevatedButton(
+                        onPressed: () => context.read<PermissionBloc>().add(
+                          PermissionEvent(context, index: index),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primaryColor,
+                        ),
+                        child: Padding(
+                          padding: context.paddingNormal,
+                          child: Text(permission.buttonText ?? ''),
                         ),
                       ),
-                      SizedBox(
-                        width: context.dynamicWidth(0.8),
-                        child: ElevatedButton(
-                          onPressed: () => context.read<PermissionBloc>().add(PermissionEvent(context, index: index)),
-                          style: ElevatedButton.styleFrom(backgroundColor: AppColors.primaryColor),
-                          child: Padding(
-                            padding: context.paddingNormal,
-                            child: Text(permission.buttonText ?? ''),
-                          ),
-                        ),
-                      )
-                    ],
-                  );
-                }),
+                    ),
+                  ],
+                );
+              },
+            ),
           );
         },
       ),

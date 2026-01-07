@@ -6,7 +6,7 @@ import 'package:smooth_compass/utils/src/compass_ui.dart';
 
 @RoutePage()
 class QiableFinderView extends StatelessWidget {
-  const QiableFinderView({Key? key}) : super(key: key);
+  const QiableFinderView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +35,16 @@ class QiableFinderView extends StatelessWidget {
                         children: [
                           Positioned.fill(
                             child: Image.asset(
-                                "assets/images/qiable_finder/face.png"),
+                              "assets/images/qiable_finder/face.png",
+                            ),
                           ),
                           Positioned.fill(
                             child: AnimatedRotation(
                               duration: context.lowDuration,
                               turns: compassData?.data?.qiblahOffset ?? 0,
                               child: Image.asset(
-                                  "assets/images/qiable_finder/needle.png"),
+                                "assets/images/qiable_finder/needle.png",
+                              ),
                             ),
                           ),
                         ],

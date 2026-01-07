@@ -4,9 +4,9 @@ part 'countdown.g.dart';
 
 @JsonSerializable()
 class Countdown with EquatableMixin {
-  int? days;
-  int? hours;
-  int? minutes;
+  final int? days;
+  final int? hours;
+  final int? minutes;
 
   Countdown({
     this.days,

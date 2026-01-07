@@ -33,7 +33,7 @@ class PermissionBloc extends Bloc<PermissionEvent, PermissionState> {
           //Notification permission handler
           await _permissionHandler(permission: Permission.notification).then((value) {
             if (value) {
-              event.context.router.replaceNamed(NavigationPaths.location.path);
+              event.context.router.replacePath(NavigationPaths.location.path);
             } else {
               debugPrint('Notification permission: $value');
             }
