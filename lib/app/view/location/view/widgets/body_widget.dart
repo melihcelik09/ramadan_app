@@ -113,13 +113,17 @@ class _BodyWidgetState extends State<BodyWidget> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
-                  onPressed: context.watch<LocationCubit>().isLocationSelected
-                      ? () async {
-                          await _cubit.submitLocation();
-                          if (!context.mounted) return;
-                          context.router.replacePath(NavigationPaths.home.path);
-                        }
-                      : null,
+                  // onPressed: context.watch<LocationCubit>().isLocationSelected
+                  //     ? () async {
+                  //         await _cubit.submitLocation();
+                  //         if (!context.mounted) return;
+                  //         context.router.replacePath(NavigationPaths.home.path);
+                  //       }
+                  //     : null,
+                  onPressed: () async {
+                    if (!context.mounted) return;
+                    context.router.replacePath(NavigationPaths.home.path);
+                  },
                   child: Text(
                     context.loc.locationNavigateHomeButtonText,
                     style: Theme.of(context).textTheme.labelLarge?.copyWith(

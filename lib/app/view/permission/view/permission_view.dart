@@ -8,12 +8,28 @@ import 'package:ramadan_app/core/extensions/context_extension.dart';
 import 'package:ramadan_app/core/init/navigation/app_router.dart';
 
 @RoutePage()
-class PermissionView extends StatelessWidget {
+class PermissionView extends StatefulWidget {
   const PermissionView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    List<PermissionModel> permissionList = [
+  State<PermissionView> createState() => _PermissionViewState();
+}
+
+class _PermissionViewState extends State<PermissionView> {
+  late final List<PermissionModel> permissionList;
+
+  late final PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    permissionList = [
       PermissionModel(
         imagePath: 'assets/images/permission/location.png',
         titleText: context.loc.locationPermissionTitle,
@@ -27,6 +43,16 @@ class PermissionView extends StatelessWidget {
         buttonText: context.loc.notificationPermissionButtonText,
       ),
     ];
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -39,57 +65,81 @@ class PermissionView extends StatelessWidget {
           ),
         ],
       ),
-      body: BlocBuilder<PermissionBloc, PermissionState>(
-        builder: (context, state) {
-          return Padding(
-            padding: context.paddingNormal,
-            child: PageView.builder(
-              controller: state.controller,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: permissionList.length,
-              itemBuilder: (context, index) {
-                PermissionModel permission = permissionList[index];
-                return Column(
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: Image.asset(permission.imagePath ?? ''),
-                    ),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Text(
-                            permission.titleText ?? '',
-                            style: context.textTheme.displayMedium,
-                          ),
-                          Text(
-                            permission.subText ?? '',
-                            style: context.textTheme.bodyLarge,
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: context.dynamicWidth(0.8),
-                      child: ElevatedButton(
-                        onPressed: () => context.read<PermissionBloc>().add(
-                          PermissionEvent(context, index: index),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primaryColor,
-                        ),
-                        child: Padding(
-                          padding: context.paddingNormal,
-                          child: Text(permission.buttonText ?? ''),
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          );
+
+      body: BlocListener<PermissionBloc, PermissionState>(
+        listener: (context, state) {
+          if (state.status == PermissionStatus.nextPage) {
+            _pageController.nextPage(
+              duration: context.lowDuration,
+              curve: Curves.easeInOut,
+            );
+          } else if (state.status == PermissionStatus.completed) {
+            context.router.replacePath(NavigationPaths.location.path);
+          }
         },
+        child: Padding(
+          padding: context.paddingNormal,
+          child: PageView.builder(
+            controller: _pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: permissionList.length,
+            itemBuilder: (context, index) {
+              PermissionModel permission = permissionList[index];
+              return Column(
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: Image.asset(permission.imagePath ?? ''),
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Text(
+                          permission.titleText ?? '',
+                          style: context.textTheme.displayMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: context.lowValue),
+                        Text(
+                          permission.subText ?? '',
+                          style: context.textTheme.bodyLarge,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: context.dynamicWidth(0.8),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (index == 0) {
+                          context.read<PermissionBloc>().add(
+                            RequestLocationPermission(),
+                          );
+                        } else if (index == 1) {
+                          context.read<PermissionBloc>().add(
+                            RequestNotificationPermission(),
+                          );
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primaryColor,
+                      ),
+                      child: Padding(
+                        padding: context.paddingNormal,
+                        child: Text(
+                          permission.buttonText ?? '',
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: context.mediumValue),
+                ],
+              );
+            },
+          ),
+        ),
       ),
     );
   }

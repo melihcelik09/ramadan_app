@@ -1,10 +1,14 @@
 part of 'permission_bloc.dart';
 
-class PermissionEvent extends Equatable {
-  final int index;
-  final BuildContext context;
-  const PermissionEvent(this.context, {required this.index});
+abstract class PermissionEvent extends Equatable {
+  const PermissionEvent();
 
   @override
-  List<Object> get props => [context, index];
+  List<Object> get props => [];
 }
+
+class RequestLocationPermission extends PermissionEvent {}
+
+class RequestNotificationPermission extends PermissionEvent {}
+
+class SkipPermission extends PermissionEvent {}
